@@ -1,9 +1,11 @@
 # DataStructures
 Some implementations of popular data structures. Mainly for practice purposes.
 
-Full implementations for:
+##Structures implemented
 Linked List
+
 Stack
+
 Queue
 
-Partial implementation for binary trees
+Tree (partially done)
