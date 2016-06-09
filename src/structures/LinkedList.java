@@ -7,24 +7,43 @@ public class LinkedList<T> {
 	private LLNode<T> tail;
 	private int size;
 	
+	/**
+	 * Constructor for a linked list
+	 */
 	public LinkedList() {
 		head = null;
 		tail = null;
 		size = 0;
 	}
 	
+	/**
+	 * Returns the head of the linked list (first node)
+	 * @return
+	 */
 	public T getHead() {
 		return head.getData();
 	}
 	
+	/**
+	 * Returns the tail (end node) of the list
+	 * @return
+	 */
 	public T getTail() {
 		return tail.getData();
 	}
 	
+	/**
+	 * Gets the size of the linked list (number of nodes in list)
+	 * @return
+	 */
 	public int getSize() {
 		return size;
 	}
 	
+	/**
+	 * Adds a node to the front of the list
+	 * @param data
+	 */
 	public void addToFront(T data) {
 		if (head == null) {
 			head = new LLNode<T>(data);
@@ -38,6 +57,10 @@ public class LinkedList<T> {
 		size++;
 	}
 	
+	/**
+	 * Adds a node to the back
+	 * @param data
+	 */
 	public void addToBack(T data) {
 		if (head == null) {
 			head = new LLNode<T>(data);
@@ -55,6 +78,9 @@ public class LinkedList<T> {
 		size++;
 	}
 	
+	/**
+	 * Removes the head of the list
+	 */
 	public void removeHead() {
 		if (head == null) {
 			return;
@@ -70,6 +96,9 @@ public class LinkedList<T> {
 		size--;
 	}
 	
+	/**
+	 * Removes the end of the list
+	 */
 	public void removeTail() {
 		if (tail == null) {
 			return;
@@ -85,6 +114,9 @@ public class LinkedList<T> {
 		size--;
 	}
 	
+	/**
+	 * Prints the list's contents
+	 */
 	public void printLL() {
 		if (head == null) {
 			return;

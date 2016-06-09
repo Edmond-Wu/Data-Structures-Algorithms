@@ -8,12 +8,19 @@ public class Queue<T> {
 	private LLNode<T> tail;
 	private int size;
 	
+	/**
+	 * Default queue constructor, FIFO
+	 */
 	public Queue () {
 		head = null;
 		tail = null;
 		size = 0;
 	}
 	
+	/**
+	 * Adds an item to the queue
+	 * @param data
+	 */
 	public void enqueue(T data) {
 		LLNode<T> new_node = new LLNode<T>(data);
 		if (head == null) {
@@ -29,6 +36,10 @@ public class Queue<T> {
 		}
 	}
 	
+	/**
+	 * De-queues an item from the queue
+	 * @return
+	 */
 	public T dequeue() {
 		if (head == null) {
 			return null;
@@ -42,25 +53,41 @@ public class Queue<T> {
 		}
 	}
 	
+	/**
+	 * Returns the value of the next node in the queue
+	 * @return
+	 */
 	public T peekHead() {
 		return head.getData();
 	}
 	
-	public T peekAss() {
+	/**
+	 * Gets the value of the last value in the queue
+	 * @return
+	 */
+	public T peekTail() {
 		return tail.getData();
 	}
 	
+	/**
+	 * Checks if the queue is empty
+	 * @return
+	 */
 	public boolean isEmpty() {
-		if (size == 0) {
-			return true;
-		}
-		return false;
+		return (size == 0);
 	}
 	
+	/**
+	 * Gets the size of the queue
+	 * @return
+	 */
 	public int getSize() {
 		return size;
 	}
 	
+	/**
+	 * Prints the queue's contents
+	 */
 	public void printQ() {
 		if (head == null) {
 			return;
