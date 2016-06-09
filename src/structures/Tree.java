@@ -26,18 +26,32 @@ public class Tree {
 	 * @param rt root of the tree
 	 * @param data value to be inserted
 	 */
-	public void addNode(TreeNode rt, int data) {
+	public void addNode(int data) {
 		TreeNode node = new TreeNode(data);
 		
-		if (rt == null) {
-			rt = node;
+		if (root == null) {
+			root = node;
+			return;
 		}
-		else {
-			if (node.getData() < data) {
-				addNode(rt.left, data);
+		
+		TreeNode current = root;
+		TreeNode parent = null;
+		
+		while (true) {
+			parent = current;
+			if (data < current.getData()) {
+				current = current.left;
+				if (current == null) {
+					parent.left = node;
+					return;
+				}
 			}
 			else {
-				addNode(rt.right, data);
+				current = current.right;
+				if (current == null) {
+					parent.right = node;
+					return;
+				}
 			}
 		}
 	}

@@ -38,12 +38,12 @@ public class Tester {
 		while(!stk.isEmpty()) {
 			System.out.print(stk.pop() + " ");
 		}
-		
+		System.out.println();
 		
 		Tree tree = new Tree();
 		int[] arr = {5, 1, 7, 3, 6, 10, 4};
 		for (int y = 0; y < arr.length; y++) {
-			tree.addNode(tree.getRoot(), arr[y]);
+			tree.addNode(arr[y]);
 		}
 		tree.inOrderTraversal(tree.getRoot());
 	}
