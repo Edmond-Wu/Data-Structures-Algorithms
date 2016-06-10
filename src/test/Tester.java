@@ -12,7 +12,7 @@ public class Tester {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		//Queue testing
 		Queue<Integer> q = new Queue<Integer>();
 		for (int i = 1; i <= 10; i++) {
 			q.enqueue(i);
@@ -22,7 +22,7 @@ public class Tester {
 		System.out.println("Tail is: " + q.peekTail());
 		q.printQ();
 		
-		
+		//Linked List testing
 		LinkedList<Character> l = new LinkedList<Character>();
 		String word = "eternalenvy";
 		for (int j = 0; j < word.length(); j++) {
@@ -34,7 +34,7 @@ public class Tester {
 		l.printLL();
 		System.out.println("Linked List size: " + l.getSize());
 		
-		
+		//Stack testing
 		Stack<Integer> stk = new Stack<Integer>();
 		for (int x = 1; x <= 10; x++) {
 			stk.push(x);
@@ -46,7 +46,7 @@ public class Tester {
 		}
 		System.out.println();
 		
-		
+		//Tree testing
 		Tree tree = new Tree();
 		int[] arr = {5, 1, 7, 3, 6, 10, 4, 20, 15, 2};
 		for (int y = 0; y < arr.length; y++) {
