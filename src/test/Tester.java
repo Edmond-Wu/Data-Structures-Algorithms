@@ -1,4 +1,9 @@
-package structures;
+package test;
+
+import structures.LinkedList;
+import structures.Queue;
+import structures.Stack;
+import structures.Tree;
 
 public class Tester {
 
@@ -45,6 +50,10 @@ public class Tester {
 		for (int y = 0; y < arr.length; y++) {
 			tree.addNode(arr[y]);
 		}
+		System.out.println();
+		System.out.println(tree.findTarget(tree.getRoot(), 11));
+		System.out.println(tree.deleteNode(4));
+		System.out.println();
 		tree.inOrderTraversal(tree.getRoot());
 	}
 }
