@@ -22,6 +22,7 @@ public class Tester {
 		System.out.println("Tail is: " + q.peekTail());
 		q.printQ();
 		
+		
 		LinkedList<Character> l = new LinkedList<Character>();
 		String word = "eternalenvy";
 		for (int j = 0; j < word.length(); j++) {
@@ -31,8 +32,8 @@ public class Tester {
 		l.removeHead();
 		l.addToFront('E');
 		l.printLL();
-		System.out.println(l.getSize());
-		//System.out.println(l.getHead() + " " + l.getTail());
+		System.out.println("Linked List size: " + l.getSize());
+		
 		
 		Stack<Integer> stk = new Stack<Integer>();
 		for (int x = 1; x <= 10; x++) {
@@ -40,13 +41,14 @@ public class Tester {
 		}
 		System.out.println("Stack size: " + stk.getSize());
 		
-		while(!stk.isEmpty()) {
+		while (!stk.isEmpty()) {
 			System.out.print(stk.pop() + " ");
 		}
 		System.out.println();
 		
+		
 		Tree tree = new Tree();
-		int[] arr = {5, 1, 7, 3, 6, 10, 4};
+		int[] arr = {5, 1, 7, 3, 6, 10, 4, 20, 15, 2};
 		for (int y = 0; y < arr.length; y++) {
 			tree.addNode(arr[y]);
 		}
@@ -55,5 +57,7 @@ public class Tester {
 		System.out.println(tree.deleteNode(4));
 		System.out.println();
 		tree.inOrderTraversal(tree.getRoot());
+		System.out.println();
+		System.out.println("Depth of tree: " + tree.getDepth(tree.getRoot()));
 	}
 }

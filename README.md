@@ -8,4 +8,4 @@ Stack
 
 Queue
 
-Tree (partially done)
+Binary Tree

@@ -188,11 +188,11 @@ public class Tree {
 	 * @param r root of the tree
 	 * @return
 	 */
-	public int getDepth(TreeNode r) {
-		if (root == null) {
+	public int getDepth(TreeNode rt) {
+		if (rt == null) {
 			return 0;
 		}
-		return Math.max(1 + getDepth(r.left), 1 + getDepth(r.right));
+		return Math.max(1 + getDepth(rt.left), 1 + getDepth(rt.right));
 	}
 	
 	/**
@@ -202,7 +202,7 @@ public class Tree {
 	public void inOrderTraversal(TreeNode rt) {
 		if (rt != null) {
 			inOrderTraversal(rt.left);
-			System.out.println(rt.getData());
+			System.out.print(rt.getData() + " ");
 			inOrderTraversal(rt.right);
 		}
 	}
