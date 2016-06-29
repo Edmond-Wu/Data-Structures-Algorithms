@@ -21,6 +21,9 @@ public class LinkedList<T> {
 	 * @return
 	 */
 	public T getHead() {
+		if (head == null) {
+			return null;
+		}
 		return head.getData();
 	}
 	
@@ -29,6 +32,9 @@ public class LinkedList<T> {
 	 * @return
 	 */
 	public T getTail() {
+		if (tail == null) {
+			return null;
+		}
 		return tail.getData();
 	}
 	
