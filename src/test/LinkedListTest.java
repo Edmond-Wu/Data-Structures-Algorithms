@@ -1,9 +1,10 @@
-package structures;
+package test;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import junit.framework.TestCase;
+import structures.LinkedList;
 
 public class LinkedListTest extends TestCase {
 

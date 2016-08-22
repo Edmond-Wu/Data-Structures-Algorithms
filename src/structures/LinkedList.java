@@ -18,7 +18,7 @@ public class LinkedList<T> {
 	
 	/**
 	 * Returns the head of the linked list (first node)
-	 * @return
+	 * @return data found in the head node
 	 */
 	public T getHead() {
 		if (head == null) {
@@ -29,7 +29,7 @@ public class LinkedList<T> {
 	
 	/**
 	 * Returns the tail (end node) of the list
-	 * @return
+	 * @return data found in the tail node
 	 */
 	public T getTail() {
 		if (tail == null) {
@@ -37,10 +37,10 @@ public class LinkedList<T> {
 		}
 		return tail.getData();
 	}
-	
+
 	/**
 	 * Gets the size of the linked list (number of nodes in list)
-	 * @return
+	 * @return size of the list
 	 */
 	public int getSize() {
 		return size;
@@ -48,7 +48,7 @@ public class LinkedList<T> {
 	
 	/**
 	 * Adds a node to the front of the list
-	 * @param data
+	 * @param data value of node to be added
 	 */
 	public void addToFront(T data) {
 		if (head == null) {
@@ -65,7 +65,7 @@ public class LinkedList<T> {
 	
 	/**
 	 * Adds a node to the back
-	 * @param data
+	 * @param data value of node to be added
 	 */
 	public void addToBack(T data) {
 		if (head == null) {
@@ -83,55 +83,82 @@ public class LinkedList<T> {
 		}
 		size++;
 	}
-	
+
 	/**
 	 * Removes the head of the list
+	 * @return value of removed node
 	 */
-	public void removeHead() {
+	public T removeHead() {
 		if (head == null) {
-			return;
-		}
-		else if (head.next == null) {
-			head = null;
-			tail = null;
-			return;
+			return null;
 		}
 		else {
-			head = head.next;
+			T data = head.getData();
+			if (head.next == null) {
+				head = null;
+				tail = null;
+			}
+			else {
+				head = head.next;
+			}
+			size--;
+			return data;
 		}
-		size--;
 	}
-	
+
 	/**
-	 * Removes the end of the list
+	 * Removes the tail of the linked list
+	 * @return value of removed node
 	 */
-	public void removeTail() {
+	public T removeTail() {
 		if (tail == null) {
-			return;
+			return null;
 		}
 		else {
+			T data = tail.getData();
 			LLNode<T> ptr = head;
 			while (ptr.next != tail) {
 				ptr = ptr.next;
 			}
 			ptr.next = null;
 			tail = ptr;
+			size--;
+			return data;
 		}
-		size--;
 	}
-	
+
 	/**
-	 * Prints the list's contents
+	 * Reverses the linked list
 	 */
-	public void printLL() {
-		if (head == null) {
+	public void reverse() {
+		if (head == null || head.next == null) {
 			return;
 		}
-		LLNode<T> ptr = head;
-		while (ptr != null) {
-			System.out.print(ptr.getData() + " ");
-			ptr = ptr.next;
+		LLNode<T> before = null;
+		LLNode<T> tmp = head;
+		while (tmp != null) {
+			LLNode<T> next = tmp.next;
+			tmp.next = before;
+			before = tmp;
+			tmp = next;
 		}
-		System.out.println();
+		head = before;
+	}
+
+	/**
+	 * Stores contents of the list into a string
+	 * @return one-line string of the list's contents
+	 */
+	public String toString() {
+		String result = "";
+		if (head != null) {
+			LLNode<T> ptr = head;
+			while (ptr != null) {
+				result += (ptr.getData() + ",");
+				ptr = ptr.next;
+			}
+			result = result.substring(0, result.length() - 1);
+		}
+		return result;
 	}
 }

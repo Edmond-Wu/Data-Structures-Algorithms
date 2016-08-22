@@ -1,20 +1,13 @@
 package structures;
 
-import node.LLNode;
-
-public class Queue<T> {
-	
-	private LLNode<T> head;
-	private LLNode<T> tail;
-	private int size;
+//Queue is just a specific linked list in this implementation
+public class Queue<T> extends LinkedList<T> {
 	
 	/**
 	 * Default queue constructor, FIFO
 	 */
 	public Queue () {
-		head = null;
-		tail = null;
-		size = 0;
+		super();
 	}
 	
 	/**
@@ -22,80 +15,14 @@ public class Queue<T> {
 	 * @param data
 	 */
 	public void enqueue(T data) {
-		LLNode<T> new_node = new LLNode<T>(data);
-		if (head == null) {
-			head = new_node;
-			tail = head;
-			size++;
-			return;
-		}
-		else {
-			tail.next = new_node;
-			tail = tail.next;
-			size++;
-		}
+		super.addToBack(data);
 	}
 	
 	/**
 	 * De-queues an item from the queue
-	 * @return
+	 * @return the de-queued item
 	 */
 	public T dequeue() {
-		if (head == null) {
-			return null;
-		}
-		else {
-			LLNode<T> ptr = head;
-			T data = ptr.getData();
-			head = ptr.next;
-			size--;
-			return data;
-		}
-	}
-	
-	/**
-	 * Returns the value of the next node in the queue
-	 * @return
-	 */
-	public T peekHead() {
-		return head.getData();
-	}
-	
-	/**
-	 * Gets the value of the last value in the queue
-	 * @return
-	 */
-	public T peekTail() {
-		return tail.getData();
-	}
-	
-	/**
-	 * Checks if the queue is empty
-	 * @return
-	 */
-	public boolean isEmpty() {
-		return (size == 0);
-	}
-	
-	/**
-	 * Gets the size of the queue
-	 * @return
-	 */
-	public int getSize() {
-		return size;
-	}
-	
-	/**
-	 * Prints the queue's contents
-	 */
-	public void printQ() {
-		if (head == null) {
-			return;
-		}
-		LLNode<T> ptr = head;
-		while (ptr.next != null) {
-			System.out.println(ptr.getData());
-			ptr = ptr.next;
-		}
+		return super.removeHead();
 	}
 }

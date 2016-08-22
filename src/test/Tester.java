@@ -18,20 +18,25 @@ public class Tester {
 			q.enqueue(i);
 		}
 		System.out.println("Size of queue: " + q.getSize());
-		System.out.println("Head is: " + q.peekHead());
-		System.out.println("Tail is: " + q.peekTail());
-		q.printQ();
-		
+		System.out.println("Head is: " + q.getHead());
+		System.out.println("Tail is: " + q.getTail());
+		System.out.println(q.toString());
+		q.dequeue();
+		System.out.println(q.toString());
+		System.out.println();
+
 		//Linked List testing
 		LinkedList<Character> l = new LinkedList<Character>();
 		String word = "eternalenvy";
 		for (int j = 0; j < word.length(); j++) {
 			l.addToBack(word.charAt(j));
 		}
-		l.printLL();
 		l.removeHead();
 		l.addToFront('E');
-		l.printLL();
+		l.removeTail();
+		System.out.println(l.toString());
+		l.reverse();
+		System.out.println(l.toString());
 		System.out.println("Linked List size: " + l.getSize());
 		
 		//Stack testing
