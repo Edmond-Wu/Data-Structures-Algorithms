@@ -2,7 +2,6 @@ package test;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import junit.framework.TestCase;
 import structures.LinkedList;
 
@@ -12,7 +11,7 @@ public class LinkedListTest extends TestCase {
 	
 	@Before
 	public void setUp() {
-		listOne = new LinkedList<Integer>();
+		listOne = new LinkedList<>();
 	}
 	
 	@Test

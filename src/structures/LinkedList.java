@@ -137,12 +137,14 @@ public class LinkedList<T> {
 		LLNode<T> before = null;
 		LLNode<T> tmp = head;
 		while (tmp != null) {
-			LLNode<T> next = tmp.next;
+			LLNode<T> next = tmp.next; //make copy of the next node
+
+			//change pointers
 			tmp.next = before;
 			before = tmp;
 			tmp = next;
 		}
-		head = before;
+		head = before; //set head to last node
 	}
 
 	/**

@@ -4,13 +4,9 @@ import structures.LinkedList;
 import structures.Queue;
 import structures.Stack;
 import structures.Tree;
+import sort.MergeSort;
 
 public class Tester {
-
-	/**
-	 * Main method to test out data structure implementations
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		//Queue testing
 		Queue<Integer> q = new Queue<Integer>();
@@ -22,8 +18,7 @@ public class Tester {
 		System.out.println("Tail is: " + q.getTail());
 		System.out.println(q.toString());
 		q.dequeue();
-		System.out.println(q.toString());
-		System.out.println();
+		System.out.println(q.toString() + "\n");
 
 		//Linked List testing
 		LinkedList<Character> l = new LinkedList<Character>();
@@ -37,7 +32,7 @@ public class Tester {
 		System.out.println(l.toString());
 		l.reverse();
 		System.out.println(l.toString());
-		System.out.println("Linked List size: " + l.getSize());
+		System.out.println("Linked List size: " + l.getSize() + "\n");
 		
 		//Stack testing
 		Stack<Integer> stk = new Stack<Integer>();
@@ -49,20 +44,22 @@ public class Tester {
 		while (!stk.isEmpty()) {
 			System.out.print(stk.pop() + " ");
 		}
-		System.out.println();
-		
+
 		//Tree testing
 		Tree tree = new Tree();
 		int[] arr = {5, 1, 7, 3, 6, 10, 4, 20, 15, 2};
 		for (int y = 0; y < arr.length; y++) {
 			tree.addNode(arr[y]);
 		}
-		System.out.println();
-		System.out.println(tree.findTarget(tree.getRoot(), 11));
+		System.out.println("\n\n" + tree.findTarget(tree.getRoot(), 11));
 		System.out.println(tree.deleteNode(4));
 		System.out.println();
 		tree.inOrderTraversal(tree.getRoot());
 		System.out.println();
-		System.out.println("Depth of tree: " + tree.getDepth(tree.getRoot()));
+		System.out.println("Depth of tree: " + tree.getDepth(tree.getRoot()) + "\n");
+
+		//Merge sort testing
+		int array[] = {22,21,19,18,15,14,9,7,5};
+		System.out.println(MergeSort.arrayString(MergeSort.sort(array)));
 	}
 }
