@@ -1,5 +1,5 @@
-# DataStructures
-Some implementations of popular data structures and some algorithms. Mainly for practice purposes.
+# DataStructuresAlgorithms
+Some implementations of popular data structures and some algorithms, as well as a few solutions from some LeetCode problems. For practice purposes.
 
 ##Structures implemented
 Linked List
