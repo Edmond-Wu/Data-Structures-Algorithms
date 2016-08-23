@@ -3,7 +3,15 @@ package sort;
 /**
  * Created by Edmond Wu on 8/22/2016.
  */
-public class QuickSort {
+public class QuickSort extends StringArray {
+
+    /**
+     * Method to quicksort an array
+     * @param arr input array
+     * @param low lower bound
+     * @param high higher bound
+     * @return array in sorted form
+     */
     public static int[] sort(int[] arr, int low, int high) {
         if (arr == null || arr.length == 0) {
             return null;
