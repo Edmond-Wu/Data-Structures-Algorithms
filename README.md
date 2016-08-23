@@ -12,3 +12,5 @@ Binary Tree
 
 ##Algorithms implemented
 Merge Sort
+
+Quick Sort
