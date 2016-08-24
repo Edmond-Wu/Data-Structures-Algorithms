@@ -182,7 +182,24 @@ public class Tree {
 			}
 		}
 	}
-	
+
+	/**
+	 * Inverts a binary tree
+	 * @param root root of tree
+	 * @return root of new inverted tree
+	 */
+	public TreeNode invertTree(TreeNode root) {
+		if (root == null || (root.left == null && root.right == null)) {
+			return root;
+		}
+		TreeNode temp = root.left;
+		root.left = root.right;
+		root.right = temp;
+		invertTree(root.left);
+		invertTree(root.right);
+		return root;
+	}
+
 	/**
 	 * Gets the height/depth of the tree
 	 * @param r root of the tree

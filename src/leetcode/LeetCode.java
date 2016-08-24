@@ -27,4 +27,21 @@ public class LeetCode {
     public boolean canWinNim(int n) {
         return !(n % 4 == 0);
     }
+
+    /**
+     * Sums the digits of a number until there's only 1 number left
+     * @param num input number
+     * @return number returned by repeatedly summing up its digits
+     */
+    public int addDigits(int num) {
+        if(num == 0) {
+            return 0;
+        }
+        else if(num != 0 && num % 9 == 0) {
+            return 9;
+        }
+        else {
+            return num % 9;
+        }
+    }
 }
