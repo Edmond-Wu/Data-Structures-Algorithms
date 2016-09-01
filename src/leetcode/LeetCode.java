@@ -44,4 +44,20 @@ public class LeetCode {
             return num % 9;
         }
     }
+
+    /**
+     * Given an Excel column title, return its corresponding column number
+     * @param s spreadsheet column ('AA', 'BC')
+     * @return number of that column
+     */
+    public int titleToNumber(String s) {
+        //'A' = 65
+        int sum = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(s.length() - i - 1);
+            int ascii = (int)c - 64;
+            sum += (Math.pow(26, i) * ascii);
+        }
+        return sum;
+    }
 }

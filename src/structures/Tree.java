@@ -15,7 +15,7 @@ public class Tree {
 	
 	/**
 	 * Returns the root of the tree
-	 * @return
+	 * @return root
 	 */
 	public TreeNode getRoot() {
 		return root;
@@ -23,7 +23,6 @@ public class Tree {
 	
 	/**
 	 * Adds a node to the tree
-	 * @param rt root of the tree
 	 * @param data value to be inserted
 	 */
 	public void addNode(int data) {
@@ -33,9 +32,8 @@ public class Tree {
 			root = node;
 			return;
 		}
-		
 		TreeNode current = root;
-		TreeNode parent = null;
+		TreeNode parent;
 		
 		while (true) {
 			parent = current;
@@ -88,7 +86,7 @@ public class Tree {
 			if (current == root){
 				root = null;
 			}
-			if (isLeftChild == true) {
+			if (isLeftChild) {
 				parent.left = null;
 			}
 			else {
@@ -185,24 +183,24 @@ public class Tree {
 
 	/**
 	 * Inverts a binary tree
-	 * @param root root of tree
+	 * @param rt root of tree
 	 * @return root of new inverted tree
 	 */
-	public TreeNode invertTree(TreeNode root) {
-		if (root == null || (root.left == null && root.right == null)) {
-			return root;
+	public TreeNode invertTree(TreeNode rt) {
+		if (rt == null || (rt.left == null && rt.right == null)) {
+			return rt;
 		}
-		TreeNode temp = root.left;
-		root.left = root.right;
-		root.right = temp;
-		invertTree(root.left);
-		invertTree(root.right);
-		return root;
+		TreeNode temp = rt.left;
+        rt.left = rt.right;
+        rt.right = temp;
+		invertTree(rt.left);
+		invertTree(rt.right);
+		return rt;
 	}
 
 	/**
 	 * Gets the height/depth of the tree
-	 * @param r root of the tree
+	 * @param rt root of the tree
 	 * @return
 	 */
 	public int getDepth(TreeNode rt) {
@@ -211,10 +209,25 @@ public class Tree {
 		}
 		return Math.max(1 + getDepth(rt.left), 1 + getDepth(rt.right));
 	}
+
+    /**
+     * Checks if 2 trees are the same structure-wise and value-wise
+     * @param p root of first tree
+     * @param q root of second tree
+     * @return true if they're the same, false if not
+     */
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
+            return true;
+        }
+        else {
+            return (!(p == null || q == null) && p.getData() == q.getData() && (isSameTree(p.left, q.left) && isSameTree(p.right, q.right)));
+        }
+    }
 	
 	/**
 	 * Performs an in-order traversal of the tree
-	 * @param rt
+	 * @param rt root of tree
 	 */
 	public void inOrderTraversal(TreeNode rt) {
 		if (rt != null) {
