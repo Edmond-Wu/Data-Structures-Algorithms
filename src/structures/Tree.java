@@ -27,14 +27,12 @@ public class Tree {
 	 */
 	public void addNode(int data) {
 		TreeNode node = new TreeNode(data);
-		
 		if (root == null) {
 			root = node;
 			return;
 		}
 		TreeNode current = root;
 		TreeNode parent;
-		
 		while (true) {
 			parent = current;
 			if (data < current.getData()) {
