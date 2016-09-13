@@ -10,6 +10,8 @@ Queue
 
 Binary Tree
 
+Graph
+
 ##Algorithms implemented
 Merge Sort
 
