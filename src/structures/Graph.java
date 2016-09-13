@@ -51,4 +51,27 @@ public class Graph<T> {
             }
         }
     }
+
+    /**
+     * Performs a depth-first search (bfs) traversal of the graph
+     * @param start starting node
+     */
+    public void dfs(GraphNode start) {
+        if (start == null) {
+            return;
+        }
+        HashSet<GraphNode<T>> visited = new HashSet<>();
+        Stack<GraphNode<T>> stk = new Stack<>();
+        stk.push(start);
+        while (!stk.isEmpty()) {
+            GraphNode<T> node = stk.pop();
+            for (GraphNode<T> neighbor : node.getNeighbors()) {
+                if (!visited.contains(neighbor)) {
+                    visited.add(neighbor);
+                    System.out.println(neighbor.getData());
+                    stk.push(neighbor);
+                }
+            }
+        }
+    }
 }
