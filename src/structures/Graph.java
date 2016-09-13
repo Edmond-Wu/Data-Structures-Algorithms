@@ -34,12 +34,15 @@ public class Graph<T> {
         }
         Queue<GraphNode<T>> queue = new Queue<>();
         HashSet<GraphNode<T>> visited = new HashSet<>();
+
+        //begin with starting node
         queue.enqueue(start);
         System.out.println(start.getData());
         visited.add(start);
         while (queue.getSize() != 0) {
             GraphNode<T> node = queue.dequeue();
             for (GraphNode<T> neighbor : node.getNeighbors()) {
+                //check if neighbor has been visited
                 if (!visited.contains(neighbor)) {
                     System.out.println(neighbor.getData());
                     visited.add(neighbor);
