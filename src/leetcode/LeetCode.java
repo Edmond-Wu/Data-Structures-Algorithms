@@ -8,6 +8,38 @@ import java.util.*;
 public class LeetCode {
     public static void main(String[] args) {
         System.out.println(compareAdjacents(1234));
+        int[] coins = {9, 6, 5, 1};
+        System.out.println("Minimum number of coins to make 11: " + minCoins(coins, 11));
+    }
+
+    /**
+     * Method to find smallest number in the array
+     * @param arr input array of integers
+     * @return smallest value in array
+     */
+    public static int minArray(int[] arr) {
+        int smallest = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < smallest) {
+                smallest = arr[i];
+            }
+        }
+        return smallest;
+    }
+
+    /**
+     * Method to find biggest number in the array
+     * @param arr input array of integers
+     * @return biggest value in array
+     */
+    public static int maxArray(int[] arr) {
+        int biggest = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > biggest) {
+                biggest = arr[i];
+            }
+        }
+        return biggest;
     }
 
     /**
@@ -93,5 +125,31 @@ public class LeetCode {
             }
         }
         return min;
+    }
+
+    /**
+     * Method to find the minimum amount of coins to add up to a certain value
+     * @param coins array of types of coins
+     * @param value value to be matched
+     * @return minimum number of coins to add up to that value
+     */
+    public static int minCoins(int[] coins, int value) {
+        if (value == 0 || value < minArray(coins)) {
+            return 0;
+        }
+        int answer = Integer.MAX_VALUE;
+
+        //try every coin smaller than value
+        for (int i = 0; i < coins.length; i++) {
+            if (coins[i] <= value) {
+                int subAnswer = minCoins(coins, value - coins[i]);
+
+                //checking for overflow and for possible minimizations
+                if (subAnswer != Integer.MAX_VALUE && subAnswer + 1 < answer) {
+                    answer = subAnswer + 1;
+                }
+            }
+        }
+        return answer;
     }
 }
