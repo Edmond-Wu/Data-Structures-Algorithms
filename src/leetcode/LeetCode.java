@@ -134,22 +134,26 @@ public class LeetCode {
      * @return minimum number of coins to add up to that value
      */
     public static int minCoins(int[] coins, int value) {
-        if (value == 0 || value < minArray(coins)) {
-            return 0;
+        //table stores the min number of coins for value i
+        int table[] = new int[value + 1];
+        table[0] = 0;
+        //initialize as infinite
+        for (int i = 1; i <= value; i++) {
+            table[i] = Integer.MAX_VALUE;
         }
-        int answer = Integer.MAX_VALUE;
 
-        //try every coin smaller than value
-        for (int i = 0; i < coins.length; i++) {
-            if (coins[i] <= value) {
-                int subAnswer = minCoins(coins, value - coins[i]);
-
-                //checking for overflow and for possible minimizations
-                if (subAnswer != Integer.MAX_VALUE && subAnswer + 1 < answer) {
-                    answer = subAnswer + 1;
+        //get minimum coins for values 1 to value
+        for (int i = 1; i <= value; i++) {
+            //iterate through coins smaller than i
+            for (int j = 0; j < coins.length; j++) {
+                if (coins[j] <= i) {
+                    int subAnswer = table[i - coins[j]];
+                    if (subAnswer != Integer.MAX_VALUE && subAnswer + 1 < table[i]) {
+                        table[i] = subAnswer + 1;
+                    }
                 }
             }
         }
-        return answer;
+        return table[value];
     }
 }
