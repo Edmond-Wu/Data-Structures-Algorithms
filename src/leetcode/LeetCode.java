@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class LeetCode {
     public static void main(String[] args) {
-        System.out.println(compareAdjacents(1234));
+        System.out.println(compareAdjacents(12345));
         int[] coins = {9, 6, 5, 1};
         System.out.println("Minimum number of coins to make 11: " + minCoins(coins, 11));
     }
@@ -103,7 +103,7 @@ public class LeetCode {
         if (n < 10) {
             return n;
         }
-        ArrayList<Integer> numbers = new ArrayList<Integer>();
+        HashSet<Integer> numbers = new HashSet<>();
         String stringForm = n + "";
         for (int i = 0; i < stringForm.length() - 1; i++) {
             int first = Integer.parseInt(stringForm.charAt(i) + "");
@@ -118,13 +118,7 @@ public class LeetCode {
             }
             numbers.add(Integer.parseInt(sub.toString()));
         }
-        int min = numbers.get(0);
-        for (int j = 1; j < numbers.size(); j++) {
-            if (numbers.get(j) < min) {
-                min = numbers.get(j);
-            }
-        }
-        return min;
+        return Collections.min(numbers);
     }
 
     /**
