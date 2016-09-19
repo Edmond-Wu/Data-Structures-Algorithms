@@ -17,7 +17,15 @@ public class Queue<T> extends LinkedList<T> {
 	public void enqueue(T data) {
 		super.addToBack(data);
 	}
-	
+
+	/**
+	 * Peeks the front of the queue without de-queuing
+	 * @return data contained in front-most node in queue
+	 */
+	public T peek() {
+		return super.getHead();
+	}
+
 	/**
 	 * De-queues an item from the queue
 	 * @return the de-queued item
