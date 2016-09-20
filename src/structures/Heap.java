@@ -140,4 +140,21 @@ public class Heap {
         }
         return minChild;
     }
+
+    /**
+     * Heap sort; builds a heap then returns an array in sorted form using the heap
+     * @param arr array to be sorted
+     * @return array in sorted form
+     */
+    public static int[] heapSort(int[] arr) {
+        int[] result = new int[arr.length];
+        Heap heap = new Heap(arr.length);
+        for (int i = 0; i < arr.length; i++) {
+            heap.insert(arr[i]);
+        }
+        for (int j = 0; j < arr.length; j++) {
+            result[j] = heap.deleteMin();
+        }
+        return result;
+    }
 }
