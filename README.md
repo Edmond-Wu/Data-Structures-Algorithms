@@ -12,8 +12,6 @@ Binary Tree
 
 Graph
 
-Binary (Min) Heap
-
 ##Algorithms implemented
 Merge Sort
 
