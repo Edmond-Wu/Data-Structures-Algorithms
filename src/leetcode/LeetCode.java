@@ -10,6 +10,8 @@ public class LeetCode {
         System.out.println(compareAdjacents(12345));
         int[] coins = {9, 6, 5, 1};
         System.out.println("Minimum number of coins to make 11: " + minCoins(coins, 11));
+        String compressed = rle("aaaaAAAwwwweerrr");
+        System.out.println(compressed);
     }
 
     /**
@@ -149,5 +151,25 @@ public class LeetCode {
             }
         }
         return table[value];
+    }
+
+    public static String rle(String source) {
+        StringBuilder compressed = new StringBuilder();
+        char letter = 0;
+        int count = 1;
+        for (int i = 0; i < source.length(); i++) {
+            if (letter == source.charAt(i)) {
+                count++;
+            }
+            else {
+                compressed = count !=1 ? compressed.append(count) : compressed;
+                compressed.append(letter);
+                letter = source.charAt(i);
+                count = 1;
+            }
+        }
+        compressed = count !=1 ? compressed.append(count) : compressed;
+        compressed.append(letter);
+        return compressed.toString();
     }
 }
