@@ -1,7 +1,7 @@
 # DataStructuresAlgorithms
 Some implementations of popular data structures and some algorithms, as well as a few solutions from some LeetCode problems. For practice purposes.
 
-##Structures implemented
+## Structures implemented
 Linked List
 
 Stack
@@ -12,7 +12,7 @@ Binary Tree
 
 Graph
 
-##Algorithms implemented
+## Algorithms implemented
 Merge Sort
 
 Quick Sort
