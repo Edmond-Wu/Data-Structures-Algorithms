@@ -1,12 +1,13 @@
 package structures;
 
+import node.GraphEdge;
 import node.GraphNode;
 import java.util.*;
 
 /**
  * Created by Edmond Wu on 9/12/2016.
  */
-public class Graph<T> {
+public class Graph<T> {	
     private HashSet<GraphNode<T>> nodes;
 
     /**
@@ -22,6 +23,14 @@ public class Graph<T> {
      */
     public HashSet<GraphNode<T>> getNodes() {
         return nodes;
+    }
+    
+    /**
+     * Adds a vertex to the graph
+     * @param vertex
+     */
+    public void addVertex(GraphNode<T> vertex) {
+    	nodes.add(vertex);
     }
 
     /**
@@ -41,12 +50,12 @@ public class Graph<T> {
         visited.add(start);
         while (queue.getSize() != 0) {
             GraphNode<T> node = queue.dequeue();
-            for (GraphNode<T> neighbor : node.getNeighbors()) {
+            for (GraphEdge<T> edge : node.getEdges()) {
                 //check if neighbor has been visited
-                if (!visited.contains(neighbor)) {
-                    System.out.println(neighbor.getData());
-                    visited.add(neighbor);
-                    queue.enqueue(neighbor);
+                if (!visited.contains(edge.getEnd())) {
+                    System.out.println(edge.getEnd().getData());
+                    visited.add(edge.getEnd());
+                    queue.enqueue(edge.getEnd());
                 }
             }
         }
@@ -65,11 +74,11 @@ public class Graph<T> {
         stk.push(start);
         while (!stk.isEmpty()) {
             GraphNode<T> node = stk.pop();
-            for (GraphNode<T> neighbor : node.getNeighbors()) {
-                if (!visited.contains(neighbor)) {
-                    visited.add(neighbor);
-                    System.out.println(neighbor.getData());
-                    stk.push(neighbor);
+            for (GraphEdge<T> edge : node.getEdges()) {
+                if (!visited.contains(edge.getEnd())) {
+                	System.out.println(edge.getEnd().getData());
+                    visited.add(edge.getEnd());
+                    stk.push(edge.getEnd());          
                 }
             }
         }

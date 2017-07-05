@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class GraphNode<T> extends Node<T> {
 
-    private HashSet<GraphNode<T>> neighbors;
+    private HashSet<GraphEdge<T>> edges;
 
     /**
      * Node for a graph
@@ -15,14 +15,23 @@ public class GraphNode<T> extends Node<T> {
      */
     public GraphNode(T value) {
         super(value);
-        neighbors = new HashSet<>();
+        edges = new HashSet<>();
     }
 
     /**
-     * Returns the node's list of neighbors
-     * @return hashset of node's neighbors
+     * Returns the node's list of edges
+     * @return hashset of node's edges
      */
-    public HashSet<GraphNode<T>> getNeighbors() {
-        return neighbors;
+    public HashSet<GraphEdge<T>> getEdges() {
+        return edges;
+    }
+    
+    /**
+     * Adds an edge to the node's set of edges
+     * @param node
+     * @param weight
+     */
+    public void addEdge(GraphNode<T> node, double weight) {
+    	edges.add(new GraphEdge<T>(this, node, weight));
     }
 }
