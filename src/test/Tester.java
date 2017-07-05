@@ -27,6 +27,7 @@ public class Tester {
 		for (int j = 0; j < word.length(); j++) {
 			l.addToBack(word.charAt(j));
 		}
+		System.out.println(l.toString());
 		l.removeHead();
 		l.addToFront('E');
 		l.removeTail();
