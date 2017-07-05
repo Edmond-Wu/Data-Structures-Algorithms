@@ -1,12 +1,11 @@
 package node;
 
-import structures.Queue;
 import java.util.*;
 
 /**
- * Created by edma_ on 9/12/2016.
+ * Created by Edmond Wu on 9/12/2016.
  */
-public class GraphNode<T> extends Node {
+public class GraphNode<T> extends Node<T> {
 
     private HashSet<GraphNode<T>> neighbors;
 

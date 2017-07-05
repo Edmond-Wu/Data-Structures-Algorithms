@@ -1,5 +1,6 @@
 package test;
 
+import structures.Graph;
 import structures.LinkedList;
 import structures.Queue;
 import structures.Stack;
@@ -61,5 +62,7 @@ public class Tester {
 		//Merge sort testing
 		int array[] = {22,21,19,18,15,14,9,7,5};
 		System.out.println(MergeSort.arrayString(MergeSort.sort(array)));
+		
+		//Graph<Integer> graph = new Graph<Integer>();
 	}
 }

@@ -4,7 +4,7 @@ import node.GraphNode;
 import java.util.*;
 
 /**
- * Created by edma_ on 9/12/2016.
+ * Created by Edmond Wu on 9/12/2016.
  */
 public class Graph<T> {
     private HashSet<GraphNode<T>> nodes;
@@ -28,7 +28,7 @@ public class Graph<T> {
      * Performs a breadth-first-search (bfs) traversal of the graph
      * @param start starting node
      */
-    public void bfs(GraphNode start) {
+    public void bfs(GraphNode<T> start) {
         if (start == null) {
             return;
         }
@@ -56,7 +56,7 @@ public class Graph<T> {
      * Performs a depth-first search (bfs) traversal of the graph
      * @param start starting node
      */
-    public void dfs(GraphNode start) {
+    public void dfs(GraphNode<T> start) {
         if (start == null) {
             return;
         }

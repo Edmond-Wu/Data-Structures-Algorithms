@@ -10,11 +10,11 @@ public class StringArray {
      * @return array in string form
      */
     public static String arrayString(int[] arr) {
-        String result = "";
+    	StringBuilder sb = new StringBuilder();
         for (int i = 0; i < arr.length - 1; i++) {
-            result += (arr[i] + ",");
+        	sb.append(arr[i] + ", ");
         }
-        result += arr[arr.length - 1];
-        return result;
+        sb.append(arr[arr.length - 1]);
+        return sb.toString();
     }
 }
