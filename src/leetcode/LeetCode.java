@@ -153,6 +153,11 @@ public class LeetCode {
         return table[value];
     }
 
+    /**
+     * RLE compression algorithm
+     * @param source an uncompressed input string
+     * @return source string in RLE-compressed form
+     */
     public static String rle(String source) {
         StringBuilder compressed = new StringBuilder();
         int consecutive = 1;

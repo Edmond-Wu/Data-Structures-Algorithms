@@ -76,7 +76,7 @@ public class Graph<T> {
             GraphNode<T> node = stk.pop();
             for (GraphEdge<T> edge : node.getEdges()) {
                 if (!visited.contains(edge.getEnd())) {
-                	System.out.println(edge.getEnd().getData());
+                    System.out.println(edge.getEnd().getData());
                     visited.add(edge.getEnd());
                     stk.push(edge.getEnd());          
                 }
