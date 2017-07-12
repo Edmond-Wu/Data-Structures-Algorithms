@@ -29,9 +29,11 @@ public class GraphNode<T> extends Node<T> {
     /**
      * Adds an edge to the node's set of edges
      * @param node
-     * @param weight
+     * @param weight (this should be a positive value)
      */
     public void addEdge(GraphNode<T> node, double weight) {
-    	edges.add(new GraphEdge<T>(this, node, weight));
+    	if (weight > 0) {
+    		edges.add(new GraphEdge<T>(this, node, weight));
+    	}
     }
 }

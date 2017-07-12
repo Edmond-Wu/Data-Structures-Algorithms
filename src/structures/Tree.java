@@ -36,16 +36,16 @@ public class Tree {
 		while (true) {
 			parent = current;
 			if (data < current.getData()) {
-				current = current.left;
+				current = current.getLeft();
 				if (current == null) {
-					parent.left = node;
+					parent.setLeft(node);
 					return;
 				}
 			}
 			else {
-				current = current.right;
+				current = current.getRight();
 				if (current == null) {
-					parent.right = node;
+					parent.setRight(node);
 					return;
 				}
 			}
@@ -66,11 +66,11 @@ public class Tree {
 			parent = current;
 			if (current.getData() > data){
 				isLeftChild = true;
-				current = current.left;
+				current = current.getLeft();
 			}
 			else {
 				isLeftChild = false;
-				current = current.right;
+				current = current.getRight();
 			}
 			//node is not found
 			if (current == null){
@@ -80,38 +80,38 @@ public class Tree {
 		
 		//node is found
 		//Case 1: if node to be deleted has no children
-		if (current.left == null && current.right == null) {
+		if (current.getLeft() == null && current.getRight() == null) {
 			if (current == root){
 				root = null;
 			}
 			if (isLeftChild) {
-				parent.left = null;
+				parent.setLeft(null);
 			}
 			else {
-				parent.right = null;
+				parent.setRight(null);
 			}
 		}
 		//Case 2 : if node to be deleted has only one child
-		else if (current.right == null) {
+		else if (current.getRight() == null) {
 			if (current == root) {
-				root = current.left;
+				root = current.getLeft();
 			}
 			else if (isLeftChild) {
-				parent.left = current.left;
+				parent.setLeft(current.getLeft());
 			}
 			else {
-				parent.right = current.left;
+				parent.setRight(current.getLeft());
 			}
 		}
-		else if (current.left == null) {
+		else if (current.getLeft() == null) {
 			if (current == root) {
-				root = current.right;
+				root = current.getRight();
 			}
 			else if (isLeftChild) {
-				parent.left = current.right;
+				parent.setLeft(current.getRight());
 			}
 			else {
-				parent.right = current.right;
+				parent.setRight(current.getRight());
 			}
 		}
 		else {
@@ -121,12 +121,12 @@ public class Tree {
 				root = successor;
 			}
 			else if (isLeftChild) {
-				parent.left = successor;
+				parent.setLeft(successor);
 			}
 			else {
-				parent.right = successor;
-			}			
-			successor.left = current.left;
+				parent.setRight(successor);
+			}
+			successor.setLeft(current.getLeft());
 		}		
 		return true;	
 	}
@@ -139,19 +139,19 @@ public class Tree {
 	public TreeNode getSuccessor(TreeNode tbd) {
 		TreeNode successor = null;
 		TreeNode successor_parent = null;
-		TreeNode current = tbd.right;
+		TreeNode current = tbd.getRight();
 		
 		while (current != null) {
 			successor_parent = successor;
 			successor = current;
-			current = current.right;
+			current = current.getRight();
 		}
 		
 		//check if the successor has a right child (cannot have left)
 		//add it to the left of successor_parent if it has a right child
-		if (successor != tbd.right) {
-			successor_parent.left = successor.right;
-			successor.right = tbd.right;
+		if (successor != tbd.getRight()) {
+			successor_parent.setLeft(successor.getRight());
+			successor.setRight(tbd.getRight());
 		}
 		return successor;
 	}
@@ -171,10 +171,10 @@ public class Tree {
 		}
 		else {
 			if (data < rt.getData()) {
-				return findTarget(rt.left, data);
+				return findTarget(rt.getLeft(), data);
 			}
 			else {
-				return findTarget(rt.right, data);
+				return findTarget(rt.getRight(), data);
 			}
 		}
 	}
@@ -185,14 +185,14 @@ public class Tree {
 	 * @return root of new inverted tree
 	 */
 	public TreeNode invertTree(TreeNode rt) {
-		if (rt == null || (rt.left == null && rt.right == null)) {
+		if (rt == null || (rt.getLeft() == null && rt.getRight() == null)) {
 			return rt;
 		}
-		TreeNode temp = rt.left;
-        rt.left = rt.right;
-        rt.right = temp;
-		invertTree(rt.left);
-		invertTree(rt.right);
+		TreeNode temp = rt.getLeft();
+		rt.setLeft(rt.getRight());
+        rt.setRight(temp);
+		invertTree(rt.getLeft());
+		invertTree(rt.getRight());
 		return rt;
 	}
 
@@ -205,7 +205,7 @@ public class Tree {
 		if (rt == null) {
 			return 0;
 		}
-		return Math.max(1 + getDepth(rt.left), 1 + getDepth(rt.right));
+		return Math.max(1 + getDepth(rt.getLeft()), 1 + getDepth(rt.getRight()));
 	}
 
     /**
@@ -219,7 +219,7 @@ public class Tree {
             return true;
         }
         else {
-            return (!(p == null || q == null) && p.getData() == q.getData() && (isSameTree(p.left, q.left) && isSameTree(p.right, q.right)));
+            return (!(p == null || q == null) && p.getData() == q.getData() && (isSameTree(p.getLeft(), q.getLeft()) && isSameTree(p.getRight(), q.getRight())));
         }
     }
 	
@@ -229,9 +229,34 @@ public class Tree {
 	 */
 	public void inOrderTraversal(TreeNode rt) {
 		if (rt != null) {
-			inOrderTraversal(rt.left);
+			inOrderTraversal(rt.getLeft());
 			System.out.print(rt.getData() + " ");
-			inOrderTraversal(rt.right);
+			inOrderTraversal(rt.getRight());
+		}
+	}
+	
+	
+	/**
+	 * Performs a pre-order traversal of the tree
+	 * @param rt root of tree
+	 */
+	public void preOrderTraversal(TreeNode rt) {
+		if (rt != null) {
+			System.out.print(rt.getData() + " ");
+			inOrderTraversal(rt.getLeft());
+			inOrderTraversal(rt.getRight());
+		}
+	}
+	
+	/**
+	 * Performs a post-order traversal of the tree
+	 * @param rt root of tree
+	 */
+	public void postOrderTraversal(TreeNode rt) {
+		if (rt != null) {
+			inOrderTraversal(rt.getLeft());
+			inOrderTraversal(rt.getRight());
+			System.out.print(rt.getData() + " ");
 		}
 	}
 }

@@ -55,6 +55,9 @@ public class LeetCode {
 
     /**
      * Method to determine whether you can win the Nim game
+     * The game starts with a number of stones on the table
+     * 2 players take turns removing 1-3 stones from the table
+     * Whoever removes the last stone wins
      * @param n number of stones
      * @return true if you can win, false otherwise
      */
@@ -85,9 +88,11 @@ public class LeetCode {
      * @return number of that column
      */
     public static int titleToNumber(String s) {
-        //'A' = 65
+        //'A' = 65'
+    	s = s.toUpperCase();
         int sum = 0;
         for (int i = 0; i < s.length(); i++) {
+        	//start in reverse order of the string
             char c = s.charAt(s.length() - i - 1);
             int ascii = (int)c - 64;
             sum += (Math.pow(26, i) * ascii);
@@ -106,7 +111,9 @@ public class LeetCode {
             return n;
         }
         HashSet<Integer> numbers = new HashSet<>();
+        //convert n to string form
         String stringForm = n + "";
+        //compare each set of 2 adjacent numbers, pick larger one and form new string, then add to set
         for (int i = 0; i < stringForm.length() - 1; i++) {
             int first = Integer.parseInt(stringForm.charAt(i) + "");
             int second = Integer.parseInt(stringForm.charAt(i + 1) + "");
