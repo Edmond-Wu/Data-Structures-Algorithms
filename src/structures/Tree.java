@@ -202,7 +202,7 @@ public class Tree {
 	 * @return
 	 */
 	public int getDepth(TreeNode rt) {
-		if (rt == null) {
+		if (rt == null || (rt.getLeft() == null && rt.getRight() == null)) {
 			return 0;
 		}
 		return Math.max(1 + getDepth(rt.getLeft()), 1 + getDepth(rt.getRight()));

@@ -7,6 +7,7 @@ import structures.Stack;
 import structures.Tree;
 import node.GraphNode;
 import sort.MergeSort;
+import sort.QuickSort;
 import sort.StringArray;
 
 public class Tester {
@@ -20,9 +21,9 @@ public class Tester {
 		System.out.println("Size of queue: " + q.getSize());
 		System.out.println("Head is: " + q.getHead());
 		System.out.println("Tail is: " + q.getTail());
-		System.out.println(q.toString());
+		System.out.println("Queue: " + q.toString());
 		q.dequeue();
-		System.out.println(q.toString() + "\n");
+		System.out.println("Queue after removing head: " + q.toString() + "\n");
 
 		//Linked List testing
 		System.out.println("Linked list testing:");
@@ -31,7 +32,7 @@ public class Tester {
 		for (int j = 0; j < word.length(); j++) {
 			l.addToBack(word.charAt(j));
 		}
-		System.out.println(l.toString());
+		System.out.println("Linked list: " + l.toString());
 		l.removeHead();
 		l.addToFront('E');
 		l.removeTail();
@@ -47,7 +48,7 @@ public class Tester {
 			stk.push(x);
 		}
 		System.out.println("Stack size: " + stk.getSize());
-		
+		System.out.print("Stack: ");
 		while (!stk.isEmpty()) {
 			System.out.print(stk.pop() + " ");
 		}
@@ -55,7 +56,7 @@ public class Tester {
 		System.out.println("\n\nTree testing:");
 		//Tree testing
 		Tree tree = new Tree();
-		int[] arr = {5, 1, 7, 3, 6, 10, 4, 20, 15, 2};
+		int[] arr = {5, 1, 7, 3, 6, 10, 4, 20, 15, 2, 9};
 		for (int y = 0; y < arr.length; y++) {
 			tree.addNode(arr[y]);
 		}
@@ -71,9 +72,16 @@ public class Tester {
 
 		//Merge sort testing
 		System.out.println("Merge sort testing:");
-		int array[] = {22,21,19,18,15,14,9,7,5};
+		int array[] = {22, 21, 19, 18, 15, 14, 9, 7, 5};
 		System.out.println("Unsorted: " + StringArray.arrayString(array));
 		System.out.println("Sorted: " + StringArray.arrayString(MergeSort.sort(array)));
+		System.out.println();
+		
+		//Quick sort testing
+		System.out.println("Quick sort testing:");
+		int array2[] = {5, 7, 2, 8, 10, 20, 14, 18, 30, 22, 20};
+		System.out.println("Unsorted: " + StringArray.arrayString(array2));
+		System.out.println("Sorted: " + StringArray.arrayString(QuickSort.sort(array2, 0, array2.length-1)));
 		System.out.println();
 		
 		//Graph testing
