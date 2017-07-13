@@ -23,7 +23,7 @@ public class Queue<T> extends LinkedList<T> {
 	 * @return data contained in front-most node in queue
 	 */
 	public T peek() {
-		return super.getHead();
+		return super.getHead().getData();
 	}
 
 	/**

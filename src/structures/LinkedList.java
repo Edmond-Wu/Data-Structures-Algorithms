@@ -20,22 +20,22 @@ public class LinkedList<T> {
 	 * Returns the head of the linked list (first node)
 	 * @return data found in the head node
 	 */
-	public T getHead() {
+	public LLNode<T> getHead() {
 		if (head == null) {
 			return null;
 		}
-		return head.getData();
+		return head;
 	}
 	
 	/**
 	 * Returns the tail (end node) of the list
 	 * @return data found in the tail node
 	 */
-	public T getTail() {
+	public LLNode<T> getTail() {
 		if (tail == null) {
 			return null;
 		}
-		return tail.getData();
+		return tail;
 	}
 
 	/**
@@ -147,6 +147,68 @@ public class LinkedList<T> {
 		head = before; //set head to last node
 	}
 
+	/**
+	 * Algorithm for merging 2 sorted integer linked lists
+	 * @param headA head of first list
+	 * @param headB head of second list
+	 * @return head of the new merged list
+	 */
+	public static LLNode<Integer> merge(LLNode<Integer> headA, LLNode<Integer> headB) {
+		if (headA == null || headB == null) {
+	        if (headA != null) {
+	            return headA;
+	        }
+	        if (headB != null) {
+	        	return headB;
+	        }
+	        return null;
+	    }
+	    LLNode<Integer> newHead, newPtr;
+	    //start new head at whichever one has the smallest starting value
+	    if (headA.getData() < headB.getData()) {
+	        newHead = headA;
+	    }
+	    else {
+	        newHead = headB;
+	    }
+	    newPtr = newHead;
+	    LLNode<Integer> ptrA = headA, ptrB = headB;
+	    //iterate through each list and add to the new list
+	    while (ptrA != null && ptrB != null) {
+	        if (ptrA.getData() < ptrB.getData()) {
+	            newPtr.next = ptrA;
+	            ptrA = ptrA.next;
+	        }
+	        else {
+	            newPtr.next = ptrB;
+	            ptrB = ptrB.next;
+	        }
+	        newPtr = newPtr.next;
+	    }
+	    if (ptrA == null) {
+	        newPtr.next = ptrB;
+	    }
+	    else {
+	        newPtr.next = ptrA;
+	    }
+	    return newHead;
+	}
+	
+	/**
+	 * Prints a list given a starting node
+	 * @param node
+	 */
+	public static<T> void printList(LLNode<T> node) {
+		if (node == null) {
+			return;
+		}
+		LLNode<T> ptr = node;
+		while (ptr != null) {
+			System.out.print(ptr.getData() + " ");
+		}
+		System.out.println();
+	}
+	
 	/**
 	 * Stores contents of the list into a string
 	 * @return one-line string of the list's contents
