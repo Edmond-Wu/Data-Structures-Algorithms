@@ -188,9 +188,11 @@ public class Tree {
 		if (rt == null || (rt.getLeft() == null && rt.getRight() == null)) {
 			return rt;
 		}
+		//swap
 		TreeNode temp = rt.getLeft();
 		rt.setLeft(rt.getRight());
-        rt.setRight(temp);
+		rt.setRight(temp);
+		//recursively call on left and right children
 		invertTree(rt.getLeft());
 		invertTree(rt.getRight());
 		return rt;
