@@ -56,9 +56,9 @@ public class LinkedList<T> {
 			tail = head;
 		}
 		else {
-			LLNode<T> new_head = new LLNode<T>(data);
-			new_head.next = head;
-			head = new_head;
+			LLNode<T> newHead = new LLNode<T>(data);
+			newHead.setNext(head);
+			head = newHead;
 		}
 		size++;
 	}
@@ -75,11 +75,11 @@ public class LinkedList<T> {
 		else {
 			LLNode<T> added = new LLNode<T>(data);
 			LLNode<T> ptr = head;
-			while (ptr.next != null) {
-				ptr = ptr.next;
+			while (ptr.getNext() != null) {
+				ptr = ptr.getNext();
 			}
-			ptr.next = added;
-			tail = ptr.next;
+			ptr.setNext(added);
+			tail = ptr.getNext();
 		}
 		size++;
 	}
@@ -94,12 +94,12 @@ public class LinkedList<T> {
 		}
 		else {
 			T data = head.getData();
-			if (head.next == null) {
+			if (head.getNext() == null) {
 				head = null;
 				tail = null;
 			}
 			else {
-				head = head.next;
+				head = head.getNext();
 			}
 			size--;
 			return data;
@@ -117,10 +117,10 @@ public class LinkedList<T> {
 		else {
 			T data = tail.getData();
 			LLNode<T> ptr = head;
-			while (ptr.next != tail) {
-				ptr = ptr.next;
+			while (ptr.getNext() != tail) {
+				ptr = ptr.getNext();
 			}
-			ptr.next = null;
+			ptr.setNext(null);
 			tail = ptr;
 			size--;
 			return data;
@@ -131,16 +131,16 @@ public class LinkedList<T> {
 	 * Reverses the linked list
 	 */
 	public void reverse() {
-		if (head == null || head.next == null) {
+		if (head == null || head.getNext() == null) {
 			return;
 		}
 		LLNode<T> before = null;
 		LLNode<T> tmp = head;
 		while (tmp != null) {
-			LLNode<T> next = tmp.next; //make copy of the next node
+			LLNode<T> next = tmp.getNext(); //make copy of the next node
 
 			//change pointers
-			tmp.next = before;
+			tmp.setNext(before);
 			before = tmp;
 			tmp = next;
 		}
@@ -166,30 +166,32 @@ public class LinkedList<T> {
 	    LLNode<Integer> newHead, newPtr;
 	    //start new head at whichever one has the smallest starting value
 	    if (headA.getData() < headB.getData()) {
-	        newHead = headA;
+	        newHead = new LLNode<Integer>(headA.getData());
+	        headA = headA.getNext();
 	    }
 	    else {
-	        newHead = headB;
+	        newHead = new LLNode<Integer>(headB.getData());
+	        headB = headB.getNext();
 	    }
 	    newPtr = newHead;
 	    LLNode<Integer> ptrA = headA, ptrB = headB;
 	    //iterate through each list and add to the new list
 	    while (ptrA != null && ptrB != null) {
 	        if (ptrA.getData() < ptrB.getData()) {
-	            newPtr.next = ptrA;
-	            ptrA = ptrA.next;
+	        	newPtr.setNext(new LLNode<Integer>(ptrA.getData()));
+	            ptrA = ptrA.getNext();
 	        }
 	        else {
-	            newPtr.next = ptrB;
-	            ptrB = ptrB.next;
+	            newPtr.setNext(new LLNode<Integer>(ptrB.getData()));
+	            ptrB = ptrB.getNext();
 	        }
-	        newPtr = newPtr.next;
+	        newPtr = newPtr.getNext();
 	    }
 	    if (ptrA == null) {
-	        newPtr.next = ptrB;
+	    	newPtr.setNext(ptrB);
 	    }
 	    else {
-	        newPtr.next = ptrA;
+	    	newPtr.setNext(ptrA);
 	    }
 	    return newHead;
 	}
@@ -205,6 +207,7 @@ public class LinkedList<T> {
 		LLNode<T> ptr = node;
 		while (ptr != null) {
 			System.out.print(ptr.getData() + " ");
+			ptr = ptr.getNext();
 		}
 		System.out.println();
 	}
@@ -219,7 +222,7 @@ public class LinkedList<T> {
 			LLNode<T> ptr = head;
 			while (ptr != null) {
 				result += (ptr.getData() + ",");
-				ptr = ptr.next;
+				ptr = ptr.getNext();
 			}
 			result = result.substring(0, result.length() - 1);
 		}

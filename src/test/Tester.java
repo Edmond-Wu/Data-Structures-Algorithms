@@ -40,7 +40,7 @@ public class Tester {
 		l.reverse();
 		System.out.println(l.toString());
 		System.out.println("Linked list size: " + l.getSize() );
-		int first[] = {1, 3, 5, 6};
+		int first[] = {1, 3, 5, 6, 8};
 		int second[] = {2, 4, 7};
 		LinkedList<Integer> firstList = new LinkedList<Integer>();
 		LinkedList<Integer> secondList = new LinkedList<Integer>();
@@ -52,6 +52,7 @@ public class Tester {
 		}
 		System.out.println("First list: " + firstList.toString());
 		System.out.println("Second list: " + secondList.toString());
+		System.out.print("Merged: ");
 		LinkedList.printList(LinkedList.merge(firstList.getHead(), secondList.getHead()));
 		
 		//Stack testing

@@ -24,7 +24,7 @@ public class Stack<T> {
 			head = node;
 		}
 		else {
-			node.next = head;
+			node.setNext(head);
 			head = node;
 		}
 		size++;
@@ -41,11 +41,11 @@ public class Stack<T> {
 		}
 		else {
 			data = head.getData();
-			if (head.next == null) {
+			if (head.getNext() == null) {
 				head = null;
 			}
 			else {
-				head = head.next;
+				head = head.getNext();
 			}
 			size--;
 			return data;
