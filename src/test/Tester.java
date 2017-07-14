@@ -67,8 +67,8 @@ public class Tester {
 			System.out.print(stk.pop() + " ");
 		}
 
-		System.out.println("\n\nTree testing:");
 		//Tree testing
+		System.out.println("\n\nTree testing:");
 		Tree tree = new Tree();
 		int[] arr = {5, 1, 7, 3, 6, 10, 4, 20, 15, 2, 9};
 		for (int y = 0; y < arr.length; y++) {
