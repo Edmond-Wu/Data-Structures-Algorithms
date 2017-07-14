@@ -7,7 +7,7 @@ import structures.LinkedList;
 
 public class LinkedListTest extends TestCase {
 
-	LinkedList<Integer> listOne, listTwo;
+	LinkedList<Integer> listOne;
 	
 	@Before
 	public void setUp() {

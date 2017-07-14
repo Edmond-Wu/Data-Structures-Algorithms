@@ -237,6 +237,16 @@ public class Tree {
 		}
 	}
 	
+	/**
+	 * In-order traversal but returns a string instead of directly printing
+	 * @param rt root of tree
+	 * @return
+	 */
+	public String iOTString(TreeNode rt) {
+		if (rt == null)
+			return "";
+		return iOTString(rt.getLeft()) + (rt.getData() + " ") + iOTString(rt.getRight());
+	}
 	
 	/**
 	 * Performs a pre-order traversal of the tree

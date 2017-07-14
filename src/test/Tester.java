@@ -76,6 +76,7 @@ public class Tester {
 		}
 		System.out.println("Finding 11: " + tree.findTarget(tree.getRoot(), 11));
 		System.out.println("Deleting 4: " + tree.deleteNode(4));
+		System.out.println(tree.iOTString(tree.getRoot()));
 		tree.inOrderTraversal(tree.getRoot());
 		System.out.println();
 		tree.preOrderTraversal(tree.getRoot());
