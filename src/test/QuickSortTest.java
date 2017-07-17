@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import java.util.*;
 
-import sort.MergeSort;
 import sort.QuickSort;
 
 /**
@@ -14,7 +13,7 @@ public class QuickSortTest {
 	@Test
 	public void randomInput() {
 		int[] arr = {5, 24, 15, 16, 8, 4, 7, 2, 50, 10, 10};
-		MergeSort.sort(arr);
+		QuickSort.sort(arr, 0, arr.length - 1);
 		assertEquals("[2, 4, 5, 7, 8, 10, 10, 15, 16, 24, 50]", Arrays.toString(arr));
 	}
 	
