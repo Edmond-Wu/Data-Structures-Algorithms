@@ -24,38 +24,9 @@ public class Tester {
 		System.out.println("Queue: " + q.toString());
 		q.dequeue();
 		System.out.println("Queue after removing head: " + q.toString() + "\n");
-
-		//Linked List testing
-		System.out.println("Linked list testing:");
-		LinkedList<Character> l = new LinkedList<Character>();
-		String word = "eternalenvy";
-		for (int j = 0; j < word.length(); j++) {
-			l.addToBack(word.charAt(j));
-		}
-		System.out.println("Linked list: " + l.toString());
-		l.removeHead();
-		l.addToFront('E');
-		l.removeTail();
-		System.out.println(l.toString());
-		l.reverse();
-		System.out.println(l.toString());
-		System.out.println("Linked list size: " + l.getSize() );
-		int first[] = {1, 3, 5, 7, 9};
-		int second[] = {2, 4, 6, 8 , 10};
-		LinkedList<Integer> firstList = new LinkedList<Integer>();
-		LinkedList<Integer> secondList = new LinkedList<Integer>();
-		for (int a = 0; a < first.length; a++) {
-			firstList.addToBack(first[a]);
-		}
-		for (int b = 0; b < second.length; b++) {
-			secondList.addToBack(second[b]);
-		}
-		System.out.println("First list: " + firstList.toString());
-		System.out.println("Second list: " + secondList.toString());
-		System.out.println("Merged: " + LinkedList.getStringFromNode(LinkedList.merge(firstList.getHead(), secondList.getHead())));
 		
 		//Stack testing
-		System.out.println("\nStack testing:");
+		System.out.println("Stack testing:");
 		Stack<Integer> stk = new Stack<Integer>();
 		for (int x = 1; x <= 10; x++) {
 			stk.push(x);
@@ -65,38 +36,7 @@ public class Tester {
 		while (!stk.isEmpty()) {
 			System.out.print(stk.pop() + " ");
 		}
-
-		//Tree testing
-		System.out.println("\n\nTree testing:");
-		Tree tree = new Tree();
-		int[] arr = {5, 1, 7, 3, 6, 10, 4, 20, 15, 2, 9};
-		for (int y = 0; y < arr.length; y++) {
-			tree.addNode(arr[y]);
-		}
-		System.out.println("Finding 11: " + tree.findTarget(tree.getRoot(), 11));
-		System.out.println("Deleting 4: " + tree.deleteNode(4));
-		System.out.println(tree.iOTString(tree.getRoot()));
-		tree.inOrderTraversal(tree.getRoot());
-		System.out.println();
-		tree.preOrderTraversal(tree.getRoot());
-		System.out.println();
-		tree.postOrderTraversal(tree.getRoot());
-		System.out.println();
-		System.out.println("Depth of tree: " + tree.getDepth(tree.getRoot()) + "\n");
-
-		//Merge sort testing
-		System.out.println("Merge sort testing:");
-		int array[] = {22, 21, 19, 18, 15, 14, 9, 7, 5};
-		System.out.println("Unsorted: " + StringArray.arrayString(array));
-		System.out.println("Sorted: " + StringArray.arrayString(MergeSort.sort(array)));
-		System.out.println();
-		
-		//Quick sort testing
-		System.out.println("Quick sort testing:");
-		int array2[] = {5, 7, 2, 8, 10, 20, 14, 18, 30, 22, 20};
-		System.out.println("Unsorted: " + StringArray.arrayString(array2));
-		System.out.println("Sorted: " + StringArray.arrayString(QuickSort.sort(array2, 0, array2.length-1)));
-		System.out.println();
+		System.out.println("\n");
 		
 		//Graph testing
 		System.out.println("Graph testing:");
