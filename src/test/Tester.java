@@ -1,14 +1,7 @@
 package test;
 
-import structures.Graph;
-import structures.LinkedList;
-import structures.Queue;
-import structures.Stack;
-import structures.Tree;
+import structures.*;
 import node.GraphNode;
-import sort.MergeSort;
-import sort.QuickSort;
-import sort.StringArray;
 
 public class Tester {
 	public static void main(String[] args) {
