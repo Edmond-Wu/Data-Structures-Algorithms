@@ -7,11 +7,12 @@ import structures.LinkedList;
 
 public class LinkedListTest extends TestCase {
 
-	LinkedList<Integer> listOne;
+	LinkedList<Integer> listOne, listTwo;
 	
 	@Before
 	public void setUp() {
 		listOne = new LinkedList<>();
+		listTwo = new LinkedList<>();
 	}
 	
 	@Test
@@ -52,5 +53,29 @@ public class LinkedListTest extends TestCase {
 		assertEquals(listOne.toString(), "1,2,3,4,5,6");
 		listOne.reverse();
 		assertEquals(listOne.toString(), "6,5,4,3,2,1");
+	}
+	
+	@Test
+	public void testMerge() {
+		for (int i = 1; i <= 5; i++) {
+			listOne.addToBack(i);
+		}
+		for (int j = 6; j <= 10; j++) {
+			listTwo.addToBack(j);
+		}
+		assertEquals(LinkedList.getStringFromNode(LinkedList.merge(listOne.getHead(), listTwo.getHead())), "1 2 3 4 5 6 7 8 9 10 ");
+		assertEquals(LinkedList.getStringFromNode(LinkedList.merge(listTwo.getHead(), listOne.getHead())), "1 2 3 4 5 6 7 8 9 10 ");
+		LinkedList<Integer> listThree = new LinkedList<>();
+		LinkedList<Integer> listFour = new LinkedList<>();
+		for (int a = 1; a <= 10; a++) {
+			if (a % 2 == 0) {
+				listFour.addToBack(a);
+			}
+			else {
+				listThree.addToBack(a);
+			}
+		}
+		assertEquals(LinkedList.getStringFromNode(LinkedList.merge(listThree.getHead(), listFour.getHead())), "1 2 3 4 5 6 7 8 9 10 ");
+		assertEquals(LinkedList.getStringFromNode(LinkedList.merge(listFour.getHead(), listThree.getHead())), "1 2 3 4 5 6 7 8 9 10 ");
 	}
 }

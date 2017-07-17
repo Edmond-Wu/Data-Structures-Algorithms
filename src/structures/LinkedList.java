@@ -197,19 +197,21 @@ public class LinkedList<T> {
 	}
 	
 	/**
-	 * Prints a list given a starting node
+	 * Gets the string form of a list from any given node
 	 * @param node
+	 * @return contents of the list starting from the node
 	 */
-	public static<T> void printList(LLNode<T> node) {
+	public static<T> String getStringFromNode(LLNode<T> node) {
+		StringBuilder builder = new StringBuilder();
 		if (node == null) {
-			return;
+			return "";
 		}
 		LLNode<T> ptr = node;
 		while (ptr != null) {
-			System.out.print(ptr.getData() + " ");
+			builder.append(ptr.getData() + " ");
 			ptr = ptr.getNext();
 		}
-		System.out.println();
+		return builder.toString();
 	}
 	
 	/**
