@@ -10,8 +10,8 @@ public class LeetCode {
         System.out.println(compareAdjacents(12345));
         int[] coins = {9, 6, 5, 1};
         System.out.println("Minimum number of coins to make 11: " + minCoins(coins, 11));
-        String compressed = rle("aaaaAAAwwwweerrr");
-        System.out.println(compressed);
+        System.out.println(rle("aaaaAAAwwwweerrr"));
+        System.out.println("Factorial of 5: " + factorial(5));
     }
 
     /**
@@ -186,5 +186,21 @@ public class LeetCode {
             }
         }
         return compressed.toString();
+    }
+    
+    /**
+     * Calculates the factorial of a number
+     * @param x input number
+     * @return
+     */
+    public static long factorial(int x) {
+    	if (x == 0) {
+    		return 1;
+    	}
+    	long answer = (long)x;
+    	for (int i = x - 1; i >= 1; i--) {
+    		answer *= i;
+    	}
+    	return answer;
     }
 }
