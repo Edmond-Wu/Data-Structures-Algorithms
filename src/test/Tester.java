@@ -1,6 +1,8 @@
 package test;
 
-import structures.*;
+import structures.Graph;
+import structures.Queue;
+import structures.Stack;
 import node.GraphNode;
 
 public class Tester {

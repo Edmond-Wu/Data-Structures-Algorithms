@@ -1,6 +1,6 @@
 package sort;
 
-import java.util.*;
+import java.util.Arrays;
 
 /**
  * Created by Edmond Wu on 8/22/2016.

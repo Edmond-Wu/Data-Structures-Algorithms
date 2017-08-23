@@ -1,13 +1,14 @@
 package node;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Edmond Wu on 9/12/2016.
  */
 public class GraphNode<T> extends Node<T> {
 
-    private HashSet<GraphEdge<T>> edges;
+    private Set<GraphEdge<T>> edges;
 
     /**
      * Node for a graph
@@ -22,7 +23,7 @@ public class GraphNode<T> extends Node<T> {
      * Returns the node's list of edges
      * @return hashset of node's edges
      */
-    public HashSet<GraphEdge<T>> getEdges() {
+    public Set<GraphEdge<T>> getEdges() {
         return edges;
     }
     

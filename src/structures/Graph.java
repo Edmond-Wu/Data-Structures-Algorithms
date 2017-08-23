@@ -1,14 +1,16 @@
 package structures;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import node.GraphEdge;
 import node.GraphNode;
-import java.util.*;
 
 /**
  * Created by Edmond Wu on 9/12/2016.
  */
 public class Graph<T> {	
-    private HashSet<GraphNode<T>> nodes;
+    private Set<GraphNode<T>> nodes;
 
     /**
      * Constructor for a graph
@@ -21,7 +23,7 @@ public class Graph<T> {
      * Retrieve list of nodes
      * @return nodes
      */
-    public HashSet<GraphNode<T>> getNodes() {
+    public Set<GraphNode<T>> getNodes() {
         return nodes;
     }
     

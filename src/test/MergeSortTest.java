@@ -1,14 +1,17 @@
 package test;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.Arrays;
+
 /**
  * Created by Edmond Wu on 8/22/2016.
  */
-import static org.junit.Assert.*;
 import org.junit.Test;
-import java.util.*;
 import sort.MergeSort;
 
 public class MergeSortTest {
+	
 	@Test
 	public void randomInput() {
 		int[] arr = {5, 24, 15, 16, 8, 4, 7, 2, 50, 10, 10};

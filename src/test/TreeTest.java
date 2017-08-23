@@ -1,13 +1,14 @@
 package test;
 
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 import structures.Tree;
 
 public class TreeTest {
-	Tree tree;
+	private Tree tree;
 	
 	@Before
 	public void setUp() {

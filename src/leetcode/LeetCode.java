@@ -1,18 +1,13 @@
 package leetcode;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Edmond Wu on 8/22/2016.
  */
 public class LeetCode {
-    public static void main(String[] args) {
-        System.out.println(compareAdjacents(12345));
-        int[] coins = {9, 6, 5, 1};
-        System.out.println("Minimum number of coins to make 11: " + minCoins(coins, 11));
-        System.out.println(rle("aaaaAAAwwwweerrr"));
-        System.out.println("Factorial of 5: " + factorial(5));
-    }
 
     /**
      * Method to find smallest number in the array
@@ -70,7 +65,7 @@ public class LeetCode {
      * @param num input number
      * @return number returned by repeatedly summing up its digits
      */
-    public static int addDigits(int num) {
+    public static int repeatAddDigits(int num) {
         if(num == 0) {
             return 0;
         }
@@ -87,7 +82,7 @@ public class LeetCode {
      * @param s spreadsheet column ('AA', 'BC')
      * @return number of that column
      */
-    public static int titleToNumber(String s) {
+    public static int columnTitleToNumber(String s) {
         //'A' = 65'
     	s = s.toUpperCase();
         int sum = 0;
@@ -110,7 +105,7 @@ public class LeetCode {
         if (n < 10) {
             return n;
         }
-        HashSet<Integer> numbers = new HashSet<>();
+        Set<Integer> numbers = new HashSet<>();
         //convert n to string form
         String stringForm = n + "";
         //compare each set of 2 adjacent numbers, pick larger one and form new string, then add to set
@@ -165,33 +160,34 @@ public class LeetCode {
      * @param source an uncompressed input string
      * @return source string in RLE-compressed form
      */
-    public static String rle(String source) {
-        StringBuilder compressed = new StringBuilder();
-        int consecutive = 1;
-        for (int i = 0; i < source.length(); i++) {
-            char c = source.charAt(i);
-            if (i != source.length() - 1 && c == source.charAt(i + 1)) {
-                consecutive++;
-            } else {
-                if (consecutive == 1) {
-                    compressed.append(c);
-                }
-                else if (consecutive == 2) {
-                    compressed.append(c + "" + c);
-                }
-                else {
-                    compressed.append(consecutive + "" + c);
-                }
-                consecutive = 1;
-            }
-        }
-        return compressed.toString();
+    public static String rle(String input) {
+    	if (input.length() == 0) {
+			return "";
+		}
+		StringBuilder compressed = new StringBuilder();
+		int consecutive = 1;
+		for (int i = 0; i < input.length(); i++) {
+			char c = input.charAt(i);
+			if (i != input.length() - 1 && c == input.charAt(i + 1)) {
+				consecutive++;
+			}
+			else {
+				if (consecutive == 1) {
+					compressed.append(c);
+				}
+				else {
+					compressed.append(consecutive + "" + c);
+				}
+				consecutive = 1;
+			}
+		}
+		return compressed.toString();
     }
     
     /**
      * Calculates the factorial of a number
      * @param x input number
-     * @return
+     * @return x * (x - 1) * (x - 2)... * 2 * 1
      */
     public static long factorial(int x) {
     	if (x == 0) {
