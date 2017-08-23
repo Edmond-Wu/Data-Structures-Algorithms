@@ -47,6 +47,14 @@ public class LinkedList<T> {
 	}
 	
 	/**
+	 * Checks if the linked list is empty
+	 * @return true if size is 0, false otherwise
+	 */
+	public boolean isEmpty() {
+		return size == 0;
+	}
+	
+	/**
 	 * Adds a node to the front of the list
 	 * @param data value of node to be added
 	 */

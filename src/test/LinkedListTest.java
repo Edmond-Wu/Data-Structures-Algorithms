@@ -17,10 +17,12 @@ public class LinkedListTest extends TestCase {
 	
 	@Test
 	public void testAddToFront() {
+		assertTrue(listOne.isEmpty());
 		assertNull(listOne.getHead());
 		assertNull(listOne.getTail());
 		assertEquals(listOne.getSize(), 0);
 		listOne.addToFront(5);
+		assertFalse(listOne.isEmpty());
 		assertEquals(listOne.getHead().getData(), (Integer)5);
 		assertEquals(listOne.getTail().getData(), listOne.getHead().getData());
 		assertEquals(listOne.getSize(), 1);

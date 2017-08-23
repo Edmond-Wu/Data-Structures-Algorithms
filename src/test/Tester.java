@@ -1,38 +1,10 @@
 package test;
 
 import structures.Graph;
-import structures.Queue;
-import structures.Stack;
 import node.GraphNode;
 
 public class Tester {
 	public static void main(String[] args) {
-		//Queue testing
-		System.out.println("Queue testing:");
-		Queue<Integer> q = new Queue<Integer>();
-		for (int i = 1; i <= 10; i++) {
-			q.enqueue(i);
-		}
-		System.out.println("Size of queue: " + q.getSize());
-		System.out.println("Head is: " + q.getHead().getData());
-		System.out.println("Tail is: " + q.getTail().getData());
-		System.out.println("Queue: " + q.toString());
-		q.dequeue();
-		System.out.println("Queue after removing head: " + q.toString() + "\n");
-		
-		//Stack testing
-		System.out.println("Stack testing:");
-		Stack<Integer> stk = new Stack<Integer>();
-		for (int x = 1; x <= 10; x++) {
-			stk.push(x);
-		}
-		System.out.println("Stack size: " + stk.getSize());
-		System.out.print("Stack: ");
-		while (!stk.isEmpty()) {
-			System.out.print(stk.pop() + " ");
-		}
-		System.out.println("\n");
-		
 		//Graph testing
 		System.out.println("Graph testing:");
 		Graph<Integer> graph = new Graph<Integer>();

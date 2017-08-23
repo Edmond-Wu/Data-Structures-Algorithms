@@ -4,15 +4,13 @@ package test;
  * Created by Edmond Wu on 8/23/2017.
  */
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import junit.framework.TestCase;
 import leetcode.LeetCode;
 
-public class LeetCodeTest {
+public class LeetCodeTest extends TestCase {
 	@Test
 	public void testMinMaxArray() {
 		int[] arr = {5, 24, 15, 16, 8, 4, 7, 2, 50, 10, 10};
