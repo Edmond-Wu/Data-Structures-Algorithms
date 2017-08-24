@@ -1,13 +1,22 @@
 package test;
 
-import structures.Graph;
-import node.GraphNode;
+import org.junit.Before;
+import org.junit.Test;
 
-public class Tester {
-	public static void main(String[] args) {
-		//Graph testing
-		System.out.println("Graph testing:");
-		Graph<Integer> graph = new Graph<Integer>();
+import junit.framework.TestCase;
+import node.GraphNode;
+import structures.Graph;
+
+public class GraphTest extends TestCase {
+	private Graph<Integer> graph;
+	
+	@Before
+	public void setUp() {
+		graph = new Graph<Integer>();
+	}
+	
+	@Test
+	public void testGraph() {
 		GraphNode<Integer> a = new GraphNode<Integer>(5);
 		GraphNode<Integer> b = new GraphNode<Integer>(10);
 		GraphNode<Integer> c = new GraphNode<Integer>(15);
@@ -17,6 +26,7 @@ public class Tester {
 		graph.addVertex(a);
 		graph.addVertex(b);
 		graph.addVertex(c);
+		assertEquals(graph.getNodes().size(), 3);
 		graph.bfs(a);
 		System.out.println();
 		graph.dfs(a);
