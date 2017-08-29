@@ -10,6 +10,9 @@ public class StringArray {
      * @return array in string form
      */
     public static String arrayString(int[] arr) {
+    	if (arr.length < 1 || arr == null) {
+    		return "";
+    	}
     	StringBuilder sb = new StringBuilder();
         for (int i = 0; i < arr.length - 1; i++) {
         	sb.append(arr[i] + ", ");

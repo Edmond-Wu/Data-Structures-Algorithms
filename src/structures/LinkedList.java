@@ -125,7 +125,7 @@ public class LinkedList<T> {
 		else {
 			T data = tail.getData();
 			LLNode<T> ptr = head;
-			while (ptr.getNext() != tail) {
+			while (ptr.getNext() != tail && ptr.getNext() != null) {
 				ptr = ptr.getNext();
 			}
 			ptr.setNext(null);

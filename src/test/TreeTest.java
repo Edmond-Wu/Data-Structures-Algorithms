@@ -29,13 +29,20 @@ public class TreeTest extends TestCase {
 	}
 	
 	@Test
-	public void testInOrderTraversal() {
+	public void testTraversals() {
+		Tree.inOrderTraversal(tree.getRoot());
+		Tree.preOrderTraversal(tree.getRoot());
+		Tree.postOrderTraversal(tree.getRoot());
 		tree.addNode(10);
 		tree.addNode(5);
 		tree.addNode(15);
 		tree.addNode(6);
 		tree.addNode(12);
-		assertEquals(tree.iOTString(tree.getRoot()), "5 6 10 12 15 ");
+		Tree.inOrderTraversal(tree.getRoot());
+		System.out.println();
+		Tree.preOrderTraversal(tree.getRoot());
+		System.out.println();
+		Tree.postOrderTraversal(tree.getRoot());
 	}
 	
 	@Test
@@ -61,5 +68,53 @@ public class TreeTest extends TestCase {
 		tree.addNode(12);
 		tree.addNode(7);
 		assertEquals(tree.getDepth(tree.getRoot()), 3);
+	}
+	
+	@Test
+	public void testDelete() {
+		tree.addNode(5);
+		tree.addNode(20);
+		tree.addNode(1);
+		tree.addNode(2);
+		tree.addNode(15);
+		assertFalse(tree.deleteNode(100));
+		assertTrue(tree.deleteNode(1));
+		assertTrue(tree.deleteNode(20));
+		assertTrue(tree.deleteNode(5));
+		assertTrue(tree.deleteNode(15));
+		assertTrue(tree.deleteNode(2));
+		assertFalse(tree.deleteNode(10));
+	}
+	
+	@Test
+	public void testInvert() {
+		assertNull(Tree.invertTree(tree.getRoot()));
+		tree.addNode(5);
+		assertNotNull(Tree.invertTree(tree.getRoot()));
+		tree.addNode(10);
+		tree.addNode(1);
+		assertEquals(tree.getRoot().getLeft().getData(), 1);
+		assertEquals(tree.getRoot().getRight().getData(), 10);
+		Tree.invertTree(tree.getRoot());
+		assertEquals(tree.getRoot().getLeft().getData(), 10);
+		assertEquals(tree.getRoot().getRight().getData(), 1);
+	}
+	
+	@Test
+	public void testSameTree() {
+		Tree treeClone = new Tree();
+		assertTrue(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
+		treeClone.addNode(5);
+		assertFalse(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
+		tree.addNode(5);
+		assertTrue(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
+		tree.addNode(10);
+		treeClone.addNode(10);
+		assertTrue(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
+		tree.addNode(1);
+		treeClone.addNode(1);
+		assertTrue(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
+		tree.addNode(4);
+		assertFalse(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
 	}
 }

@@ -3,6 +3,7 @@ package test;
 import org.junit.Before;
 import org.junit.Test;
 import junit.framework.TestCase;
+import node.LLNode;
 import structures.LinkedList;
 
 public class LinkedListTest extends TestCase {
@@ -13,6 +14,14 @@ public class LinkedListTest extends TestCase {
 	public void setUp() {
 		listOne = new LinkedList<>();
 		listTwo = new LinkedList<>();
+	}
+	
+	@Test
+	public void testNode() {
+		LLNode<Integer> node = new LLNode<Integer>(5);
+		node.setData(10);
+		int data = node.getData();
+		assertEquals(data, 10);
 	}
 	
 	@Test
@@ -45,7 +54,20 @@ public class LinkedListTest extends TestCase {
 	}
 	
 	@Test
+	public void testRemove() {
+		assertNull(listOne.removeHead());
+		assertNull(listOne.removeTail());
+		listOne.addToBack(5);
+		listOne.addToFront(10);
+		listOne.addToFront(20);
+		int removed = listOne.removeTail();
+		assertEquals(5, removed);
+	}
+	
+	@Test
 	public void testReverse() {
+		listOne.reverse();
+		assertEquals(listOne.toString(), "");
 		listOne.addToBack(1);
 		listOne.reverse();
 		assertEquals(listOne.toString(), "1");
@@ -59,9 +81,11 @@ public class LinkedListTest extends TestCase {
 	
 	@Test
 	public void testMerge() {
+		assertNull(LinkedList.merge(listOne.getHead(), listTwo.getHead()));
 		for (int i = 1; i <= 5; i++) {
 			listOne.addToBack(i);
 		}
+		assertEquals(LinkedList.getStringFromNode(LinkedList.merge(listOne.getHead(), listTwo.getHead())), "1 2 3 4 5 ");
 		for (int j = 6; j <= 10; j++) {
 			listTwo.addToBack(j);
 		}

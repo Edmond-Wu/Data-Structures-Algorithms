@@ -58,6 +58,9 @@ public class Tree {
 	 * @return true if deleted, false if value does not exist in tree
 	 */
 	public boolean deleteNode(int data) {
+		if (root == null) {
+			return false;
+		}
 		TreeNode parent = root;
 		TreeNode current = root;
 		boolean isLeftChild = false;
@@ -184,7 +187,7 @@ public class Tree {
 	 * @param rt root of tree
 	 * @return root of new inverted tree
 	 */
-	public TreeNode invertTree(TreeNode rt) {
+	public static TreeNode invertTree(TreeNode rt) {
 		if (rt == null || (rt.getLeft() == null && rt.getRight() == null)) {
 			return rt;
 		}
@@ -216,7 +219,7 @@ public class Tree {
      * @param q root of second tree
      * @return true if they're the same, false if not
      */
-    public boolean isSameTree(TreeNode p, TreeNode q) {
+    public static boolean isSameTree(TreeNode p, TreeNode q) {
         if (p == null && q == null) {
             return true;
         }
@@ -229,7 +232,7 @@ public class Tree {
 	 * Performs an in-order traversal of the tree
 	 * @param rt root of tree
 	 */
-	public void inOrderTraversal(TreeNode rt) {
+	public static void inOrderTraversal(TreeNode rt) {
 		if (rt != null) {
 			inOrderTraversal(rt.getLeft());
 			System.out.print(rt.getData() + " ");
@@ -237,22 +240,12 @@ public class Tree {
 		}
 	}
 	
-	/**
-	 * In-order traversal but returns a string instead of directly printing
-	 * @param rt root of tree
-	 * @return
-	 */
-	public String iOTString(TreeNode rt) {
-		if (rt == null)
-			return "";
-		return iOTString(rt.getLeft()) + (rt.getData() + " ") + iOTString(rt.getRight());
-	}
 	
 	/**
 	 * Performs a pre-order traversal of the tree
 	 * @param rt root of tree
 	 */
-	public void preOrderTraversal(TreeNode rt) {
+	public static void preOrderTraversal(TreeNode rt) {
 		if (rt != null) {
 			System.out.print(rt.getData() + " ");
 			inOrderTraversal(rt.getLeft());
@@ -264,7 +257,7 @@ public class Tree {
 	 * Performs a post-order traversal of the tree
 	 * @param rt root of tree
 	 */
-	public void postOrderTraversal(TreeNode rt) {
+	public static void postOrderTraversal(TreeNode rt) {
 		if (rt != null) {
 			inOrderTraversal(rt.getLeft());
 			inOrderTraversal(rt.getRight());
