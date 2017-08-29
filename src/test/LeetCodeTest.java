@@ -35,6 +35,7 @@ public class LeetCodeTest extends TestCase {
 		assertEquals(LeetCode.repeatAddDigits(12234), 3);
 		assertEquals(LeetCode.repeatAddDigits(279), 9);
 		assertEquals(LeetCode.repeatAddDigits(0), 0);
+		
 	}
 	
 	@Test
@@ -46,8 +47,10 @@ public class LeetCodeTest extends TestCase {
 	
 	@Test
 	public void testCompareAdjacents() {
+		assertEquals(LeetCode.compareAdjacents(9), 9);
 		assertEquals(LeetCode.compareAdjacents(12345), 1235);
 		assertEquals(LeetCode.compareAdjacents(12), 2);
+		assertEquals(LeetCode.compareAdjacents(4321), 421);
 	}
 	
 	@Test
@@ -67,6 +70,7 @@ public class LeetCodeTest extends TestCase {
 	
 	@Test
 	public void testFactorial() {
+		assertEquals(LeetCode.factorial(0), 1);
 		assertEquals(LeetCode.factorial(5), 120);
 		assertEquals(LeetCode.factorial(12), 479001600);
 	}
