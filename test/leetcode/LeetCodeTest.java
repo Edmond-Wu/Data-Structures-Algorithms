@@ -1,4 +1,4 @@
-package test;
+package leetcode;
 
 /**
  * Created by Edmond Wu on 8/23/2017.
@@ -10,6 +10,11 @@ import org.junit.Test;
 import junit.framework.TestCase;
 import leetcode.LeetCode;
 
+/**
+ * Tests various LeetCode methods
+ * @author Edmond Wu
+ *
+ */
 public class LeetCodeTest extends TestCase {
 	@Test
 	public void testMinMaxArray() {

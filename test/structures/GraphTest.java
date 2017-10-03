@@ -1,4 +1,4 @@
-package test;
+package structures;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +8,11 @@ import node.GraphEdge;
 import node.GraphNode;
 import structures.Graph;
 
+/**
+ * Tests various graph methods
+ * @author Edmond Wu
+ *
+ */
 public class GraphTest extends TestCase {
 	private Graph<Integer> graph;
 	
