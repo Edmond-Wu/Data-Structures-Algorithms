@@ -1,5 +1,5 @@
-# DataStructuresAlgorithms
-Some implementations of popular data structures and some algorithms, as well as a few solutions from some LeetCode problems. For practice purposes. Various data structures and algorithms can be tested with the test files in the "test" package, and the Leetcode problems are found in "LeetCode.java", which has a main method.
+# Data-Structures-Algorithms
+Some implementations of popular data structures and some algorithms, as well as a few solutions from some LeetCode problems. For practice purposes. Various data structures and algorithms can be tested with the Junit test files in the "test" directory.
 
 ## Structures implemented
 Linked List
