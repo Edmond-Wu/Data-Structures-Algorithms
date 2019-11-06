@@ -3,6 +3,7 @@
 .idea/workspace.xml
 .project
 .classpath
+bin
 
 # Windows image file caches
 Thumbs.db
