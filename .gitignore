@@ -1,6 +1,8 @@
 .settings
 .idea
 .idea/workspace.xml
+.project
+.classpath
 
 # Windows image file caches
 Thumbs.db

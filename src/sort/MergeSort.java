@@ -1,7 +1,5 @@
 package sort;
 
-import java.util.Arrays;
-
 /**
  * Created by Edmond Wu on 8/22/2016.
  */
@@ -11,54 +9,61 @@ public class MergeSort extends StringArray {
      * Merge sort
      * @param input input array
      */
-    public static int[] sort(int[] input) {
+    public static void sort(int[] input) {
         if (input.length <= 1) {
-            return input;
+            return;
         }
-        int mid = input.length / 2, sizeLeft = mid;
-        int[] left = Arrays.copyOfRange(input, 0, sizeLeft), right = Arrays.copyOfRange(input, sizeLeft, input.length);
-
+        int mid = input.length / 2;
+        int[] left = new int[mid];
+        int[] right = new int[input.length - mid];
+        int index = 0;
+        while (index < input.length) {
+        	if (index < mid) {
+        		left[index] = input[index];
+        	}
+        	else {
+        		right[index - mid] = input[index];
+        	}
+        	index++;
+        }
         sort(left);
         sort(right);
-        return merge(left, right, input);
+        merge(left, right, input);
     }
 
     /**
-     * Merges 2 lists
-     * @param left first array
-     * @param right second array
-     * @param array merged array
+     * Merges two sorted lists
+     * @param left
+     * @param right
      */
-    public static int[] merge(int[] left, int[] right, int[] array) {
-        int leftIndex = 0, rightIndex = 0, arrIndex = 0;
+    public static void merge(int[] left, int[] right, int[] arrayToMerge) {
+    	int leftIndex = 0;
+    	int rightIndex = 0;
+    	int mergeIndex = 0;
         while (leftIndex < left.length && rightIndex < right.length) {
-            if (left[leftIndex] < right[rightIndex]) {
-                array[arrIndex] = left[leftIndex];
-                leftIndex++;
-            }
-            else {
-                array[arrIndex] = right[rightIndex];
-                rightIndex++;
-            }
-            arrIndex++;
+        	if (left[leftIndex] < right[rightIndex]) {
+        		arrayToMerge[mergeIndex] = left[leftIndex];
+        		leftIndex++;
+        	}
+        	else {
+        		arrayToMerge[mergeIndex] = right[rightIndex];
+        		rightIndex++;
+        	}
+        	mergeIndex++;
         }
-
-        //left array finishes first
         if (leftIndex == left.length) {
-            while (rightIndex < right.length) {
-                array[arrIndex] = right[rightIndex];
-                rightIndex++;
-                arrIndex++;
-            }
+        	while (rightIndex < right.length) {
+        		arrayToMerge[mergeIndex] = right[rightIndex];
+        		rightIndex++;
+        		mergeIndex++;
+        	}
         }
-        //right finishes first
         else {
-            while (leftIndex < left.length) {
-                array[arrIndex] = left[leftIndex];
-                leftIndex++;
-                arrIndex++;
-            }
+        	while (leftIndex < left.length) {
+        		arrayToMerge[mergeIndex] = left[leftIndex];
+        		leftIndex++;
+        		mergeIndex++;
+        	}
         }
-        return array;
     }
 }
