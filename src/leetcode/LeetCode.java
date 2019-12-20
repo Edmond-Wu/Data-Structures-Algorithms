@@ -1,7 +1,9 @@
 package leetcode;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -198,5 +200,43 @@ public class LeetCode {
     		answer *= i;
     	}
     	return answer;
+    }
+    
+    /**
+     * Gets distinct combinations of set length of a String of distinct, lexicographically sorted characters
+     * Set combinations don't have repeating letters
+     * @param characters
+     * @param combinationLength
+     * @return
+     */
+    public static List<String> getCombinations(String characters, int combinationLength) {
+    	List<String> comboList = new ArrayList<>();
+    	buildCombinations(characters, combinationLength, comboList, 0, new StringBuilder());
+    	return comboList;
+    }
+    
+    /**
+     * Helper, recursive method to getCombinations
+     * @param characters
+     * @param combinationLength
+     * @param comboList
+     * @param startIndex
+     * @param sb
+     */
+    private static void buildCombinations(String characters, int combinationLength, 
+    		List<String> comboList, int startIndex, StringBuilder sb) {
+    	if (sb.length() == combinationLength) {
+    		comboList.add(sb.toString());
+    		return;
+    	}
+    	if (sb.length() > combinationLength) {
+    		return;
+    	}
+    	for (int i = startIndex; i < characters.length(); i++) {
+    		int sbCurrentLength = sb.length();
+    		sb.append(characters.charAt(i));
+    		buildCombinations(characters, combinationLength, comboList, i + 1, sb);
+    		sb.setLength(sbCurrentLength);
+    	}
     }
 }

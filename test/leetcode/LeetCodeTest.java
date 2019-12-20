@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.util.List;
+
 /**
  * Created by Edmond Wu on 8/23/2017.
  */
@@ -78,5 +80,11 @@ public class LeetCodeTest extends TestCase {
 		assertEquals(LeetCode.factorial(0), 1);
 		assertEquals(LeetCode.factorial(5), 120);
 		assertEquals(LeetCode.factorial(12), 479001600);
+	}
+	
+	@Test
+	public void testGetCombinations() {
+		assertEquals(LeetCode.getCombinations("abc", 2).size(), 3);
+		assertEquals(LeetCode.getCombinations("abcd", 3).size(), 4);
 	}
 }
