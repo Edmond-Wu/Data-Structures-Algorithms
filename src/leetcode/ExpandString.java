@@ -15,9 +15,8 @@ public class ExpandString {
         if (input.length() == 0) {
             return "";
         }
-        List<List<String>> parsedList = new ArrayList<>();
-        buildStringList(parsedList, input);
-        List<String> expandedList = buildExpandString(parsedList);
+        List<String> expandedList = new ArrayList<>();
+        buildStringList(input, expandedList);
         //use StringBuilder to turn list into String output
         StringBuilder listStringBuilder = new StringBuilder();
         for (int i = 0; i < expandedList.size() - 1; i++) {
@@ -29,28 +28,37 @@ public class ExpandString {
     }
 
     /**
-     * Helper method to parse the original input string by its brackets
-     * @param stringList
+     * Helper method to parse through input string and populate the list
      * @param input
+     * @param stringList
      */
-    private static void buildStringList(List<List<String>> stringList, String input) {
+    private static void buildStringList(String input, List<String> stringList) {
         if (input.length() == 0) {
             return;
         }
         //if no brackets, add entire string
         int firstOpenBracket = input.indexOf('{');
         if (firstOpenBracket == -1) {
-            List<String> noBracketList = new ArrayList<>();
-            noBracketList.add(input);
-            stringList.add(noBracketList);
+            stringList.add(input);
             return;
         }
-        //if first character is not a bracket, add substring until the first bracket
+        //if first character is not a bracket, add substring until the first bracket if the original list is empty
+        //otherwise add it to every existing element in stringList
         if (firstOpenBracket != 0) {
-            List<String> nonBracketedStringList = new ArrayList<>();
-            nonBracketedStringList.add(input.substring(0, firstOpenBracket));
-            stringList.add(nonBracketedStringList);
-            buildStringList(stringList, input.substring(firstOpenBracket));
+            String substring = input.substring(0, firstOpenBracket);
+            if (stringList.isEmpty()) {
+                stringList.add(substring);
+            }
+            else {
+                List<String> newStringList = new ArrayList<>();
+                for (String oldListString : stringList) {
+                    newStringList.add(oldListString + substring);
+                }
+                //update current list by emptying old contents then adding new list
+                stringList.clear();
+                stringList.addAll(newStringList);
+            }
+            buildStringList(input.substring(firstOpenBracket), stringList);
         }
         //parse the bracket
         else {
@@ -60,36 +68,21 @@ public class ExpandString {
                 return;
             }
             String[] split = input.substring(firstOpenBracket + 1, firstCloseBracket).split(",");
-            List<String> bracketedStringList = new ArrayList<>();
-            Collections.addAll(bracketedStringList, split);
-            stringList.add(bracketedStringList);
-            buildStringList(stringList, input.substring(firstCloseBracket + 1));
-        }
-    }
-
-    /**
-     * Helper method to take the list from buildStringList() and create a list of the expanded strings
-     * @param stringList
-     * @return
-     */
-    private static List<String> buildExpandString(List<List<String>> stringList) {
-        List<String> expandedList = new ArrayList<>();
-        for (List<String> bracket : stringList) {
-            if (expandedList.isEmpty()) {
-                expandedList.addAll(bracket);
+            if (stringList.isEmpty()) {
+                Collections.addAll(stringList, split);
             }
             else {
-                //add on every string in the bracket to the previous values in the list
-                List<String> newExpandedList = new ArrayList<>();
-                for (String bracketString : bracket) {
-                    for (String expandedString : expandedList) {
-                        newExpandedList.add(expandedString + bracketString);
+                List<String> newStringList = new ArrayList<>();
+                for (String splitString : split) {
+                    for (String oldListString : stringList) {
+                        newStringList.add(oldListString + splitString);
                     }
                 }
-                //update expandedList to the newExpandedList
-                expandedList = newExpandedList;
+                //update list contents by emptying old list and adding new list
+                stringList.clear();
+                stringList.addAll(newStringList);
             }
+            buildStringList(input.substring(firstCloseBracket + 1), stringList);
         }
-        return expandedList;
     }
 }
