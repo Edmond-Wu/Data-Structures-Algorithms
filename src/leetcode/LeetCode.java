@@ -1,10 +1,6 @@
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Edmond Wu on 8/22/2016.
@@ -12,16 +8,54 @@ import java.util.Set;
 public class LeetCode {
 
     /**
+     * Binary search algorithm that returns the index of the target
+     * If the index doesn't exist then return the index where it should be placed
+     * @param arr array of integers
+     * @param target target to search for
+     * @return index of the target or where it should be if it's not found
+     */
+    public static int binarySearch(int[] arr, int target) {
+        //if the array length is 0, return 0
+        if (arr == null || arr.length == 0) {
+            return 0;
+        }
+        //sort the array
+        Arrays.sort(arr);
+        int index = -1;
+        int left = 0;
+        int right = arr.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            //if it's a match, return the index
+            if (arr[mid] == target) {
+                return mid;
+            }
+            if (arr[mid] < target) {
+                left = mid + 1;
+            }
+            else {
+                right = mid - 1;
+            }
+            //update the index
+            index = mid;
+        }
+        //if the element wasn't found, return the index where it should be
+        //check the number at index, if the target is bigger than that return index + 1
+        if (arr[index] < target) {
+            index++;
+        }
+        return index;
+    }
+
+    /**
      * Method to find smallest number in the array
      * @param arr input array of integers
      * @return smallest value in array
      */
     public static int minArray(int[] arr) {
-        int smallest = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i] < smallest) {
-                smallest = arr[i];
-            }
+        int smallest = Integer.MAX_VALUE;
+        for (int num : arr) {
+            smallest = Math.min(smallest, num);
         }
         return smallest;
     }
@@ -32,11 +66,9 @@ public class LeetCode {
      * @return biggest value in array
      */
     public static int maxArray(int[] arr) {
-        int biggest = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i] > biggest) {
-                biggest = arr[i];
-            }
+        int biggest = Integer.MIN_VALUE;
+        for (int num : arr) {
+            biggest = Math.max(biggest, num);
         }
         return biggest;
     }
@@ -135,7 +167,7 @@ public class LeetCode {
      */
     public static int minCoins(int[] coins, int value) {
         //table stores the min number of coins for value i
-        int table[] = new int[value + 1];
+        int[] table = new int[value + 1];
         table[0] = 0;
         //initialize as infinite
         for (int i = 1; i <= value; i++) {
@@ -159,7 +191,7 @@ public class LeetCode {
 
     /**
      * RLE compression algorithm
-     * @param source an uncompressed input string
+     * @param input an uncompressed input string
      * @return source string in RLE-compressed form
      */
     public static String rle(String input) {
