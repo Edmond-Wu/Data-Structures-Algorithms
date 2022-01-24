@@ -29,7 +29,7 @@ public class Graph<T> {
     
     /**
      * Adds a vertex to the graph
-     * @param vertex
+     * @param vertex vertex to be added
      */
     public void addVertex(GraphNode<T> vertex) {
     	nodes.add(vertex);
@@ -45,7 +45,7 @@ public class Graph<T> {
         }
         System.out.print("BFS: ");
         Queue<GraphNode<T>> queue = new Queue<>();
-        HashSet<GraphNode<T>> visited = new HashSet<>();
+        Set<GraphNode<T>> visited = new HashSet<>();
 
         //begin with starting node
         queue.enqueue(start);
@@ -73,7 +73,7 @@ public class Graph<T> {
             return;
         }
         System.out.print("DFS: ");
-        HashSet<GraphNode<T>> visited = new HashSet<>();
+        Set<GraphNode<T>> visited = new HashSet<>();
         Stack<GraphNode<T>> stk = new Stack<>();
         stk.push(start);
         while (!stk.isEmpty()) {
