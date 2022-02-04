@@ -271,4 +271,42 @@ public class LeetCode {
     		sb.setLength(sbCurrentLength);
     	}
     }
+
+    /**
+     * Method to find all subsets of an array of numbers (power set)
+     * @param nums non-null array of numbers
+     * @return a list containing all the subsets of nums
+     */
+    public static List<List<Integer>> findSubsets(int[] nums) {
+        List<List<Integer>> subsets = new ArrayList<>();
+        for (int i = 0; i <= nums.length; i++) {
+            subsetsBacktrack(subsets, nums, new ArrayList<Integer>(), 0, i);
+        }
+        return subsets;
+    }
+
+    /**
+     * Helper method using the backtracking algorithm to build the different subsets
+     * @param subsets list of subsets
+     * @param nums array of numbers to build subsets from
+     * @param currentCombination the current subset being built
+     * @param index index in the nums array
+     * @param combinationLen current max length of subset to add to subsets list
+     */
+    private static void subsetsBacktrack(List<List<Integer>> subsets, int[] nums, List<Integer> currentCombination, int index, int combinationLen) {
+        //if the current subset's size is the length of the combinationLen, add it to the subsets list and return
+        if (currentCombination.size() == combinationLen) {
+            subsets.add(new ArrayList<Integer>(currentCombination));
+            return;
+        }
+        //iterate through nums from index and backtrack
+        for (int i = index; i < nums.length; i++) {
+            //add current value at index to combination
+            currentCombination.add(nums[i]);
+            //backtrack from the next index
+            subsetsBacktrack(subsets, nums, currentCombination, i + 1, combinationLen);
+            //reset currentCombination
+            currentCombination.remove(currentCombination.size() - 1);
+        }
+    }
 }

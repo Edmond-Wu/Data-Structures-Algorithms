@@ -8,6 +8,9 @@ package leetcode;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  * Tests various LeetCode methods
  * @author Edmond Wu
@@ -93,5 +96,20 @@ public class LeetCodeTest {
 	public void testGetCombinations() {
 		Assert.assertEquals(LeetCode.getCombinations("abc", 2).size(), 3);
 		Assert.assertEquals(LeetCode.getCombinations("abcd", 3).size(), 4);
+	}
+
+	@Test
+	public void testFindSubsets() {
+		List<List<Integer>> testList = new ArrayList<>();
+		//test empty array
+		testList.add(new ArrayList<Integer>());
+		Assert.assertEquals(testList, LeetCode.findSubsets(new int[0]));
+		//test array with 1 element
+		List<Integer> singleItemList = new ArrayList<>();
+		singleItemList.add(0);
+		testList.add(singleItemList);
+		Assert.assertEquals(testList, LeetCode.findSubsets(new int[1]));
+		int[] testArray = {1, 2, 3};
+		System.out.println(LeetCode.findSubsets(testArray));
 	}
 }
