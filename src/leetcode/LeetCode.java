@@ -168,11 +168,9 @@ public class LeetCode {
     public static int minCoins(int[] coins, int value) {
         //table stores the min number of coins for value i
         int[] table = new int[value + 1];
-        table[0] = 0;
         //initialize as infinite
-        for (int i = 1; i <= value; i++) {
-            table[i] = Integer.MAX_VALUE;
-        }
+        Arrays.fill(table, Integer.MAX_VALUE);
+        table[0] = 0;
 
         //get minimum coins for values 1 to value
         for (int i = 1; i <= value; i++) {
@@ -210,7 +208,8 @@ public class LeetCode {
 					compressed.append(c);
 				}
 				else {
-					compressed.append(consecutive + "" + c);
+					compressed.append(consecutive);
+                    compressed.append(c);
 				}
 				consecutive = 1;
 			}
@@ -227,10 +226,10 @@ public class LeetCode {
     	if (x == 0) {
     		return 1;
     	}
-    	long answer = (long)x;
-    	for (int i = x - 1; i >= 1; i--) {
-    		answer *= i;
-    	}
+    	long answer = 1;
+        for (int i = 1; i <= x; i++) {
+            answer *= i;
+        }
     	return answer;
     }
     
@@ -259,9 +258,6 @@ public class LeetCode {
     		List<String> comboList, int startIndex, StringBuilder sb) {
     	if (sb.length() == combinationLength) {
     		comboList.add(sb.toString());
-    		return;
-    	}
-    	if (sb.length() > combinationLength) {
     		return;
     	}
     	for (int i = startIndex; i < characters.length(); i++) {
