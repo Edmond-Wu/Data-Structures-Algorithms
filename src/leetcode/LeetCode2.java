@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 public class LeetCode2 {
@@ -135,5 +136,28 @@ public class LeetCode2 {
         }
         //after mark visited as false again
         visited[row][col] = false;
+    }
+
+    /**
+     * "Shuffles" an array, by returning the array in a randomly sorted order
+     * @param arr array to be shuffled
+     * @return a shuffled array
+     */
+    public static int[] shuffleArray(int[] arr) {
+        List<Integer> arrList = new ArrayList<>();
+        for (int num : arr) {
+            arrList.add(num);
+        }
+        int[] shuffled = new int[arr.length];
+        Random rand = new Random();
+        //randomly pick element from list, add it to shuffled, then remove from arrList
+        int counter = 0;
+        while (!arrList.isEmpty()) {
+            int randomIndex = rand.nextInt(arrList.size());
+            shuffled[counter] = arrList.get(randomIndex);
+            counter++;
+            arrList.remove(randomIndex);
+        }
+        return shuffled;
     }
 }
