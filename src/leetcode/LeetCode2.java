@@ -160,4 +160,101 @@ public class LeetCode2 {
         }
         return shuffled;
     }
+
+    /**
+     * Given a 2D matrix of 0's and 1's, with 1 representing land and 0 representing water, returns the # of islands in the matrix
+     * @param grid a character grid of 1's and 0's
+     * @return number of islands in the grid
+     */
+    public static int numIslands(char[][] grid) {
+        boolean[][] visited = new boolean[grid.length][grid[0].length];
+        int numIslands = 0;
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[0].length; col++) {
+                //only process if cell isn't visited
+                if (!visited[row][col]) {
+                    //run DFS if it's a 1
+                    if (grid[row][col] == '1') {
+                        dfsIsland(grid, visited, row, col);
+                        numIslands++;
+                    }
+                    //otherwise just mark cell as visited
+                    else {
+                        visited[row][col] = true;
+                    }
+                }
+            }
+        }
+        return numIslands;
+    }
+
+    /**
+     * Helper recursive DFS method to mark the islands on the grid
+     * @param grid character grid of 1's and 0's
+     * @param visited boolean matrix that represents visited cells
+     * @param row row of cell
+     * @param col column of cell
+     */
+    private static void dfsIsland(char[][] grid, boolean[][] visited, int row, int col) {
+        //if it's already visited or it's a '0', don't do anything
+        if (grid[row][col] == '0' || visited[row][col]) {
+            return;
+        }
+        //mark current cell as visited
+        visited[row][col] = true;
+        //recurse to the neighboring adjacent cells
+        //up
+        if (row - 1 >= 0) {
+            dfsIsland(grid, visited, row - 1, col);
+        }
+        //down
+        if (row + 1 < grid.length) {
+            dfsIsland(grid, visited, row + 1, col);
+        }
+        //left
+        if (col - 1 >= 0) {
+            dfsIsland(grid, visited, row, col - 1);
+        }
+        //right
+        if (col + 1 < grid[0].length) {
+            dfsIsland(grid, visited, row, col + 1);
+        }
+    }
+
+    /**
+     * Counts the minimum number of swaps needed to group all the 1's together in an array of 1's and 0's
+     * @param data an array of only 1's and 0's
+     * @return minimum number of swaps to group all the 1's together
+     */
+    public static int minSwaps(int[] data) {
+        //count number of 1's
+        //that number is the size of the final group
+        //find sub-array of that size in data that has the most amount of 1's
+        int numOnes = 0;
+        for (int num : data) {
+            if (num == 1) {
+                numOnes++;
+            }
+        }
+        int maxNumOnesInSubArr = 0;
+        int leftBound = 0;
+        int rightBound = 0;
+        int oneCount = 0;
+        //track max # of 1's in every sub-array of size numOnes
+        while (rightBound < data.length) {
+            //increase the right side and update the oneCount; can just add directly since array
+            //will only have 1's and 0's
+            oneCount += data[rightBound];
+            rightBound++;
+            //if the rightBound - leftBound exceeds the sub-array size, move up the leftBound and remove the old value
+            //from oneCount
+            if (rightBound - leftBound > numOnes) {
+                oneCount -= data[leftBound];
+                leftBound++;
+            }
+            maxNumOnesInSubArr = Math.max(maxNumOnesInSubArr, oneCount);
+        }
+        //answer is the total # of 1's minus the max 1's in sub-array
+        return numOnes - maxNumOnesInSubArr;
+    }
 }

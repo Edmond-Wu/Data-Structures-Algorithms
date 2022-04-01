@@ -23,4 +23,22 @@ public class LeetCode2Test {
         int[][] testArr3 = {{0,1},{2,0}};
         Assert.assertEquals(0, LeetCode2.uniquePathsIII(testArr3));
     }
+
+    @Test
+    public void testNumIslands() {
+        char[][] testArr1 = {{'1','1','1','1','0'},{'1','1','0','1','0'},{'1','1','0','0','0'},{'0','0','0','0','0'}};
+        Assert.assertEquals(1, LeetCode2.numIslands(testArr1));
+        char[][] testArr2 = {{'1','1','0','0','0'},{'1','1','0','0','0'},{'0','0','1','0','0'},{'0','0','0','1','1'}};
+        Assert.assertEquals(3, LeetCode2.numIslands(testArr2));
+    }
+
+    @Test
+    public void testMinSwaps() {
+        int[] testArr1 = {1,0,1,0,1};
+        Assert.assertEquals(1, LeetCode2.minSwaps(testArr1));
+        int[] testArr2 = {0,0,0,1,0};
+        Assert.assertEquals(0, LeetCode2.minSwaps(testArr2));
+        int[] testArr3 = {1,0,1,0,1,0,0,1,1,0,1};
+        Assert.assertEquals(3, LeetCode2.minSwaps(testArr3));
+    }
 }

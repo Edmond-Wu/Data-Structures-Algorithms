@@ -236,9 +236,9 @@ public class LeetCode {
     /**
      * Gets distinct combinations of set length of a String of distinct, lexicographically sorted characters
      * Set combinations don't have repeating letters
-     * @param characters
-     * @param combinationLength
-     * @return
+     * @param characters string of characters to build combinations from
+     * @param combinationLength specified length of combinations
+     * @return list of combinations of given combination length
      */
     public static List<String> getCombinations(String characters, int combinationLength) {
     	List<String> comboList = new ArrayList<>();
@@ -248,23 +248,23 @@ public class LeetCode {
     
     /**
      * Helper, recursive method to getCombinations
-     * @param characters
-     * @param combinationLength
-     * @param comboList
-     * @param startIndex
-     * @param sb
+     * @param characters string of characters to build combinations from
+     * @param combinationLength length of the combination to add
+     * @param comboList list of combinations
+     * @param startIndex starting index in characters
+     * @param currentStringBuilder string builder to build the combination string
      */
     private static void buildCombinations(String characters, int combinationLength, 
-    		List<String> comboList, int startIndex, StringBuilder sb) {
-    	if (sb.length() == combinationLength) {
-    		comboList.add(sb.toString());
+    		List<String> comboList, int startIndex, StringBuilder currentStringBuilder) {
+    	if (currentStringBuilder.length() == combinationLength) {
+    		comboList.add(currentStringBuilder.toString());
     		return;
     	}
     	for (int i = startIndex; i < characters.length(); i++) {
-    		int sbCurrentLength = sb.length();
-    		sb.append(characters.charAt(i));
-    		buildCombinations(characters, combinationLength, comboList, i + 1, sb);
-    		sb.setLength(sbCurrentLength);
+    		int sbCurrentLength = currentStringBuilder.length();
+    		currentStringBuilder.append(characters.charAt(i));
+    		buildCombinations(characters, combinationLength, comboList, i + 1, currentStringBuilder);
+    		currentStringBuilder.setLength(sbCurrentLength);
     	}
     }
 
