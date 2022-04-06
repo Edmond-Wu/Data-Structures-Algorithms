@@ -67,10 +67,13 @@ public class ExpandString {
             if (firstCloseBracket == -1) {
                 return;
             }
+            //split the string to find the individual substrings in the bracket set
             String[] split = input.substring(firstOpenBracket + 1, firstCloseBracket).split(",");
+            //if the current list is empty then just add the split contents to the list
             if (stringList.isEmpty()) {
                 Collections.addAll(stringList, split);
             }
+            //otherwise create a new list, and for every element in the current list, add (element + split-substring) to the new list
             else {
                 List<String> newStringList = new ArrayList<>();
                 for (String splitString : split) {
