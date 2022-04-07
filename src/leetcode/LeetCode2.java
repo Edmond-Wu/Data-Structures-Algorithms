@@ -1,11 +1,13 @@
 package leetcode;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 
@@ -256,5 +258,91 @@ public class LeetCode2 {
         }
         //answer is the total # of 1's minus the max 1's in sub-array
         return numOnes - maxNumOnesInSubArr;
+    }
+
+    /**
+     * Given a character 2D grid, where '*' represents the starting square, 'X' represents an obstacle that can't be walked through
+     * 'O' represents an empty space that can be walked through, '#' which represents a cell with food
+     * Find the length of the shortest path from the start to any food cell
+     * @param grid a 2D character matrix
+     * @return length of the shortest path to any food cell, or -1 if a path doesn't exist
+     */
+    public static int shortestPathToFood(char[][] grid) {
+        //first find the starting cell
+        boolean foundStartingCell = false;
+        int startRow = 0;
+        int startCol = 0;
+        for (int row = 0; row < grid.length; row++) {
+            //break out of the outer loop once starting cell is found
+            if (foundStartingCell) {
+                break;
+            }
+            for (int col = 0; col < grid[0].length; col++) {
+                //starting cell represented by '*'
+                if (grid[row][col] == '*') {
+                    startRow = row;
+                    startCol = col;
+                    foundStartingCell = true;
+                    break;
+                }
+            }
+        }
+        //call bfs algorithm
+        return bfsFood(grid, new boolean[grid.length][grid[0].length], startRow, startCol);
+    }
+
+    /**
+     * BFS helper method to find the shortest path to a food cell. Uses BFS instead of DFS since the nature of BFS means that the first food cell encountered
+     * is the shortest path by default
+     * @param grid character grid representing the room with food
+     * @param visited boolean grid with the same dimensions as the grid representing visited cells
+     * @param startRow starting row index
+     * @param startCol starting column index
+     * @return length of the shortest path to a food cell, or -1 if there exists no path
+     */
+    private static int bfsFood(char[][] grid, boolean[][] visited, int startRow, int startCol) {
+        //use a queue for BFS
+        Queue<int[]> cellQueue = new ArrayDeque<>();
+        int shortestPath = 0;
+        cellQueue.add(new int[]{startRow, startCol});
+        visited[startRow][startCol] = true;
+        while (!cellQueue.isEmpty()) {
+            int queueSize = cellQueue.size();
+            for (int i = 0; i < queueSize; i++) {
+                //poll the queue, then add the 4 neighboring cells
+                int[] cell = cellQueue.poll();
+                int currRow = cell[0];
+                int currCol = cell[1];
+                //if the current cell is a food cell, return shortestPath
+                if (grid[currRow][currCol] == '#') {
+                    return shortestPath;
+                }
+                //add the neighboring, unvisited, valid cells to the queue
+                //up
+                if (currRow - 1 >= 0 && grid[currRow - 1][currCol] != 'X' && !visited[currRow - 1][currCol]) {
+                    cellQueue.add(new int[]{currRow - 1, currCol});
+                    visited[currRow - 1][currCol] = true;
+                }
+                //down
+                if (currRow + 1 < grid.length && grid[currRow + 1][currCol] != 'X' && !visited[currRow + 1][currCol]) {
+                    cellQueue.add(new int[]{currRow + 1, currCol});
+                    visited[currRow + 1][currCol] = true;
+                }
+                //left
+                if (currCol - 1 >= 0 && grid[currRow][currCol - 1] != 'X' && !visited[currRow][currCol - 1]) {
+                    cellQueue.add(new int[]{currRow, currCol - 1});
+                    visited[currRow][currCol - 1] = true;
+                }
+                //right
+                if (currCol + 1 < grid[0].length && grid[currRow][currCol + 1] != 'X' && !visited[currRow][currCol + 1]) {
+                    cellQueue.add(new int[]{currRow, currCol + 1});
+                    visited[currRow][currCol + 1] = true;
+                }
+            }
+            //increment length of the shortest path
+            shortestPath++;
+        }
+        //no path, so return -1
+        return -1;
     }
 }

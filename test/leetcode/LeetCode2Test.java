@@ -41,4 +41,14 @@ public class LeetCode2Test {
         int[] testArr3 = {1,0,1,0,1,0,0,1,1,0,1};
         Assert.assertEquals(3, LeetCode2.minSwaps(testArr3));
     }
+
+    @Test
+    public void testShortestPathToFood() {
+        char[][] grid1 = {{'X','X','X','X','X','X'},{'X','*','O','O','O','X'},{'X','O','O','#','O','X'},{'X','X','X','X','X','X'}};
+        Assert.assertEquals(3, LeetCode2.shortestPathToFood(grid1));
+        char[][] grid2 = {{'X','X','X','X','X'},{'X','*','X','O','X'},{'X','O','X','#','X'},{'X','X','X','X','X'}};
+        Assert.assertEquals(-1, LeetCode2.shortestPathToFood(grid2));
+        char[][] grid3 = {{'X','X','X','X','X','X','X','X'},{'X','*','O','X','O','#','O','X'},{'X','O','O','X','O','O','X','X'},{'X','O','O','O','O','#','O','X'},{'X','X','X','X','X','X','X','X'}};
+        Assert.assertEquals(6, LeetCode2.shortestPathToFood(grid3));
+    }
 }
