@@ -3,6 +3,10 @@ package leetcode;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class LeetCode2Test {
     @Test
     public void testLongestStringChain() {
@@ -50,5 +54,18 @@ public class LeetCode2Test {
         Assert.assertEquals(-1, LeetCode2.shortestPathToFood(grid2));
         char[][] grid3 = {{'X','X','X','X','X','X','X','X'},{'X','*','O','X','O','#','O','X'},{'X','O','O','X','O','O','X','X'},{'X','O','O','O','O','#','O','X'},{'X','X','X','X','X','X','X','X'}};
         Assert.assertEquals(6, LeetCode2.shortestPathToFood(grid3));
+    }
+
+    @Test
+    public void testWordBreak() {
+        String s1 = "leetcode";
+        String s2 = "applepenapple";
+        String s3 = "catsandog";
+        List<String> list1 = Arrays.asList("leet", "code");
+        List<String> list2 = Arrays.asList("apple","pen");
+        List<String> list3 = Arrays.asList("cats","dog","sand","and","cat");
+        Assert.assertTrue(LeetCode2.wordBreak(s1, list1));
+        Assert.assertTrue(LeetCode2.wordBreak(s2, list2));
+        Assert.assertFalse(LeetCode2.wordBreak(s3, list3));
     }
 }

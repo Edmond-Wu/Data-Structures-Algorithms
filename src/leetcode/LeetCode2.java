@@ -345,4 +345,36 @@ public class LeetCode2 {
         //no path, so return -1
         return -1;
     }
+
+    /**
+     * Given a dictionary of words wordDict, determine whether the string s can be broken up into words from wordDict
+     * @param s input string
+     * @param wordDict a list of words
+     * @return true if s can be formed from words in wordDict, and false otherwise
+     */
+    public static boolean wordBreak(String s, List<String> wordDict) {
+        //use dynamic programming
+        //a boolean array that represents for each substring from the beginning, whether that substring fits the criteria
+        boolean[] visitedSubstrings = new boolean[s.length() + 1];
+        //set the first value to true to start the loop
+        visitedSubstrings[0] = true;
+        //use a set to store the dictionary for easy look-up
+        Set<String> wordSet = new HashSet<>(wordDict);
+        //iterate through the substrings
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = 0; j < s.length(); j++) {
+                //if the value at visitedSubstrings is false, then skip
+                if (!visitedSubstrings[j]) {
+                    continue;
+                }
+                //otherwise, if the current substring is found in the set, mark the i index as true and break out
+                if (wordSet.contains(s.substring(j, i))) {
+                    visitedSubstrings[i] = true;
+                    break;
+                }
+            }
+        }
+        //return the value that represents the full string s
+        return visitedSubstrings[s.length()];
+    }
 }
