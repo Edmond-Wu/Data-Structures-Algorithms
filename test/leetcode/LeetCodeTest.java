@@ -112,4 +112,14 @@ public class LeetCodeTest {
 		int[] testArray = {1, 2, 3};
 		System.out.println(LeetCode.findSubsets(testArray));
 	}
+
+	@Test
+	public void testMaxSubArrayLenPositiveProduct() {
+		int[] arr1 = {1,-2,-3,4};
+		Assert.assertEquals(4, LeetCode.maxSubArrayLenPositiveProduct(arr1));
+		int[] arr2 = {0,1,-2,-3,-4};
+		Assert.assertEquals(3, LeetCode.maxSubArrayLenPositiveProduct(arr2));
+		int[] arr3 = {-1,-2,-3,0,1};
+		Assert.assertEquals(2, LeetCode.maxSubArrayLenPositiveProduct(arr3));
+	}
 }
