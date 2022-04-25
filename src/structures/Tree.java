@@ -264,4 +264,29 @@ public class Tree {
 			System.out.print(rt.getData() + " ");
 		}
 	}
+
+	/**
+	 * Returns the lowest common ancestor (LCA) of 2 given nodes p and q
+	 * @param root root of the tree
+	 * @param p node 1
+	 * @param q node 2
+	 * @return lowest common ancestor of p and q
+	 */
+	public static TreeNode getLowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+		if (root == null) {
+			return null;
+		}
+		if (root == p || root == q) {
+			return root;
+		}
+		TreeNode left = getLowestCommonAncestor(root.getLeft(), p, q);
+		TreeNode right = getLowestCommonAncestor(root.getRight(), p, q);
+		if (left != null) {
+			if (right != null) {
+				return root;
+			}
+			return left;
+		}
+		return right;
+	}
 }
