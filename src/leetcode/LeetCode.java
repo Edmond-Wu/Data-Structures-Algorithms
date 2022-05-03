@@ -350,4 +350,81 @@ public class LeetCode {
         }
         return maxLength;
     }
+
+    /**
+     * Given a 2D matrix of empty spaces, fresh oranges, and rotten oranges, find the minimum time it takes for a "plague" to completely spread from the rotten
+     * oranges to the fresh ones. Each minute, a rotten orange will "infect" any fresh oranges in its 4 adjacent cells, though will be blocked by any empty spaces
+     * @param grid 2D matrix of 0's, 1's, and 2's, with 0 representing an empty space, 1 representing a fresh orange, and 2 representing a rotten orange
+     * @return the minimum amount of "turns" it takes for a grid to be completely rotten, or -1 if it's impossible for all the oranges to be rotten
+     */
+    public static int plagueOranges(int[][] grid) {
+        //this is a bfs problem, given the nature of the rotten oranges spreading
+        //first go through the grid once to get an initial count of fresh and rotten oranges
+        int cleanOranges = 0;
+        //use a queue to store the cells of the rotten oranges for bfs
+        Queue<int[]> rottenOrangeCells = new ArrayDeque<>();
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[row].length; col++) {
+                //if it's a 1, increment clean oranges
+                if (grid[row][col] == 1) {
+                    cleanOranges++;
+                }
+                //if it's a 2, add the cell to the queue
+                else if (grid[row][col] == 2) {
+                    int[] cell = {row, col};
+                    rottenOrangeCells.add(cell);
+                }
+            }
+        }
+        //now perform bfs, with the breakpoint being determined by when cleanOranges is reduced to 0 or less
+        int minutes = 0;
+        while (!rottenOrangeCells.isEmpty()) {
+            //first check if cleanOranges is <= 0 as return condition
+            if (cleanOranges <= 0) {
+                return minutes;
+            }
+            int queueSize = rottenOrangeCells.size();
+            //for each element in the queue, apply the infection to its neighbors and update the queue
+            for (int i = 0; i < queueSize; i++) {
+                int[] rottenCell = rottenOrangeCells.poll();
+                int row = rottenCell[0];
+                int col = rottenCell[1];
+                //check 4 directions
+                //up
+                if (row - 1 >= 0 && grid[row - 1][col] == 1) {
+                    int[] upCell = {row - 1, col};
+                    //add the up cell to the queue, and change its value in the grid from 1 to 2 to update its rotten status
+                    rottenOrangeCells.add(upCell);
+                    grid[row - 1][col] = 2;
+                    //decrement cleanOranges
+                    cleanOranges--;
+                }
+                //down
+                if (row + 1 < grid.length && grid[row + 1][col] == 1) {
+                    int[] downCell = {row + 1, col};
+                    rottenOrangeCells.add(downCell);
+                    grid[row + 1][col] = 2;
+                    cleanOranges--;
+                }
+                //left
+                if (col - 1 >= 0 && grid[row][col - 1] == 1) {
+                    int[] leftCell = {row, col - 1};
+                    rottenOrangeCells.add(leftCell);
+                    grid[row][col - 1] = 2;
+                    cleanOranges--;
+                }
+                //right
+                if (col + 1 < grid[0].length && grid[row][col + 1] == 1) {
+                    int[] rightCell = {row, col + 1};
+                    rottenOrangeCells.add(rightCell);
+                    grid[row][col + 1] = 2;
+                    cleanOranges--;
+                }
+            }
+            //increment minutes
+            minutes++;
+        }
+        //-1 is the default return if we did not return earlier, which means the clean oranges cannot become completely rotten
+        return -1;
+    }
 }
