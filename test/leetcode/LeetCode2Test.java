@@ -68,4 +68,10 @@ public class LeetCode2Test {
         Assert.assertTrue(LeetCode2.wordBreak(s2, list2));
         Assert.assertFalse(LeetCode2.wordBreak(s3, list3));
     }
+
+    @Test
+    public void testFindAllRecipes() {
+        String[] recipes1 = {"bread"};
+        List<List<String>> ingredients1 = new ArrayList<>();
+    }
 }
