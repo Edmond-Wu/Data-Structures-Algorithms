@@ -8,18 +8,23 @@ import java.util.Map;
  * Problem to design an in-memory file system.
  * File system consists of files and directories, and files can contain text inside them
  * Implement methods to create directories and files, and add contents to files
+ * Bonus: Implement methods to change current directories and remove folders/files
  * All path inputs will always start with "/"
  */
 public class MockFileSystem {
 
     //a directory to represent the home directory which has a path of "/"
-    private SystemDirectory homeDir;
+    private final SystemDirectory homeDir;
+
+    private SystemDirectory currentDir;
 
     /**
      * Constructor to initialize home directory
      */
     public MockFileSystem() {
         this.homeDir = new SystemDirectory("/");
+        //current directory is the home directory by default
+        this.currentDir = homeDir;
     }
 
     /**
@@ -71,8 +76,16 @@ public class MockFileSystem {
      */
     public List<String> ls(String path) {
         List<String> dirContents = new ArrayList<>();
-        //base case, check if the path is the home directory
-        if (path.equals("/")) {
+        //base cases
+        //if the path is empty, then just reveal the contents of the current directory
+        if (path == null || path.length() == 0) {
+            for (Map.Entry<String, FileSystemObject> currentEntry : currentDir.getSystemMap().entrySet()) {
+                dirContents.add(currentEntry.getValue().getName());
+            }
+            return dirContents;
+        }
+        //check if the path is the home directory
+        if (path.equals("/") || path.equals("~")) {
             //return contents of home directory
             for (Map.Entry<String, FileSystemObject> homeEntry : homeDir.getSystemMap().entrySet()) {
                 dirContents.add(homeEntry.getValue().getName());
@@ -81,7 +94,7 @@ public class MockFileSystem {
         }
 
         //find the file
-        FileSystemObject obj = findFileObject(path);
+        FileSystemObject obj = find(path);
         //let the user know the path doesn't exist if the object is null
         if (obj == null) {
             System.out.println("Path doesn't exist.");
@@ -103,6 +116,54 @@ public class MockFileSystem {
     }
 
     /**
+     * Changes directory to the specified path
+     * If the path doesn't exist (or is a file), let the user know
+     * If the path is null/empty or a "~", that means go home
+     * @param path path to switch directories to
+     */
+    public void cd(String path) {
+        if (path == null || path.length() == 0 || path.equals("~")) {
+            this.currentDir = homeDir;
+            return;
+        }
+        FileSystemObject obj = find(path);
+        //if it's not a directory, output error
+        if (!(obj instanceof SystemDirectory)) {
+            System.out.println("Folder doesn't exist or is a file.");
+        }
+        else {
+            this.currentDir = (SystemDirectory) obj;
+        }
+    }
+
+    /**
+     * Attempts to delete a file/folder found at the specified path and returns based on success
+     * @param path file/folder path to be deleted
+     * @return true if it was deleted, false otherwise
+     */
+    public boolean rm(String path) {
+        //find the higher level parent directory containing the file/folder
+        String[] pathSplit = path.split("/");
+        StringBuilder pathBuilder = new StringBuilder("/");
+        //only want to iterate up to the 2nd to last element
+        for (int i = 1; i < pathSplit.length - 1; i++) {
+            pathBuilder.append(pathSplit[i]);
+            //if it's not the last one in the iteration add a "/"
+            if (i != pathSplit.length - 2) {
+                pathBuilder.append("/");
+            }
+        }
+        //check if that folder exists
+        FileSystemObject obj = find(pathBuilder.toString());
+        if (!(obj instanceof SystemDirectory)) {
+            return false;
+        }
+        SystemDirectory dir = (SystemDirectory) obj;
+        //remove the path key from the parent dir to delete it
+        return (dir.getSystemMap().remove(path) != null);
+    }
+
+    /**
      * Adds content to a file given the path. If the file doesn't exist, creates the file
      * @param filePath file path of the file
      * @param content content to be added to the file
@@ -121,7 +182,7 @@ public class MockFileSystem {
             }
         }
         //search for the dir associated with the path
-        SystemDirectory dir = (SystemDirectory) findFileObject(pathBuilder.toString());
+        SystemDirectory dir = (SystemDirectory) find(pathBuilder.toString());
         //if it's null, then let user know the directory to make the file does not exist
         if (dir == null) {
             System.out.println("Directory in which the file to add content to does not exist");
@@ -147,7 +208,7 @@ public class MockFileSystem {
      * @return contents found in the file
      */
     public String readContentFromFile(String filePath) {
-        FileSystemObject obj = findFileObject(filePath);
+        FileSystemObject obj = find(filePath);
         //cannot read a file that's null
         if (obj == null) {
             System.out.println("Cannot read a null file.");
@@ -169,7 +230,7 @@ public class MockFileSystem {
      * @param path file path
      * @return the file/directory of the path, or null if it doesn't exist
      */
-    private FileSystemObject findFileObject(String path) {
+    protected FileSystemObject find(String path) {
         //base case where the path is the home dir
         if (path.equals("/")) {
             return homeDir;

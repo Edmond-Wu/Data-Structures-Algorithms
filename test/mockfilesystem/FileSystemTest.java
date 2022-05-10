@@ -24,5 +24,9 @@ public class FileSystemTest {
         Assert.assertEquals(1, fileSystem.ls("/a").size());
         fileSystem.addContentToFile("/a/b/c/d", " world");
         Assert.assertEquals("hello world", fileSystem.readContentFromFile("/a/b/c/d"));
+        fileSystem.cd("/a/b/c");
+        Assert.assertEquals("d", fileSystem.ls("").get(0));
+        Assert.assertTrue(fileSystem.rm("/a/b/c/d"));
+        Assert.assertEquals(0, fileSystem.ls("/a/b/c").size());
     }
 }
