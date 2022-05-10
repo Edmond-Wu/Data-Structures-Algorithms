@@ -142,6 +142,10 @@ public class MockFileSystem {
      * @return true if it was deleted, false otherwise
      */
     public boolean rm(String path) {
+        //base case, cannot remove home directory
+        if (path == null || path.equals("/") || path.equals("~")) {
+            return false;
+        }
         //find the higher level parent directory containing the file/folder
         String[] pathSplit = path.split("/");
         StringBuilder pathBuilder = new StringBuilder("/");
@@ -223,6 +227,10 @@ public class MockFileSystem {
             SystemFile file = (SystemFile) obj;
             return file.getContent();
         }
+    }
+
+    public SystemDirectory getCurrentDir() {
+        return currentDir;
     }
 
     /**

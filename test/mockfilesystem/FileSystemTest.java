@@ -16,7 +16,7 @@ public class FileSystemTest {
     }
 
     @Test
-    public void testFileSystem() {
+    public void testFileSystem1() {
         Assert.assertEquals(new ArrayList<String>(), fileSystem.ls("/"));
         fileSystem.mkdir("/a/b/c");
         fileSystem.addContentToFile("/a/b/c/d", "hello");
@@ -28,5 +28,22 @@ public class FileSystemTest {
         Assert.assertEquals("d", fileSystem.ls("").get(0));
         Assert.assertTrue(fileSystem.rm("/a/b/c/d"));
         Assert.assertEquals(0, fileSystem.ls("/a/b/c").size());
+    }
+
+    @Test
+    public void testFileSystem2() {
+        fileSystem.mkdir("/gh");
+        Assert.assertEquals("gh", fileSystem.ls("/").get(0));
+        fileSystem.mkdir("/e");
+        fileSystem.mkdir("/jfo");
+        fileSystem.mkdir("/gh/znflyvnd");
+        fileSystem.cd("/gh");
+        Assert.assertEquals(3, fileSystem.ls("/").size());
+        Assert.assertEquals("znflyvnd", fileSystem.ls("/gh").get(0));
+        Assert.assertEquals("gh", fileSystem.getCurrentDir().getName());
+        fileSystem.addContentToFile("/mhdmck", "v");
+        Assert.assertEquals("v", fileSystem.readContentFromFile("/mhdmck"));
+        fileSystem.addContentToFile("/bbigs", "kzdi");
+        Assert.assertEquals("kzdi", fileSystem.readContentFromFile("/bbigs"));
     }
 }
