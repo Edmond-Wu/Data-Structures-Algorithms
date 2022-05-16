@@ -1,6 +1,14 @@
 package structures;
 
+import javafx.util.Pair;
 import node.TreeNode;
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Tree {
 	private TreeNode root;
@@ -288,5 +296,44 @@ public class Tree {
 			return left;
 		}
 		return right;
+	}
+
+	/**
+	 * Given a binary tree, returns the vertical order traversal of the tree (top-bottom, left-right columns)
+	 * @param root root of the tree
+	 * @return list containing the traversal
+	 */
+	public static List<List<Integer>> verticalOrderTraversal(TreeNode root) {
+		List<List<Integer>> traversalList = new ArrayList<>();
+		if (root == null) {
+			return traversalList;
+		}
+		//each node has a row/column value, so create a map to store the nodes
+		Map<Integer, List<Integer>> nodeColumnMap = new TreeMap<>();
+		//search the tree via BFS to preserve the vertical order
+		Deque<Pair<Integer, TreeNode>> nodeQueue = new ArrayDeque<>();
+		nodeQueue.add(new Pair<>(0, root));
+		while (!nodeQueue.isEmpty()) {
+			//poll the queue and add it to the map
+			Pair<Integer, TreeNode> polled = nodeQueue.poll();
+			int column = polled.getKey();
+			TreeNode node = polled.getValue();
+			if (!nodeColumnMap.containsKey(column)) {
+				nodeColumnMap.put(column, new ArrayList<>());
+			}
+			nodeColumnMap.get(column).add(node.getData());
+			//add its children to the queue
+			if (node.getLeft() != null) {
+				nodeQueue.add(new Pair<>(column - 1, node.getLeft()));
+			}
+			if (node.getRight() != null) {
+				nodeQueue.add(new Pair<>(column + 1, node.getRight()));
+			}
+		}
+		//add map contents to return list
+		for (Integer column : nodeColumnMap.keySet()) {
+			traversalList.add(nodeColumnMap.get(column));
+		}
+		return traversalList;
 	}
 }

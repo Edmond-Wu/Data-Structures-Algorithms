@@ -1,12 +1,11 @@
 package structures;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-import structures.Tree;
 
-public class TreeTest extends TestCase {
+public class TreeTest {
 	private Tree tree;
 	
 	@Before
@@ -17,15 +16,15 @@ public class TreeTest extends TestCase {
 	@Test
 	public void testAdding() {
 		tree.addNode(10);
-		assertEquals(tree.getRoot().getData(), 10);
+		Assert.assertEquals(10, tree.getRoot().getData());
 		tree.addNode(5);
-		assertEquals(tree.getRoot().getLeft().getData(), 5);
+		Assert.assertEquals(5, tree.getRoot().getLeft().getData());
 		tree.addNode(15);
-		assertEquals(tree.getRoot().getRight().getData(), 15);
+		Assert.assertEquals(15, tree.getRoot().getRight().getData());
 		tree.addNode(6);
-		assertEquals(tree.getRoot().getLeft().getRight().getData(), 6);
+		Assert.assertEquals(6, tree.getRoot().getLeft().getRight().getData());
 		tree.addNode(12);
-		assertEquals(tree.getRoot().getRight().getLeft().getData(), 12);
+		Assert.assertEquals(12, tree.getRoot().getRight().getLeft().getData());
 	}
 	
 	@Test
@@ -52,11 +51,11 @@ public class TreeTest extends TestCase {
 		tree.addNode(15);
 		tree.addNode(6);
 		tree.addNode(12);
-		assertEquals(tree.findTarget(tree.getRoot(), 5), true);
-		assertEquals(tree.findTarget(tree.getRoot(), 12), true);
-		assertEquals(tree.findTarget(tree.getRoot(), 6), true);
-		assertEquals(tree.findTarget(tree.getRoot(), 15), true);
-		assertEquals(tree.findTarget(tree.getRoot(), 7), false);
+		Assert.assertTrue(tree.findTarget(tree.getRoot(), 5));
+		Assert.assertTrue(tree.findTarget(tree.getRoot(), 12));
+		Assert.assertTrue(tree.findTarget(tree.getRoot(), 6));
+		Assert.assertTrue(tree.findTarget(tree.getRoot(), 15));
+		Assert.assertFalse(tree.findTarget(tree.getRoot(), 7));
 	}
 	
 	@Test
@@ -67,7 +66,7 @@ public class TreeTest extends TestCase {
 		tree.addNode(6);
 		tree.addNode(12);
 		tree.addNode(7);
-		assertEquals(tree.getDepth(tree.getRoot()), 3);
+		Assert.assertEquals(3, tree.getDepth(tree.getRoot()));
 	}
 	
 	@Test
@@ -77,44 +76,54 @@ public class TreeTest extends TestCase {
 		tree.addNode(1);
 		tree.addNode(2);
 		tree.addNode(15);
-		assertFalse(tree.deleteNode(100));
-		assertTrue(tree.deleteNode(1));
-		assertTrue(tree.deleteNode(20));
-		assertTrue(tree.deleteNode(5));
-		assertTrue(tree.deleteNode(15));
-		assertTrue(tree.deleteNode(2));
-		assertFalse(tree.deleteNode(10));
+		Assert.assertFalse(tree.deleteNode(100));
+		Assert.assertTrue(tree.deleteNode(1));
+		Assert.assertTrue(tree.deleteNode(20));
+		Assert.assertTrue(tree.deleteNode(5));
+		Assert.assertTrue(tree.deleteNode(15));
+		Assert.assertTrue(tree.deleteNode(2));
+		Assert.assertFalse(tree.deleteNode(10));
 	}
 	
 	@Test
 	public void testInvert() {
-		assertNull(Tree.invertTree(tree.getRoot()));
+		Assert.assertNull(Tree.invertTree(tree.getRoot()));
 		tree.addNode(5);
-		assertNotNull(Tree.invertTree(tree.getRoot()));
+		Assert.assertNotNull(Tree.invertTree(tree.getRoot()));
 		tree.addNode(10);
 		tree.addNode(1);
-		assertEquals(tree.getRoot().getLeft().getData(), 1);
-		assertEquals(tree.getRoot().getRight().getData(), 10);
+		Assert.assertEquals(1, tree.getRoot().getLeft().getData());
+		Assert.assertEquals(10, tree.getRoot().getRight().getData());
 		Tree.invertTree(tree.getRoot());
-		assertEquals(tree.getRoot().getLeft().getData(), 10);
-		assertEquals(tree.getRoot().getRight().getData(), 1);
+		Assert.assertEquals(10, tree.getRoot().getLeft().getData());
+		Assert.assertEquals(1, tree.getRoot().getRight().getData());
 	}
 	
 	@Test
 	public void testSameTree() {
 		Tree treeClone = new Tree();
-		assertTrue(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
+		Assert.assertTrue(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
 		treeClone.addNode(5);
-		assertFalse(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
+		Assert.assertFalse(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
 		tree.addNode(5);
-		assertTrue(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
+		Assert.assertTrue(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
 		tree.addNode(10);
 		treeClone.addNode(10);
-		assertTrue(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
+		Assert.assertTrue(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
 		tree.addNode(1);
 		treeClone.addNode(1);
-		assertTrue(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
+		Assert.assertTrue(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
 		tree.addNode(4);
-		assertFalse(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
+		Assert.assertFalse(Tree.isSameTree(tree.getRoot(), treeClone.getRoot()));
+	}
+
+	@Test
+	public void testVerticalOrderTraversal() {
+		tree.addNode(5);
+		tree.addNode(20);
+		tree.addNode(1);
+		tree.addNode(2);
+		tree.addNode(15);
+		System.out.println(Tree.verticalOrderTraversal(tree.getRoot()));
 	}
 }
