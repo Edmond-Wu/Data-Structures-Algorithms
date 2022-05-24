@@ -132,4 +132,11 @@ public class LeetCodeTest {
 		int[][] grid3 = {{0,2}};
 		Assert.assertEquals(0, LeetCode.plagueOranges(grid3));
 	}
+
+	@Test
+	public void testLongestValidParentheses() {
+		Assert.assertEquals(2, LeetCode.longestValidParentheses("(()"));
+		Assert.assertEquals(4, LeetCode.longestValidParentheses(")()())"));
+		Assert.assertEquals(0, LeetCode.longestValidParentheses(""));
+	}
 }
