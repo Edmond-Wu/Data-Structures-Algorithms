@@ -466,4 +466,38 @@ public class LeetCode {
         }
         return maxLen;
     }
+
+    /**
+     * Given 2 strings, what is the minimum number of characters to delete from either/both strings such that the remaining substrings are equal?
+     * @param s1 first string
+     * @param s2 second string
+     * @return minimum deletions to make the strings equal
+     */
+    public static int minDeletionsToMakeStringsEqual(String s1, String s2) {
+        //use dynamic programming to keep track of the minimum deletions for each string up to a given length
+        //use a 2D array to represent the 2 strings
+        int len1 = s1.length();
+        int len2 = s2.length();
+        int[][] dp = new int[len1 + 1][len2 + 1];
+        //go through both strings
+        for (int i = 0; i <= len1; i++) {
+            for (int j = 0; j <= len2; j++) {
+                //if either i or j is 0, then the minimum deletions is just the sum of i and j
+                //ex: if i is 0 and j is 5, since i represents a substring of length 0 so all of j needs to be deleted
+                if (i == 0 || j == 0) {
+                    dp[i][j] = i + j;
+                }
+                //otherwise check if the characters and i - 1 and j - 1 are equal, need to subtract 1 as the indices are 0-indexed
+                else if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                    //they're equal, so no need to delete anything and just set the value to the previous value
+                    dp[i][j] = dp[i - 1][j - 1];
+                }
+                else {
+                    //at least one needs to be deleted, so see whether deleting from i or j is smaller, then add 1
+                    dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        return dp[len1][len2];
+    }
 }

@@ -139,4 +139,12 @@ public class LeetCodeTest {
 		Assert.assertEquals(4, LeetCode.longestValidParentheses(")()())"));
 		Assert.assertEquals(0, LeetCode.longestValidParentheses(""));
 	}
+
+	@Test
+	public void testMinDeletionsToMakeStringsEqual() {
+		Assert.assertEquals(2, LeetCode.minDeletionsToMakeStringsEqual("sea", "eat"));
+		Assert.assertEquals(4, LeetCode.minDeletionsToMakeStringsEqual("sea", "ate"));
+		Assert.assertEquals(4, LeetCode.minDeletionsToMakeStringsEqual("leetcode", "etco"));
+		Assert.assertEquals(2, LeetCode.minDeletionsToMakeStringsEqual("b", "a"));
+	}
 }
