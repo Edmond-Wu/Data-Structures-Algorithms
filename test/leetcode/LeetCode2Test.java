@@ -77,4 +77,16 @@ public class LeetCode2Test {
         int[] arr3 = {7,7,7,7,7,7,7};
         Assert.assertEquals(1, LeetCode2.longestIncreasingSubsequence(arr3));
     }
+
+    @Test
+    public void testBricksAndLadders() {
+        int[] buildings1 = {4,2,7,6,9,14,12};
+        Assert.assertEquals(4, LeetCode2.bricksAndLadders(buildings1, 5, 1));
+        int[] buildings2 = {4,12,2,7,3,18,20,3,19};
+        Assert.assertEquals(7, LeetCode2.bricksAndLadders(buildings2, 10, 2));
+        int[] buildings3 = {14,3,19,3};
+        Assert.assertEquals(3, LeetCode2.bricksAndLadders(buildings3, 17, 0));
+        int[] buildings4 = {2,7,9,3,1,2,5,9,4,6};
+        Assert.assertEquals(9, LeetCode2.bricksAndLadders(buildings4, 8, 2));
+    }
 }
