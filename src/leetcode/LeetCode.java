@@ -100,10 +100,10 @@ public class LeetCode {
      * @return number returned by repeatedly summing up its digits
      */
     public static int repeatAddDigits(int num) {
-        if(num == 0) {
+        if (num == 0) {
             return 0;
         }
-        else if(num % 9 == 0) {
+        else if (num % 9 == 0) {
             return 9;
         }
         else {
@@ -139,9 +139,9 @@ public class LeetCode {
         if (n < 10) {
             return n;
         }
-        Set<Integer> numbers = new HashSet<>();
+        TreeSet<Integer> numbers = new TreeSet<>();
         //convert n to string form
-        String stringForm = n + "";
+        String stringForm = Integer.toString(n);
         //compare each set of 2 adjacent numbers, pick larger one and form new string, then add to set
         for (int i = 0; i < stringForm.length() - 1; i++) {
             int first = Integer.parseInt(stringForm.charAt(i) + "");
@@ -156,35 +156,7 @@ public class LeetCode {
             }
             numbers.add(Integer.parseInt(sub.toString()));
         }
-        return Collections.min(numbers);
-    }
-
-    /**
-     * Method to find the minimum amount of coins to add up to a certain value
-     * @param coins array of types of coins
-     * @param value value to be matched
-     * @return minimum number of coins to add up to that value
-     */
-    public static int minCoins(int[] coins, int value) {
-        //table stores the min number of coins for value i
-        int[] table = new int[value + 1];
-        //initialize as infinite
-        Arrays.fill(table, Integer.MAX_VALUE);
-        table[0] = 0;
-
-        //get minimum coins for values 1 to value
-        for (int i = 1; i <= value; i++) {
-            //iterate through coins smaller than i
-            for (int j = 0; j < coins.length; j++) {
-                if (coins[j] <= i) {
-                    int subAnswer = table[i - coins[j]];
-                    if (subAnswer != Integer.MAX_VALUE && subAnswer + 1 < table[i]) {
-                        table[i] = subAnswer + 1;
-                    }
-                }
-            }
-        }
-        return table[value];
+        return numbers.first();
     }
 
     /**
@@ -232,82 +204,10 @@ public class LeetCode {
         }
     	return answer;
     }
-    
-    /**
-     * Gets distinct combinations of set length of a String of distinct, lexicographically sorted characters
-     * Set combinations don't have repeating letters
-     * @param characters string of characters to build combinations from
-     * @param combinationLength specified length of combinations
-     * @return list of combinations of given combination length
-     */
-    public static List<String> getCombinations(String characters, int combinationLength) {
-    	List<String> comboList = new ArrayList<>();
-    	buildCombinations(characters, combinationLength, comboList, 0, new StringBuilder());
-    	return comboList;
-    }
-    
-    /**
-     * Helper, recursive method to getCombinations
-     * @param characters string of characters to build combinations from
-     * @param combinationLength length of the combination to add
-     * @param comboList list of combinations
-     * @param startIndex starting index in characters
-     * @param currentStringBuilder string builder to build the combination string
-     */
-    private static void buildCombinations(String characters, int combinationLength, 
-    		List<String> comboList, int startIndex, StringBuilder currentStringBuilder) {
-    	if (currentStringBuilder.length() == combinationLength) {
-    		comboList.add(currentStringBuilder.toString());
-    		return;
-    	}
-    	for (int i = startIndex; i < characters.length(); i++) {
-    		int sbCurrentLength = currentStringBuilder.length();
-    		currentStringBuilder.append(characters.charAt(i));
-    		buildCombinations(characters, combinationLength, comboList, i + 1, currentStringBuilder);
-    		currentStringBuilder.setLength(sbCurrentLength);
-    	}
-    }
-
-    /**
-     * Method to find all subsets of an array of numbers (power set)
-     * @param nums non-null array of numbers
-     * @return a list containing all the subsets of nums
-     */
-    public static List<List<Integer>> findSubsets(int[] nums) {
-        List<List<Integer>> subsets = new ArrayList<>();
-        for (int i = 0; i <= nums.length; i++) {
-            subsetsBacktrack(subsets, nums, new ArrayList<Integer>(), 0, i);
-        }
-        return subsets;
-    }
-
-    /**
-     * Helper method using the backtracking algorithm to build the different subsets
-     * @param subsets list of subsets
-     * @param nums array of numbers to build subsets from
-     * @param currentCombination the current subset being built
-     * @param index index in the nums array
-     * @param combinationLen current max length of subset to add to subsets list
-     */
-    private static void subsetsBacktrack(List<List<Integer>> subsets, int[] nums, List<Integer> currentCombination, int index, int combinationLen) {
-        //if the current subset's size is the length of the combinationLen, add it to the subsets list and return
-        if (currentCombination.size() == combinationLen) {
-            subsets.add(new ArrayList<Integer>(currentCombination));
-            return;
-        }
-        //iterate through nums from index and backtrack
-        for (int i = index; i < nums.length; i++) {
-            //add current value at index to combination
-            currentCombination.add(nums[i]);
-            //backtrack from the next index
-            subsetsBacktrack(subsets, nums, currentCombination, i + 1, combinationLen);
-            //reset currentCombination
-            currentCombination.remove(currentCombination.size() - 1);
-        }
-    }
 
     /**
      * Given an array of integers, return the length of the longest subarray where the product of its values is positive
+     * Sliding Window problem
      * @param nums an array of integers
      * @return length of the longest subarray of nums where the product of its elements is positive
      */
@@ -352,83 +252,6 @@ public class LeetCode {
     }
 
     /**
-     * Given a 2D matrix of empty spaces, fresh oranges, and rotten oranges, find the minimum time it takes for a "plague" to completely spread from the rotten
-     * oranges to the fresh ones. Each minute, a rotten orange will "infect" any fresh oranges in its 4 adjacent cells, though will be blocked by any empty spaces
-     * @param grid 2D matrix of 0's, 1's, and 2's, with 0 representing an empty space, 1 representing a fresh orange, and 2 representing a rotten orange
-     * @return the minimum amount of "turns" it takes for a grid to be completely rotten, or -1 if it's impossible for all the oranges to be rotten
-     */
-    public static int plagueOranges(int[][] grid) {
-        //this is a bfs problem, given the nature of the rotten oranges spreading
-        //first go through the grid once to get an initial count of fresh and rotten oranges
-        int cleanOranges = 0;
-        //use a queue to store the cells of the rotten oranges for bfs
-        Queue<int[]> rottenOrangeCells = new ArrayDeque<>();
-        for (int row = 0; row < grid.length; row++) {
-            for (int col = 0; col < grid[row].length; col++) {
-                //if it's a 1, increment clean oranges
-                if (grid[row][col] == 1) {
-                    cleanOranges++;
-                }
-                //if it's a 2, add the cell to the queue
-                else if (grid[row][col] == 2) {
-                    int[] cell = {row, col};
-                    rottenOrangeCells.add(cell);
-                }
-            }
-        }
-        //now perform bfs, with the breakpoint being determined by when cleanOranges is reduced to 0 or less
-        int minutes = 0;
-        while (!rottenOrangeCells.isEmpty()) {
-            //first check if cleanOranges is <= 0 as return condition
-            if (cleanOranges <= 0) {
-                return minutes;
-            }
-            int queueSize = rottenOrangeCells.size();
-            //for each element in the queue, apply the infection to its neighbors and update the queue
-            for (int i = 0; i < queueSize; i++) {
-                int[] rottenCell = rottenOrangeCells.poll();
-                int row = rottenCell[0];
-                int col = rottenCell[1];
-                //check 4 directions
-                //up
-                if (row - 1 >= 0 && grid[row - 1][col] == 1) {
-                    int[] upCell = {row - 1, col};
-                    //add the up cell to the queue, and change its value in the grid from 1 to 2 to update its rotten status
-                    rottenOrangeCells.add(upCell);
-                    grid[row - 1][col] = 2;
-                    //decrement cleanOranges
-                    cleanOranges--;
-                }
-                //down
-                if (row + 1 < grid.length && grid[row + 1][col] == 1) {
-                    int[] downCell = {row + 1, col};
-                    rottenOrangeCells.add(downCell);
-                    grid[row + 1][col] = 2;
-                    cleanOranges--;
-                }
-                //left
-                if (col - 1 >= 0 && grid[row][col - 1] == 1) {
-                    int[] leftCell = {row, col - 1};
-                    rottenOrangeCells.add(leftCell);
-                    grid[row][col - 1] = 2;
-                    cleanOranges--;
-                }
-                //right
-                if (col + 1 < grid[0].length && grid[row][col + 1] == 1) {
-                    int[] rightCell = {row, col + 1};
-                    rottenOrangeCells.add(rightCell);
-                    grid[row][col + 1] = 2;
-                    cleanOranges--;
-                }
-            }
-            //increment minutes
-            minutes++;
-        }
-        //-1 is the default return if we did not return earlier, which means the clean oranges cannot become completely rotten
-        return -1;
-    }
-
-    /**
      * Given a string consisting of "(" and ")", return the length of the longest valid parentheses that can be formed from the string
      * A valid parentheses is "well-formed" where each opening and closing parentheses is perfectly matched
      * @param s parentheses string
@@ -465,39 +288,5 @@ public class LeetCode {
             }
         }
         return maxLen;
-    }
-
-    /**
-     * Given 2 strings, what is the minimum number of characters to delete from either/both strings such that the remaining substrings are equal?
-     * @param s1 first string
-     * @param s2 second string
-     * @return minimum deletions to make the strings equal
-     */
-    public static int minDeletionsToMakeStringsEqual(String s1, String s2) {
-        //use dynamic programming to keep track of the minimum deletions for each string up to a given length
-        //use a 2D array to represent the 2 strings
-        int len1 = s1.length();
-        int len2 = s2.length();
-        int[][] dp = new int[len1 + 1][len2 + 1];
-        //go through both strings
-        for (int i = 0; i <= len1; i++) {
-            for (int j = 0; j <= len2; j++) {
-                //if either i or j is 0, then the minimum deletions is just the sum of i and j
-                //ex: if i is 0 and j is 5, since i represents a substring of length 0 so all of j needs to be deleted
-                if (i == 0 || j == 0) {
-                    dp[i][j] = i + j;
-                }
-                //otherwise check if the characters and i - 1 and j - 1 are equal, need to subtract 1 as the indices are 0-indexed
-                else if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
-                    //they're equal, so no need to delete anything and just set the value to the previous value
-                    dp[i][j] = dp[i - 1][j - 1];
-                }
-                else {
-                    //at least one needs to be deleted, so see whether deleting from i or j is smaller, then add 1
-                    dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1]);
-                }
-            }
-        }
-        return dp[len1][len2];
     }
 }

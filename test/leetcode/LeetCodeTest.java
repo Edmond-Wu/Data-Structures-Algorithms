@@ -71,14 +71,6 @@ public class LeetCodeTest {
 	}
 	
 	@Test
-	public void testMinCoins() {
-		int[] coins = {1, 5, 10, 25};
-		Assert.assertEquals(LeetCode.minCoins(coins, 11), 2);
-		Assert.assertEquals(LeetCode.minCoins(coins, 24), 6);
-		Assert.assertEquals(LeetCode.minCoins(coins, 60), 3);
-	}
-	
-	@Test
 	public void testRle() {
 		String uncompressed = "qwwwwwwwwweeeeerrtyyyyyqqqqwEErTTT";
 		Assert.assertEquals("q9w5e2rt5y4qw2Er3T", LeetCode.rle(uncompressed));
@@ -90,27 +82,6 @@ public class LeetCodeTest {
 		Assert.assertEquals(LeetCode.factorial(0), 1);
 		Assert.assertEquals(LeetCode.factorial(5), 120);
 		Assert.assertEquals(LeetCode.factorial(12), 479001600);
-	}
-	
-	@Test
-	public void testGetCombinations() {
-		Assert.assertEquals(LeetCode.getCombinations("abc", 2).size(), 3);
-		Assert.assertEquals(LeetCode.getCombinations("abcd", 3).size(), 4);
-	}
-
-	@Test
-	public void testFindSubsets() {
-		List<List<Integer>> testList = new ArrayList<>();
-		//test empty array
-		testList.add(new ArrayList<Integer>());
-		Assert.assertEquals(testList, LeetCode.findSubsets(new int[0]));
-		//test array with 1 element
-		List<Integer> singleItemList = new ArrayList<>();
-		singleItemList.add(0);
-		testList.add(singleItemList);
-		Assert.assertEquals(testList, LeetCode.findSubsets(new int[1]));
-		int[] testArray = {1, 2, 3};
-		System.out.println(LeetCode.findSubsets(testArray));
 	}
 
 	@Test
@@ -124,27 +95,9 @@ public class LeetCodeTest {
 	}
 
 	@Test
-	public void testPlagueOranges() {
-		int[][] grid1 = {{2,1,1},{1,1,0},{0,1,1}};
-		Assert.assertEquals(4, LeetCode.plagueOranges(grid1));
-		int[][] grid2 = {{2,1,1},{0,1,1},{1,0,1}};
-		Assert.assertEquals(-1, LeetCode.plagueOranges(grid2));
-		int[][] grid3 = {{0,2}};
-		Assert.assertEquals(0, LeetCode.plagueOranges(grid3));
-	}
-
-	@Test
 	public void testLongestValidParentheses() {
 		Assert.assertEquals(2, LeetCode.longestValidParentheses("(()"));
 		Assert.assertEquals(4, LeetCode.longestValidParentheses(")()())"));
 		Assert.assertEquals(0, LeetCode.longestValidParentheses(""));
-	}
-
-	@Test
-	public void testMinDeletionsToMakeStringsEqual() {
-		Assert.assertEquals(2, LeetCode.minDeletionsToMakeStringsEqual("sea", "eat"));
-		Assert.assertEquals(4, LeetCode.minDeletionsToMakeStringsEqual("sea", "ate"));
-		Assert.assertEquals(4, LeetCode.minDeletionsToMakeStringsEqual("leetcode", "etco"));
-		Assert.assertEquals(2, LeetCode.minDeletionsToMakeStringsEqual("b", "a"));
 	}
 }
