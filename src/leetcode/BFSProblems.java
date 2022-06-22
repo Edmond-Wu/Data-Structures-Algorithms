@@ -6,7 +6,7 @@ import java.util.Queue;
 /**
  * LeetCode questions focused on BFS-related algorithms
  */
-public class BFS {
+public class BFSProblems {
     /**
      * Given a 2D matrix of empty spaces, fresh oranges, and rotten oranges, find the minimum time it takes for a "plague" to completely spread from the rotten
      * oranges to the fresh ones. Each minute, a rotten orange will "infect" any fresh oranges in its 4 adjacent cells, though will be blocked by any empty spaces

@@ -39,43 +39,6 @@ public class LeetCode2 {
     }
 
     /**
-     * Counts the minimum number of swaps needed to group all the 1's together in an array of 1's and 0's
-     * @param data an array of only 1's and 0's
-     * @return minimum number of swaps to group all the 1's together
-     */
-    public static int minSwaps(int[] data) {
-        //count number of 1's
-        //that number is the size of the final group
-        //find sub-array of that size in data that has the most amount of 1's
-        int numOnes = 0;
-        for (int num : data) {
-            if (num == 1) {
-                numOnes++;
-            }
-        }
-        int maxNumOnesInSubArr = 0;
-        int leftBound = 0;
-        int rightBound = 0;
-        int oneCount = 0;
-        //track max # of 1's in every sub-array of size numOnes
-        while (rightBound < data.length) {
-            //increase the right side and update the oneCount; can just add directly since array
-            //will only have 1's and 0's
-            oneCount += data[rightBound];
-            rightBound++;
-            //if the rightBound - leftBound exceeds the sub-array size, move up the leftBound and remove the old value
-            //from oneCount
-            if (rightBound - leftBound > numOnes) {
-                oneCount -= data[leftBound];
-                leftBound++;
-            }
-            maxNumOnesInSubArr = Math.max(maxNumOnesInSubArr, oneCount);
-        }
-        //answer is the total # of 1's minus the max 1's in sub-array
-        return numOnes - maxNumOnesInSubArr;
-    }
-
-    /**
      * Given a list of recipes, a list of ingredients for each recipe, and a list of currently available supplies, find all the recipes that can be made.
      * Assume that there is an infinite amount of supplies. Recipes can be used as ingredients for other recipes.
      * @param recipes list of recipes
@@ -168,49 +131,5 @@ public class LeetCode2 {
         }
         //answer is the size of subSet
         return subSet.size();
-    }
-
-    /**
-     * How far can we get through an array of buildings to climb given some ladders and bricks?
-     * Ladders are a one-size-fits-all, each brick is 1 unit
-     * Climbing a building can use a ladder that covers the entire climb or use bricks to cover the height difference
-     * @param buildings array of heights of buildings
-     * @param bricks number of bricks starting out with
-     * @param ladders number of ladders starting out with
-     * @return the index of the farthest building that can be made before running out of bricks/ladders
-     */
-    public static int bricksAndLadders(int[] buildings, int bricks, int ladders) {
-        //use a min-heap to store the sizes that are used by ladders
-        //we want to use ladders for the biggest climbs and bricks for the smallest
-        //use ladders if available, otherwise replace the smallest ladder being used with bricks
-        Queue<Integer> ladderHeap = new PriorityQueue<>();
-        for (int i = 0; i < buildings.length - 1; i++) {
-            int heightDiff = buildings[i + 1] - buildings[i];
-            //only care about positive climbs as equal/negative climbs don't need bricks/ladders
-            if (heightDiff > 0) {
-                //use a ladder if available
-                if (ladders > 0) {
-                    ladders--;
-                    ladderHeap.add(heightDiff);
-                }
-                else {
-                    //if the heap is empty or the smallest ladder being used exceeds the current climb, use bricks
-                    if (ladderHeap.isEmpty() || ladderHeap.peek() >= heightDiff) {
-                        bricks -= heightDiff;
-                    }
-                    //replace the smallest ladder with bricks and use a ladder for the current climb
-                    else {
-                        bricks -= ladderHeap.poll();
-                        ladderHeap.add(heightDiff);
-                    }
-                    //if bricks becomes negative we need to return
-                    if (bricks < 0) {
-                        return i;
-                    }
-                }
-            }
-        }
-        //return the last building if the loop didn't prematurely exit
-        return buildings.length - 1;
     }
 }

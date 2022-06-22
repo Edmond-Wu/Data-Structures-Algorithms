@@ -83,21 +83,4 @@ public class LeetCodeTest {
 		Assert.assertEquals(LeetCode.factorial(5), 120);
 		Assert.assertEquals(LeetCode.factorial(12), 479001600);
 	}
-
-	@Test
-	public void testMaxSubArrayLenPositiveProduct() {
-		int[] arr1 = {1,-2,-3,4};
-		Assert.assertEquals(4, LeetCode.maxSubArrayLenPositiveProduct(arr1));
-		int[] arr2 = {0,1,-2,-3,-4};
-		Assert.assertEquals(3, LeetCode.maxSubArrayLenPositiveProduct(arr2));
-		int[] arr3 = {-1,-2,-3,0,1};
-		Assert.assertEquals(2, LeetCode.maxSubArrayLenPositiveProduct(arr3));
-	}
-
-	@Test
-	public void testLongestValidParentheses() {
-		Assert.assertEquals(2, LeetCode.longestValidParentheses("(()"));
-		Assert.assertEquals(4, LeetCode.longestValidParentheses(")()())"));
-		Assert.assertEquals(0, LeetCode.longestValidParentheses(""));
-	}
 }

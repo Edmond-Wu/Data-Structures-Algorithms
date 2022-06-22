@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * LeetCode questions focused on DFS-related algorithms like backtracking
  */
-public class DFS {
+public class DFSProblems {
     /**
      * Gets distinct combinations of set length of a String of distinct, lexicographically sorted characters
      * Set combinations don't have repeating letters
