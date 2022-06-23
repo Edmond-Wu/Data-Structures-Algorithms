@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -72,5 +74,35 @@ public class HeapProblems {
         }
         //return top element of heap
         return minHeap.peek();
+    }
+
+    /**
+     * Given a 2D array of courses, where course[i][0] represents the duration of a course and course[i][1] represents the last day it has to be finished by
+     * Return the max number of courses that can be taken
+     * @param courses 2D array of courses represented by duration and last day
+     * @return max number of courses that can be taken
+     */
+    public static int scheduleCourse(int[][] courses) {
+        //sort the array by end day
+        Arrays.sort(courses, Comparator.comparingInt(arr -> arr[1]));
+        //keep track of the current time while taking classes
+        int scheduleTime = 0;
+        //use a max-heap to store classes
+        //as we iterate through courses, if we come across a class we can't take we can remove the longest class taken
+        Queue<Integer> maxHeap = new PriorityQueue<>(courses.length, (num1, num2) -> Integer.compare(num2, num1));
+        for (int[] course : courses) {
+            //can take the class, so update the time and add to heap
+            if (scheduleTime + course[0] <= course[1]) {
+                scheduleTime += course[0];
+                maxHeap.add(course[0]);
+            }
+            //need to remove the largest element from the heap and update time appropriately
+            //obviously only do this if the heap is not empty
+            else if (!maxHeap.isEmpty() && maxHeap.peek() > course[0]) {
+                scheduleTime += course[0] - maxHeap.poll();
+                maxHeap.add(course[0]);
+            }
+        }
+        return maxHeap.size();
     }
 }

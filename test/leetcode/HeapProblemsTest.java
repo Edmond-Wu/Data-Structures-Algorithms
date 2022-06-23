@@ -23,4 +23,14 @@ public class HeapProblemsTest {
         int[] arr2 = {3,2,3,1,2,4,5,5,6};
         Assert.assertEquals(4, HeapProblems.findKthLargest(arr2, 4));
     }
+
+    @Test
+    public void testScheduleCourse() {
+        int[][] courses1 = {{100,200},{200,1300},{1000,1250},{2000,3200}};
+        Assert.assertEquals(3, HeapProblems.scheduleCourse(courses1));
+        int[][] courses2 = {{100,200}};
+        Assert.assertEquals(1, HeapProblems.scheduleCourse(courses2));
+        int[][] courses3 = {{3,2},{4,3}};
+        Assert.assertEquals(0, HeapProblems.scheduleCourse(courses3));
+    }
 }
