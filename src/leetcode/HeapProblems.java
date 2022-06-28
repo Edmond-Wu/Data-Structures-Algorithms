@@ -108,4 +108,42 @@ public class HeapProblems {
         }
         return maxHeap.size();
     }
+
+    /**
+     * Given a string s, return the minimum # of deletions so that the frequency of each character in s is unique
+     * @param s string containing only lower-case English letters
+     * @return minimum # of deletions to make all frequencies unique
+     */
+    public static int minDeletionsUniqueFrequencies(String s) {
+        if (s == null || s.length() <= 1) {
+            return 0;
+        }
+        int minDeletions = 0;
+        //find frequencies of characters
+        int[] charFrequencies = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            int ascii = s.charAt(i) - 'a';
+            charFrequencies[ascii]++;
+        }
+        //store frequencies in a frequency max heap
+        Queue<Integer> freqMaxHeap = new PriorityQueue<>(26, (num1, num2) -> Integer.compare(num2, num1));
+        for (int freq : charFrequencies) {
+            if (freq > 0) {
+                freqMaxHeap.add(freq);
+            }
+        }
+        //while the heap has at least 2 elements, compare the top 2 elements and decrement one of them if they are equal
+        //add back to the heap if the decremented value > 0
+        while (freqMaxHeap.size() > 1) {
+            int firstFreq = freqMaxHeap.poll();
+            if (firstFreq == freqMaxHeap.peek()) {
+                firstFreq--;
+                minDeletions++;
+                if (firstFreq > 0) {
+                    freqMaxHeap.add(firstFreq);
+                }
+            }
+        }
+        return minDeletions;
+    }
 }

@@ -33,4 +33,11 @@ public class HeapProblemsTest {
         int[][] courses3 = {{3,2},{4,3}};
         Assert.assertEquals(0, HeapProblems.scheduleCourse(courses3));
     }
+
+    @Test
+    public void testMinDeletionsUniqueFrequencies() {
+        Assert.assertEquals(0, HeapProblems.minDeletionsUniqueFrequencies("aab"));
+        Assert.assertEquals(2, HeapProblems.minDeletionsUniqueFrequencies("aaabbbcc"));
+        Assert.assertEquals(2, HeapProblems.minDeletionsUniqueFrequencies("ceabaacb"));
+    }
 }
