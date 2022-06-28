@@ -60,6 +60,9 @@ public class HeapProblems {
      * @return the K-th largest number in nums
      */
     public static int findKthLargest(int[] nums, int k) {
+        if (nums == null || nums.length == 0 || k <= 0) {
+            return 0;
+        }
         //2 approaches depending on whether space or time is more important
         //for time, use a heap, for space, sort the array in place
         //use a heap as this is a Heap problem class
