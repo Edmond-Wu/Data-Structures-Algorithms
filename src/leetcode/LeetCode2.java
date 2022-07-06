@@ -101,35 +101,4 @@ public class LeetCode2 {
         }
         return allRecipes;
     }
-
-    /**
-     * Given an array of integers, find the length of the longest strictly increasing subsequence
-     * Subsequence is any sub-set of the array that maintains original order
-     * @param nums array of integers
-     * @return length of the longest increasing subsequence
-     */
-    public static int longestIncreasingSubsequence(int[] nums) {
-        //base case
-        if (nums == null || nums.length == 0) {
-            return 0;
-        }
-        //build the sequence with a tree set
-        TreeSet<Integer> subSet = new TreeSet<>();
-        //by default, add the 1st element
-        subSet.add(nums[0]);
-        //iterate through nums from the 2nd element
-        for (int i = 1; i < nums.length; i++) {
-            //if nums[i] is greater than anything in the set, add it to the set
-            if (nums[i] > subSet.last()) {
-                subSet.add(nums[i]);
-            }
-            //otherwise replace the smallest element >= nums[i] with nums[i]
-            else {
-                subSet.remove(subSet.ceiling(nums[i]));
-                subSet.add(nums[i]);
-            }
-        }
-        //answer is the size of subSet
-        return subSet.size();
-    }
 }

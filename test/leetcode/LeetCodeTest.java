@@ -63,14 +63,6 @@ public class LeetCodeTest {
 	}
 	
 	@Test
-	public void testCompareAdjacents() {
-		Assert.assertEquals(LeetCode.compareAdjacents(9), 9);
-		Assert.assertEquals(LeetCode.compareAdjacents(12345), 1235);
-		Assert.assertEquals(LeetCode.compareAdjacents(12), 2);
-		Assert.assertEquals(LeetCode.compareAdjacents(4321), 421);
-	}
-	
-	@Test
 	public void testRle() {
 		String uncompressed = "qwwwwwwwwweeeeerrtyyyyyqqqqwEErTTT";
 		Assert.assertEquals("q9w5e2rt5y4qw2Er3T", LeetCode.rle(uncompressed));
