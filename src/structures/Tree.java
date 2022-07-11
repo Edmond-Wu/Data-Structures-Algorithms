@@ -336,4 +336,21 @@ public class Tree {
 		}
 		return traversalList;
 	}
+
+	/**
+	 * Performs a level-order-traversal of a given TreeNode root, adding the nodes to the nodeList
+	 * @param nodeList list of list of nodes, with the outer list representing each level
+	 * @param root root of the tree
+	 * @param level level of the tree
+	 */
+	public static void levelOrderTraversal(List<List<Integer>> nodeList, TreeNode root, int level) {
+		if (root != null) {
+			if (nodeList.size() <= level) {
+				nodeList.add(new ArrayList<>());
+			}
+			nodeList.get(level).add(root.getData());
+			levelOrderTraversal(nodeList, root.getLeft(), level + 1);
+			levelOrderTraversal(nodeList, root.getRight(), level + 1);
+		}
+	}
 }
