@@ -105,4 +105,49 @@ public class DynamicProgramming {
         //return the value that represents the full string s
         return visitedSubstrings[s.length()];
     }
+
+    /**
+     * Given a stair case with stairSize steps, how many ways can you reach the top from the bottom
+     * given that you can either take 1 or 2 steps each time
+     * @param stairSize number of steps for the staircase
+     * @return the amount of ways you can climb to the top
+     */
+    public static int climbStairs(int stairSize) {
+        //2 steps or less just return the stair size
+        if (stairSize <= 2) {
+            return stairSize;
+        }
+        //create array to store the amount of times it takes to reach each step up to the last step
+        int[] dp = new int[stairSize + 1];
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i <= stairSize; i++) {
+            //you can either take 1 step or 2 steps, so for the current step
+            //the answer is the sum of how many steps it takes to reach 1 before and how many it takes to reach 2 before
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[stairSize];
+    }
+
+    /**
+     * Given an array of steps, with each step having a certain cost to climb, find the minimum cost it takes to climb to the top
+     * if each time you can take 1 or 2 steps
+     * @param cost an array of steps, with cost[i] representing the cost to climb from that step
+     * @return minimum cost to climb to the top
+     */
+    public static int minCostClimbingStairs(int[] cost) {
+        //if the array size is less than 2 than just return 0
+        if (cost == null || cost.length < 2) {
+            return 0;
+        }
+        //array to represent the min cost it takes to reach each step
+        int[] dp = new int[cost.length + 1];
+        for (int i = 2; i <= cost.length; i++) {
+            //you can get to step i either taking 1 step or 2 steps
+            int oneStep = dp[i - 1] + cost[i - 1];
+            int twoSteps = dp[i - 2] + cost[i - 2];
+            dp[i] = Math.min(oneStep, twoSteps);
+        }
+        return dp[cost.length];
+    }
 }

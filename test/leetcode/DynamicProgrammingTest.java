@@ -35,4 +35,19 @@ public class DynamicProgrammingTest {
         Assert.assertTrue(DynamicProgramming.wordBreak(s2, list2));
         Assert.assertFalse(DynamicProgramming.wordBreak(s3, list3));
     }
+
+    @Test
+    public void testClimbStairs() {
+        Assert.assertEquals(3, DynamicProgramming.climbStairs(3));
+        Assert.assertEquals(5, DynamicProgramming.climbStairs(4));
+        Assert.assertEquals(8, DynamicProgramming.climbStairs(5));
+    }
+
+    @Test
+    public void testMinCostClimbingStairs() {
+        int[] arr1 = {10,15,20};
+        Assert.assertEquals(15, DynamicProgramming.minCostClimbingStairs(arr1));
+        int[] arr2 = {1,100,1,1,1,100,1,1,100,1};
+        Assert.assertEquals(6, DynamicProgramming.minCostClimbingStairs(arr2));
+    }
 }
