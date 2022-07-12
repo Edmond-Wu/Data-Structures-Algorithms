@@ -175,4 +175,34 @@ public class LeetCode {
         }
     	return answer;
     }
+
+    /**
+     * Given a binary string of 1's and 0's, return the minimum # of swaps to make the string a palindrome, or -1 if it's impossible
+     * @param binaryString string of only 1's and 0's
+     * @return minimum # of swaps to make the string a palindrome, or -1 otherwise
+     */
+    public static int minSwapsToMakeBinaryStringPalindrome(String binaryString) {
+        int len = binaryString.length();
+        if (len <= 1) {
+            return 0;
+        }
+        //count the # of times the indices don't match
+        //every 2 times you can make a swap
+        int numDifferences = 0;
+        int leftIndex = 0;
+        int rightIndex = len - 1;
+        while (leftIndex < rightIndex) {
+            if (binaryString.charAt(leftIndex) != binaryString.charAt(rightIndex)) {
+                numDifferences++;
+            }
+            leftIndex++;
+            rightIndex--;
+        }
+        //even length but odd differences means it's impossible
+        if (numDifferences % 2 != 0 && len % 2 == 0) {
+            return -1;
+        }
+        //number of swaps is half of the differences rounded up
+        return (numDifferences + 1) / 2;
+    }
 }
