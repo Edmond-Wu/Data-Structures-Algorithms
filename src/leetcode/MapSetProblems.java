@@ -1,6 +1,8 @@
 package leetcode;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -95,5 +97,38 @@ public class MapSetProblems {
         }
         //answer is the size of subSet
         return subSet.size();
+    }
+
+    /**
+     * Given an array of 1's and 0's, find the length of the longest contiguous sub-array such that there are equal 1's and 0's
+     * @param binaryArr integer array of only 1's and 0's
+     * @return length of the longest contiguous sub-array such that there are equal 1's and 0's
+     */
+    public static int findMaxLengthEqualOnesZeroes(int[] binaryArr) {
+        //use a counter that goes up with 1 and goes down with 0
+        //a sub-array with equal 1's and 0's is found when the counter hits a value that is seen before
+        //use a map to store the count at each step and its indices
+        Map<Integer, Integer> countIndexMap = new HashMap<>();
+        int count = 0;
+        int maxLen = 0;
+        //put (0, -1) in the map to represent the starting point
+        countIndexMap.put(0, -1);
+        for (int i = 0; i < binaryArr.length; i++) {
+            if (binaryArr[i] == 1) {
+                count++;
+            }
+            else {
+                count--;
+            }
+            //check if the current count exists in the map, and update the max length if it does
+            if (countIndexMap.containsKey(count)) {
+                maxLen = Math.max(maxLen, i - countIndexMap.get(count));
+            }
+            else {
+                //only want the first occurrence of each count for calculations
+                countIndexMap.put(count, i);
+            }
+        }
+        return maxLen;
     }
 }

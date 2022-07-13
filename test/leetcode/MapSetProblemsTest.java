@@ -32,4 +32,14 @@ public class MapSetProblemsTest {
         int[] arr3 = {7,7,7,7,7,7,7};
         Assert.assertEquals(1, MapSetProblems.longestIncreasingSubsequence(arr3));
     }
+
+    @Test
+    public void testFindMaxLengthEqualOnesZeroes() {
+        int[] arr1 = {0,1};
+        Assert.assertEquals(2, MapSetProblems.findMaxLengthEqualOnesZeroes(arr1));
+        int[] arr2 = {0,1,0};
+        Assert.assertEquals(2, MapSetProblems.findMaxLengthEqualOnesZeroes(arr2));
+        int[] arr3 = {0,0,0,1,1,1};
+        Assert.assertEquals(6, MapSetProblems.findMaxLengthEqualOnesZeroes(arr3));
+    }
 }
