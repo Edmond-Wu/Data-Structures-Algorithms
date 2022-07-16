@@ -50,4 +50,11 @@ public class DynamicProgrammingTest {
         int[] arr2 = {1,100,1,1,1,100,1,1,100,1};
         Assert.assertEquals(6, DynamicProgramming.minCostClimbingStairs(arr2));
     }
+
+    @Test
+    public void testOutOfBoundaryPaths() {
+        Assert.assertEquals(6, DynamicProgramming.outOfBoundaryPaths(2, 2, 2, 0, 0));
+        Assert.assertEquals(12, DynamicProgramming.outOfBoundaryPaths(1, 3, 3, 0, 1));
+        Assert.assertEquals(914783380, DynamicProgramming.outOfBoundaryPaths(8, 50, 23, 5, 26));
+    }
 }

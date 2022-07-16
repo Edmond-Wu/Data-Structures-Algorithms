@@ -150,4 +150,65 @@ public class DynamicProgramming {
         }
         return dp[cost.length];
     }
+
+    /**
+     * Given a soccer ball at a starting position on a grid, how many paths can the ball be moved out-of-bounds given at most a certain amount of moves
+     * @param numRows # of rows
+     * @param numCols # of cols
+     * @param maxMoves max # of moves
+     * @param startRow starting row
+     * @param startCol starting column
+     * @return max # of paths, % by 1000000007
+     */
+    public static int outOfBoundaryPaths(int numRows, int numCols, int maxMoves, int startRow, int startCol) {
+        //use a 3D memo array to store the # of paths possible for each given starting position and # of moves
+        int[][][] memo = new int[numRows][numCols][maxMoves + 1];
+        //initialize each value to -1
+        for (int[][] i : memo) {
+            for (int[] j : i) {
+                Arrays.fill(j, -1);
+            }
+        }
+        //call recursive function
+        return boundaryRecursion(memo, numRows, numCols, maxMoves, startRow, startCol);
+    }
+
+    /**
+     * Helper recursive method to populate memo array
+     * @param memo 3D memoization array for storing # of possible paths for a given config of row/col/moves
+     * @param numRows length of row
+     * @param numCols length of column
+     * @param currentMoves amount of moves available
+     * @param row current row
+     * @param col current column
+     * @return # of available paths with the given configuration
+     */
+    private static int boundaryRecursion(int[][][] memo, int numRows, int numCols, int currentMoves, int row, int col) {
+        //return 1 if we're out of bounds
+        if (row < 0 || row == numRows || col < 0 || col == numCols) {
+            return 1;
+        }
+        //return 0 if we're out of moves
+        if (currentMoves == 0) {
+            return 0;
+        }
+        //if the memo is not -1, return that value
+        if (memo[row][col][currentMoves] >= 0) {
+            return memo[row][col][currentMoves];
+        }
+        //find the total paths and recurse in 4 directions
+        long totalPaths = 0;
+        int mod = 1000000007;
+        //up
+        totalPaths += boundaryRecursion(memo, numRows, numCols, currentMoves - 1, row - 1, col);
+        //down
+        totalPaths += boundaryRecursion(memo, numRows, numCols, currentMoves - 1, row + 1, col);
+        //left
+        totalPaths += boundaryRecursion(memo, numRows, numCols, currentMoves - 1, row, col - 1);
+        //right
+        totalPaths += boundaryRecursion(memo, numRows, numCols, currentMoves - 1, row, col + 1);
+        //update the memo and return it
+        memo[row][col][currentMoves] = (int)(totalPaths % mod);
+        return memo[row][col][currentMoves];
+    }
 }
