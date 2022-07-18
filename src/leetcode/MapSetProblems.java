@@ -131,4 +131,59 @@ public class MapSetProblems {
         }
         return maxLen;
     }
+
+    /**
+     * Given an array nums and an integer target k, find the # of subarrays that sum up to k
+     * @param nums array of integers
+     * @param k target to sum up to
+     * @return # of subarrays that add up to k
+     */
+    public static int subArraySumEqualsK(int[] nums, int k) {
+        //store cumulative/prefix sum occurrences in the map
+        Map<Integer, Integer> sumCountMap = new HashMap<>();
+        int count = 0;
+        int sum = 0;
+        sumCountMap.put(0, 1);
+        for (int num : nums) {
+            sum += num;
+            //increment count if sum - k is in the map
+            //determine the number of times a subarray with sum k has occurred up to the current index
+            count += sumCountMap.getOrDefault(sum - k, 0);
+            //update map
+            sumCountMap.put(sum, sumCountMap.getOrDefault(sum, 0) + 1);
+        }
+        return count;
+    }
+
+    /**
+     * Same problem as the previous method, but with a 2D matrix instead of a 1D array
+     * @param matrix 2D integer matrix
+     * @param k target to sum to
+     * @return # of submatrices that add to k
+     */
+    public static int subMatrixSumEqualsK(int[][] matrix, int k) {
+        int count = 0;
+        int numRows = matrix.length;
+        int numCols = matrix[0].length;
+        //go through each sub-matrix by using 2 row iterators
+        for (int row1 = 0; row1 < numRows; row1++) {
+            int[] prefixSums = new int[numCols];
+            for (int row2 = row1; row2 < numRows; row2++) {
+                Map<Integer, Integer> pSumsCountMap = new HashMap<>();
+                int pSum = 0;
+                //empty matrix is 0
+                pSumsCountMap.put(0, 1);
+                for (int col = 0; col < numCols; col++) {
+                    //update the prefix sums
+                    prefixSums[col] += matrix[row2][col];
+                    pSum += prefixSums[col];
+                    //increment count by the map count of pSum - k
+                    count += pSumsCountMap.getOrDefault(pSum - k, 0);
+                    //update the map
+                    pSumsCountMap.put(pSum, pSumsCountMap.getOrDefault(pSum, 0) + 1);
+                }
+            }
+        }
+        return count;
+    }
 }

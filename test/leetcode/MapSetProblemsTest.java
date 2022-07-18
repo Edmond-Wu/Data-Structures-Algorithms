@@ -42,4 +42,23 @@ public class MapSetProblemsTest {
         int[] arr3 = {0,0,0,1,1,1};
         Assert.assertEquals(6, MapSetProblems.findMaxLengthEqualOnesZeroes(arr3));
     }
+
+    @Test
+    public void testSubarraySumEqualsK() {
+        int[] arr1 = {1,1,1};
+        Assert.assertEquals(2, MapSetProblems.subArraySumEqualsK(arr1, 2));
+        int[] arr2 = {1,2,3};
+        Assert.assertEquals(2, MapSetProblems.subArraySumEqualsK(arr2, 3));
+        Assert.assertEquals(1, MapSetProblems.subArraySumEqualsK(arr2, 2));
+    }
+
+    @Test
+    public void testSubMatrixSumEqualsK() {
+        int[][] mat1 = {{0,1,0},{1,1,1},{0,1,0}};
+        Assert.assertEquals(4, MapSetProblems.subMatrixSumEqualsK(mat1, 0));
+        int[][] mat2 = {{1,-1},{-1,1}};
+        Assert.assertEquals(5, MapSetProblems.subMatrixSumEqualsK(mat2, 0));
+        int[][] mat3 = {{100}};
+        Assert.assertEquals(0, MapSetProblems.subMatrixSumEqualsK(mat3, 1));
+    }
 }
