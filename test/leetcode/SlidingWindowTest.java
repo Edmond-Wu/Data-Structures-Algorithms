@@ -24,4 +24,10 @@ public class SlidingWindowTest {
         int[] testArr3 = {1,0,1,0,1,0,0,1,1,0,1};
         Assert.assertEquals(3, SlidingWindow.minSwaps(testArr3));
     }
+
+    @Test
+    public void testNumKLenSubstrNoRepeats() {
+        Assert.assertEquals(6, SlidingWindow.numKLenSubstrNoRepeats("havefunonleetcode", 5));
+        Assert.assertEquals(0, SlidingWindow.numKLenSubstrNoRepeats("home", 5));
+    }
 }

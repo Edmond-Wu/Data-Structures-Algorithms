@@ -86,4 +86,43 @@ public class SlidingWindow {
         //answer is the total # of 1's minus the max 1's in sub-array
         return numOnes - maxNumOnesInSubArr;
     }
+
+    /**
+     * Given a string s and integer k, find the number of k-length substrings in s that have no repeating characters
+     * @param s string with only lower-case English letters
+     * @param k length of substring
+     * @return number of substrings that have no repeating characters
+     */
+    public static int numKLenSubstrNoRepeats(String s, int k) {
+        if (s == null || s.length() < k) {
+            return 0;
+        }
+        int numStrings = 0;
+        //use 2 pointers for sliding window
+        int leftPtr = 0;
+        int rightPtr = 0;
+        //use an int array of size 26 to track frequencies
+        int[] frequencies = new int[26];
+        while (rightPtr < s.length()) {
+            //update frequency
+            char rightC = s.charAt(rightPtr);
+            frequencies[rightC - 'a']++;
+
+            //if the frequency of rightC exceeds 1, move up leftPtr and decrement frequencies until the duplicate is removed
+            while (frequencies[rightC - 'a'] > 1) {
+                frequencies[s.charAt(leftPtr) - 'a']--;
+                leftPtr++;
+            }
+
+            //if the distance between left and right pointers is k, then increment the count
+            if (rightPtr - leftPtr + 1 == k) {
+                numStrings++;
+                //move up the left ptr and update frequency since that substring is done
+                frequencies[s.charAt(leftPtr) - 'a']--;
+                leftPtr++;
+            }
+            rightPtr++;
+        }
+        return numStrings;
+    }
 }
