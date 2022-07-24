@@ -23,4 +23,13 @@ public class BFSProblemsTest {
         char[][] grid3 = {{'X','X','X','X','X','X','X','X'},{'X','*','O','X','O','#','O','X'},{'X','O','O','X','O','O','X','X'},{'X','O','O','O','O','#','O','X'},{'X','X','X','X','X','X','X','X'}};
         Assert.assertEquals(6, BFSProblems.shortestPathToFood(grid3));
     }
+
+    @Test
+    public void testNetworkDelayTime() {
+        int[][] times1 = {{2,1,1},{2,3,1},{3,4,1}};
+        Assert.assertEquals(2, BFSProblems.networkDelayTime(times1, 4, 2));
+        int[][] times2 = {{1,2,1}};
+        Assert.assertEquals(1, BFSProblems.networkDelayTime(times2, 2, 1));
+        Assert.assertEquals(-1, BFSProblems.networkDelayTime(times2, 2, 2));
+    }
 }

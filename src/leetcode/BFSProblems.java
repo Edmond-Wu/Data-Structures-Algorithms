@@ -1,6 +1,15 @@
 package leetcode;
 
+import javafx.util.Pair;
+
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 /**
@@ -168,5 +177,65 @@ public class BFSProblems {
         }
         //no path, so return -1
         return -1;
+    }
+
+    /**
+     * Given a matrix times, where each row is [i, j, k] where i is the start node, j is the dest node, and k is the time it takes for a signal to go from i to j
+     * From the startingNode, find the minimum time it takes for all other nodes to receive a signal from the startingNode
+     * @param times 2D matrix of length 3 rows
+     * @param numNodes number of nodes in the network
+     * @param startingNode starting node, between 1 and numNodes inclusive
+     * @return minimum time for all nodes to receive a signal from startingNode, or -1 if not all nodes can receive the signal
+     */
+    public static int networkDelayTime(int[][] times, int numNodes, int startingNode) {
+
+        //DIJKSTRA'S ALGORITHM
+
+        //create a graph
+        Map<Integer, List<Pair<Integer, Integer>>> graph = new HashMap<>();
+        for (int[] edge : times) {
+            int source = edge[0];
+            int dest = edge[1];
+            int weight = edge[2];
+            if (!graph.containsKey(source)) {
+                graph.put(source, new ArrayList<>());
+            }
+            graph.get(source).add(new Pair<>(dest, weight));
+        }
+
+        //use priority queue to store nodes by shortest distance
+        Queue<Pair<Integer, Integer>> shortestNodeQueue = new PriorityQueue<>(Comparator.comparing(Pair::getKey));
+        shortestNodeQueue.add(new Pair<>(0, startingNode));
+
+        int[] signalReceivedArr = new int[numNodes + 1];
+        Arrays.fill(signalReceivedArr, Integer.MAX_VALUE);
+        signalReceivedArr[startingNode] = 0;
+
+        //go through the queue and update distances
+        while (!shortestNodeQueue.isEmpty()) {
+            Pair<Integer, Integer> node = shortestNodeQueue.poll();
+            int distanceToVertex = node.getKey();
+            int vertex = node.getValue();
+            if (distanceToVertex > signalReceivedArr[vertex] || !graph.containsKey(vertex)) {
+                continue;
+            }
+            for (Pair<Integer, Integer> neighbor : graph.get(vertex)) {
+                int dest = neighbor.getKey();
+                int distanceToDest = neighbor.getValue();
+                //update the time in signalReceivedArr and add to queue
+                if (distanceToDest + distanceToVertex < signalReceivedArr[dest]) {
+                    signalReceivedArr[dest] = distanceToDest + distanceToVertex;
+                    shortestNodeQueue.add(new Pair<>(distanceToDest + distanceToVertex, dest));
+                }
+            }
+        }
+        int totalTime = 0;
+        for (int i = 1; i < signalReceivedArr.length; i++) {
+            if (signalReceivedArr[i] == Integer.MAX_VALUE) {
+                return -1;
+            }
+            totalTime = Math.max(totalTime, signalReceivedArr[i]);
+        }
+        return totalTime;
     }
 }
