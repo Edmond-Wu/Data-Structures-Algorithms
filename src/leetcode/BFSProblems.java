@@ -231,11 +231,51 @@ public class BFSProblems {
         }
         int totalTime = 0;
         for (int i = 1; i < signalReceivedArr.length; i++) {
+            //if any nodes did not receive a signal, return -1
             if (signalReceivedArr[i] == Integer.MAX_VALUE) {
                 return -1;
             }
             totalTime = Math.max(totalTime, signalReceivedArr[i]);
         }
         return totalTime;
+    }
+
+    /**
+     * Given a 2D matrix of city connections, where isConnected[i][j] is 1 if city i is connected to city j and 0 if not
+     * A province is a network of connected cities
+     * Return the # of provinces
+     * @param isConnected 2D matrix of city connections
+     * @return # of distinct provinces
+     */
+    public static int numProvinces(int[][] isConnected) {
+        //use BFS
+        //use a visited array to track if each city is visited
+        int numCities = isConnected.length;
+        int numProvinces = 0;
+        boolean[] visited = new boolean[numCities];
+        Queue<Integer> cityQueue = new ArrayDeque<>();
+        for (int city = 0; city < numCities; city++) {
+            //if it's not been visited already, add to queue
+            if (!visited[city]) {
+                cityQueue.add(city);
+                //bfs from that city
+                while (!cityQueue.isEmpty()) {
+                    int deque = cityQueue.poll();
+                    //mark the deque city as visited
+                    visited[deque] = true;
+                    //add its connections to the queue
+                    for (int otherCity = 0; otherCity < numCities; otherCity++) {
+                        //if the other city hasn't been visited yet and it's connected, add to queue
+                        if (!visited[otherCity] && isConnected[deque][otherCity] == 1) {
+                            cityQueue.add(otherCity);
+                        }
+                    }
+                }
+                //increment num provinces at the end
+                numProvinces++;
+            }
+        }
+
+        return numProvinces;
     }
 }

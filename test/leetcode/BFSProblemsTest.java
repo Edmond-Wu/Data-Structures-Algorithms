@@ -32,4 +32,12 @@ public class BFSProblemsTest {
         Assert.assertEquals(1, BFSProblems.networkDelayTime(times2, 2, 1));
         Assert.assertEquals(-1, BFSProblems.networkDelayTime(times2, 2, 2));
     }
+
+    @Test
+    public void testNumProvinces() {
+        int[][] connect1 = {{1,1,0},{1,1,0},{0,0,1}};
+        Assert.assertEquals(2, BFSProblems.numProvinces(connect1));
+        int[][] connect2 = {{1,0,0},{0,1,0},{0,0,1}};
+        Assert.assertEquals(3, BFSProblems.numProvinces(connect2));
+    }
 }
