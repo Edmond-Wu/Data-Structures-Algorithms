@@ -146,4 +146,32 @@ public class HeapProblems {
         }
         return minDeletions;
     }
+
+    /**
+     * Given an array of meeting time intervals (start, end), return the minimum # of conference rooms needed to host all meetings
+     * @param meetingIntervals 2D array where each array is of size 2 with a start time and end time of the meeting
+     * @return minimum # of conference rooms needed
+     */
+    public static int minMeetingRooms(int[][] meetingIntervals) {
+        //sort the matrix by meeting start times
+        Arrays.sort(meetingIntervals, Comparator.comparingInt(a -> a[0]));
+
+        //use a heap to store the end times of meetings
+        Queue<Integer> endTimeHeap = new PriorityQueue<>();
+
+        for (int[] meeting : meetingIntervals) {
+            //if the heap isn't empty, compare the current meeting start to the earliest meeting to end
+            if (!endTimeHeap.isEmpty()) {
+                //if the earliest meeting ends before the current one, remove it from the heap
+                if (endTimeHeap.peek() <= meeting[0]) {
+                    endTimeHeap.poll();
+                }
+            }
+            //add the current meeting end to the heap
+            endTimeHeap.add(meeting[1]);
+        }
+
+        //# of conference rooms is the size of the heap at the end
+        return endTimeHeap.size();
+    }
 }

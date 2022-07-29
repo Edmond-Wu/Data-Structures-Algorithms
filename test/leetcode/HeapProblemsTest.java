@@ -40,4 +40,12 @@ public class HeapProblemsTest {
         Assert.assertEquals(2, HeapProblems.minDeletionsUniqueFrequencies("aaabbbcc"));
         Assert.assertEquals(2, HeapProblems.minDeletionsUniqueFrequencies("ceabaacb"));
     }
+
+    @Test
+    public void testMinMeetingRooms() {
+        int[][] meetings1 = {{0,30},{5,10},{15,20}};
+        Assert.assertEquals(2, HeapProblems.minMeetingRooms(meetings1));
+        int[][] meetings2 = {{7,10},{2,4}};
+        Assert.assertEquals(1, HeapProblems.minMeetingRooms(meetings2));
+    }
 }
