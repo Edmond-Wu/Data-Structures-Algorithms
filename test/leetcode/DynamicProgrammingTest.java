@@ -57,4 +57,11 @@ public class DynamicProgrammingTest {
         Assert.assertEquals(12, DynamicProgramming.outOfBoundaryPaths(1, 3, 3, 0, 1));
         Assert.assertEquals(914783380, DynamicProgramming.outOfBoundaryPaths(8, 50, 23, 5, 26));
     }
+
+    @Test
+    public void testUniquePaths() {
+        Assert.assertEquals(28, DynamicProgramming.uniquePaths(3, 7));
+        Assert.assertEquals(3, DynamicProgramming.uniquePaths(3, 2));
+        Assert.assertEquals(193536720, DynamicProgramming.uniquePaths(23, 12));
+    }
 }

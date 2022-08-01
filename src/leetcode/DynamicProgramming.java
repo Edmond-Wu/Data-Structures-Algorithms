@@ -211,4 +211,35 @@ public class DynamicProgramming {
         memo[row][col][currentMoves] = (int)(totalPaths % mod);
         return memo[row][col][currentMoves];
     }
+
+    /**
+     * Given a m * n matrix, a robot starts from the top-left corner.
+     * The robot can only move right and down, how many total paths are there to reach the bottom-right corner?
+     * @param m height of the matrix
+     * @param n width of the matrix
+     * @return # of paths that reach the bottom-right cell
+     */
+    public static long uniquePaths(int m, int n) {
+        if (m <= 0 || n <= 0) {
+            return 0;
+        }
+        //use dynamic programming
+        long[][] dp = new long[m][n];
+
+        //for the first row and column, there is only 1 way for the robot to reach those cells (all right or all down)
+        Arrays.fill(dp[0], 1);
+        for (int i = 1; i < m; i++) {
+            dp[i][0] = 1;
+        }
+
+        //for the remaining cells, the answer is the sum of the cell to the left and above
+        for (int row = 1; row < m; row++) {
+            for (int col = 1; col < n; col++) {
+                dp[row][col] = dp[row - 1][col] + dp[row][col - 1];
+            }
+        }
+
+        //return the value at the last cell
+        return dp[m - 1][n - 1];
+    }
 }
