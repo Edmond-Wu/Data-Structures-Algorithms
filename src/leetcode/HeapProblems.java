@@ -174,4 +174,43 @@ public class HeapProblems {
         //# of conference rooms is the size of the heap at the end
         return endTimeHeap.size();
     }
+
+    /**
+     * Given an n * n matrix where both rows and columns are sorted in ascending order, find
+     * the kth smallest element in the matrix
+     * @param matrix n * n matrix
+     * @param k value of k
+     * @return the kth smallest number in the matrix
+     */
+    public static int kthSmallestNumberInMatrix(int[][] matrix, int k) {
+        //store smallest element of every row in a min-heap
+        //go from 1 to k, polling the smallest element, and then replacing that with the next element in that same row
+        //represent heap items as a 3-size array of [value, row, col]
+        PriorityQueue<int[]> minHeap = new PriorityQueue<>(matrix.length, Comparator.comparingInt(o -> o[0]));
+
+        //only add up to the smaller between k and the length of the matrix
+        for (int row = 0; row < Math.min(matrix.length, k); row++) {
+            int[] heapEntry = new int[3];
+            heapEntry[0] = matrix[row][0];
+            heapEntry[1] = row;
+            minHeap.add(heapEntry);
+        }
+
+        //now iterate through k
+        for (int i = 1; i < k; i++) {
+            int[] minEntry = minHeap.poll();
+            int row = minEntry[1];
+            int col = minEntry[2];
+            if (col < matrix.length - 1) {
+                int[] nextEntry = new int[3];
+                nextEntry[0] = matrix[row][col + 1];
+                nextEntry[1] = row;
+                nextEntry[2] = col + 1;
+                minHeap.add(nextEntry);
+            }
+        }
+
+        //return the top of the heap
+        return minHeap.peek()[0];
+    }
 }

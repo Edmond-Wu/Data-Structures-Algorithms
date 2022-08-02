@@ -48,4 +48,12 @@ public class HeapProblemsTest {
         int[][] meetings2 = {{7,10},{2,4}};
         Assert.assertEquals(1, HeapProblems.minMeetingRooms(meetings2));
     }
+
+    @Test
+    public void testKthSmallestNumberInMatrix() {
+        int[][] mat1 = {{1,5,9},{10,11,13},{12,13,15}};
+        Assert.assertEquals(13, HeapProblems.kthSmallestNumberInMatrix(mat1, 8));
+        int[][] mat2 = {{-5}};
+        Assert.assertEquals(-5, HeapProblems.kthSmallestNumberInMatrix(mat2, 1));
+    }
 }
