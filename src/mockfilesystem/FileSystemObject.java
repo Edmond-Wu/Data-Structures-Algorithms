@@ -33,7 +33,7 @@ public abstract class FileSystemObject {
 
     /**
      * Returns the name of the object, which is the last part of the file path
-     * @return
+     * @return name of file
      */
     public String getName() {
         return name;
