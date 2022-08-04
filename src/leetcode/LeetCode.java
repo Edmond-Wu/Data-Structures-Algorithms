@@ -205,4 +205,39 @@ public class LeetCode {
         //number of swaps is half of the differences rounded up
         return (numDifferences + 1) / 2;
     }
+
+    /**
+     * Find the sum of the # of distinct characters found in every substring in s
+     * @param s string of lower-case English characters
+     * @return the sum of the "appeal" of all sub-strings, the # of distinct characters in each substring
+     */
+    public static long appealSum(String s) {
+        int length = s.length();
+        if (length <= 1) {
+            return length;
+        }
+
+        long sum = 0;
+        //use an array to keep track of the last-seen occurrence of each character in s
+        int[] lastSeen = new int[26];
+        //initialize it to be -1 for every value as no character is seen yet
+        Arrays.fill(lastSeen, -1);
+
+        //iterate through each character in s
+        for (int i = 0; i < length; i++) {
+            //for a character at i to contribute to a distinct character
+            //the given substring must start before i and end after the previously last-seen occurrence of the character at i
+            int ascii = s.charAt(i) - 'a';
+
+            //there are (i - lastSeen[ascii]) possible start positions for the substring to contain the character at i
+            //length - i possible end positions for the substring
+            //multiply the 2 and add to the sum to get total # of substrings that can contribute the current character
+            sum += (long) (i - lastSeen[ascii]) * (length - i);
+
+            //update the last-seen occurrence of character at i
+            lastSeen[ascii] = i;
+        }
+
+        return sum;
+    }
 }

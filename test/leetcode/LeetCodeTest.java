@@ -75,4 +75,11 @@ public class LeetCodeTest {
 		Assert.assertEquals(LeetCode.factorial(5), 120);
 		Assert.assertEquals(LeetCode.factorial(12), 479001600);
 	}
+
+	@Test
+	public void testAppealSum() {
+		Assert.assertEquals(28, LeetCode.appealSum("abbca"));
+		Assert.assertEquals(20, LeetCode.appealSum("code"));
+		Assert.assertEquals(105, LeetCode.appealSum("leetcode"));
+	}
 }
