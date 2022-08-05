@@ -1,8 +1,10 @@
 package leetcode;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -241,5 +243,47 @@ public class DynamicProgramming {
 
         //return the value at the last cell
         return dp[m - 1][n - 1];
+    }
+
+    /**
+     * Given an array of integers, find the # of combinations of elements in the array that sum to target
+     * @param nums array of integers
+     * @param target target to sum to
+     * @return # of combinations of elements in the array that sum to target
+     */
+    public static int combinationSum4(int[] nums, int target) {
+        //use memoization and recursion
+        //memoization stores each remainder as a key and the value is the # of combinations for that remainder
+        Map<Integer, Integer> memo = new HashMap<>();
+        Arrays.sort(nums);
+        return getNumCombinations(memo, nums, target);
+    }
+
+    /**
+     * Recursive helper method for combinationSum4 to recurse for elements that sum to target
+     * @param memo memoization map to store each element and the # of combinations for that element
+     * @param nums integer array
+     * @param target current target to sum up to
+     * @return # of combinations that sum to that specific target
+     */
+    private static int getNumCombinations(Map<Integer, Integer> memo, int[] nums, int target) {
+        //if the target is 0, then it's a valid combination
+        if (target == 0) {
+            return 1;
+        }
+        //if it's in the map already, return it
+        if (memo.containsKey(target)) {
+            return memo.get(target);
+        }
+        //otherwise iterate through nums and subtract each element from target as a recursive call
+        int result = 0;
+        for (int num : nums) {
+            if (target - num >= 0) {
+                result += getNumCombinations(memo, nums, target - num);
+            }
+        }
+        //update the map and return the result
+        memo.put(target, result);
+        return result;
     }
 }

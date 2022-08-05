@@ -64,4 +64,12 @@ public class DynamicProgrammingTest {
         Assert.assertEquals(3, DynamicProgramming.uniquePaths(3, 2));
         Assert.assertEquals(193536720, DynamicProgramming.uniquePaths(23, 12));
     }
+
+    @Test
+    public void testCombinationSum4() {
+        int[] nums1 = {1,2,3};
+        Assert.assertEquals(7, DynamicProgramming.combinationSum4(nums1, 4));
+        int[] nums2 = {9};
+        Assert.assertEquals(0, DynamicProgramming.combinationSum4(nums2, 3));
+    }
 }
