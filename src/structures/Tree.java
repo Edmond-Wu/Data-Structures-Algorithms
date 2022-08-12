@@ -281,10 +281,7 @@ public class Tree {
 	 * @return lowest common ancestor of p and q
 	 */
 	public static TreeNode getLowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-		if (root == null) {
-			return null;
-		}
-		if (root == p || root == q) {
+		if (root == null || root == p || root == q) {
 			return root;
 		}
 		TreeNode left = getLowestCommonAncestor(root.getLeft(), p, q);
