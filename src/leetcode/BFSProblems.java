@@ -191,7 +191,7 @@ public class BFSProblems {
 
         //DIJKSTRA'S ALGORITHM
 
-        //create a graph
+        //create a graph, adjacency map
         Map<Integer, List<Pair<Integer, Integer>>> graph = new HashMap<>();
         for (int[] edge : times) {
             int source = edge[0];
@@ -216,19 +216,22 @@ public class BFSProblems {
             Pair<Integer, Integer> node = shortestNodeQueue.poll();
             int distanceToVertex = node.getKey();
             int vertex = node.getValue();
+            //skip if the current distance is not less than the current shortest distance or if the graph doesn't have the vertex
             if (distanceToVertex > signalReceivedArr[vertex] || !graph.containsKey(vertex)) {
                 continue;
             }
+            //go through each neighbor
             for (Pair<Integer, Integer> neighbor : graph.get(vertex)) {
                 int dest = neighbor.getKey();
-                int distanceToDest = neighbor.getValue();
+                int distanceToDest = distanceToVertex + neighbor.getValue();
                 //update the time in signalReceivedArr and add to queue
-                if (distanceToDest + distanceToVertex < signalReceivedArr[dest]) {
-                    signalReceivedArr[dest] = distanceToDest + distanceToVertex;
-                    shortestNodeQueue.add(new Pair<>(distanceToDest + distanceToVertex, dest));
+                if (distanceToDest < signalReceivedArr[dest]) {
+                    signalReceivedArr[dest] = distanceToDest;
+                    shortestNodeQueue.add(new Pair<>(distanceToDest, dest));
                 }
             }
         }
+        //find the max time in the signal received array to find out how long it took for all nodes to be hit
         int totalTime = 0;
         for (int i = 1; i < signalReceivedArr.length; i++) {
             //if any nodes did not receive a signal, return -1
