@@ -1,5 +1,9 @@
 package leetcode;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * LeetCode problems that focus on the "sliding-window" algorithm
  */
@@ -124,5 +128,42 @@ public class SlidingWindow {
             rightPtr++;
         }
         return numStrings;
+    }
+
+    /**
+     * Given 2 strings s and p, find the start indices of p's anagrams in s.
+     * @param s string to find anagrams in
+     * @param p string to be compared to for anagrams
+     * @return a list of indices of anagrams of p in s
+     */
+    public static List<Integer> findAnagrams(String s, String p) {
+        List<Integer> anagramIndices = new ArrayList<>();
+        if (s.length() < p.length()) {
+            return anagramIndices;
+        }
+        //count frequencies in p
+        int[] pFreqs = new int[26];
+        for (int i = 0; i < p.length(); i++) {
+            pFreqs[p.charAt(i) - 'a']++;
+        }
+        //find frequencies of the substring at index 0
+        int[] sFreqs = new int[26];
+        for (int j = 0; j < p.length(); j++) {
+            sFreqs[s.charAt(j) - 'a']++;
+        }
+        if (Arrays.equals(sFreqs, pFreqs)) {
+            anagramIndices.add(0);
+        }
+        //go through rest of s
+        for (int k = 1; k < s.length() - p.length() + 1; k++) {
+            //delete char occurrence of previous index as it's not in the window anymore
+            sFreqs[s.charAt(k - 1) - 'a']--;
+            //add char occurrence of the end of the new window
+            sFreqs[s.charAt(k + p.length() - 1) - 'a']++;
+            if (Arrays.equals(sFreqs, pFreqs)) {
+                anagramIndices.add(k);
+            }
+        }
+        return anagramIndices;
     }
 }

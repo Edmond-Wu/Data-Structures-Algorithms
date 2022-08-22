@@ -3,6 +3,10 @@ package leetcode;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class SlidingWindowTest {
 
     @Test
@@ -29,5 +33,11 @@ public class SlidingWindowTest {
     public void testNumKLenSubstrNoRepeats() {
         Assert.assertEquals(6, SlidingWindow.numKLenSubstrNoRepeats("havefunonleetcode", 5));
         Assert.assertEquals(0, SlidingWindow.numKLenSubstrNoRepeats("home", 5));
+    }
+
+    @Test
+    public void testFindAnagrams() {
+        Assert.assertEquals(new ArrayList<>(Arrays.asList(0, 6)), SlidingWindow.findAnagrams("cbaebabacd", "abc"));
+        Assert.assertEquals(new ArrayList<>(Arrays.asList(0, 1, 2)), SlidingWindow.findAnagrams("abab", "ab"));
     }
 }
